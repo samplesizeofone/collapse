@@ -1,3 +1,5 @@
+BeginPackage["collapse`"]
+
 trilaterate[{r1_, r2_, r3_}, {{x2_}, {x3_, y3_}}] :=
     Module[{d, i, j, x, y, z},
         d = x2;
@@ -54,3 +56,5 @@ calculateNormal[{p1_, p2_, p3_}] :=
     Normalize[
         Cross[calculateTangent[{p1, p2, p3}], calculateBinormal[{p1, p2, p3}]]
     ]
+
+EndPackage[]
