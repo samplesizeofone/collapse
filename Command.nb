@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      1884,         67]
-NotebookOptionsPosition[      1492,         48]
-NotebookOutlinePosition[      1846,         64]
-CellTagsIndexPosition[      1803,         61]
+NotebookDataLength[      1139,         45]
+NotebookOptionsPosition[       855,         30]
+NotebookOutlinePosition[      1209,         46]
+CellTagsIndexPosition[      1166,         43]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -24,30 +24,12 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"Needs", "[", "\"\<collapse`\>\"", "]"}]], "Input",
- CellChangeTimes->{{3.64501281728986*^9, 3.645012820632036*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Graphics3D", "[", 
-  RowBox[{"renderCreasePattern", "[", 
-   RowBox[{"convertCreasePatternTo3D", "[", "testCreasePattern", "]"}], "]"}],
-   "]"}]], "Input",
- CellChangeTimes->{{3.645020378740251*^9, 3.6450203800770693`*^9}, {
-  3.645020579386355*^9, 3.6450205797597513`*^9}, {3.645020753319891*^9, 
-  3.645020756437564*^9}}],
-
-Cell[BoxData[
- Graphics3DBox[{Polygon3DBox[{{0, 0, 0}, {1, 0, 0}, {0, 1, 0}}], {
-    {RGBColor[1, 0, 0], TubeBox[{{0, 0, 0}, {1, 0, 0}}]}, 
-    {RGBColor[0, 0, 1], TubeBox[{{1, 0, 0}, {0, 1, 0}}]}}}]], "Output",
- CellChangeTimes->{
-  3.645020380630908*^9, {3.645020576369954*^9, 3.645020580025464*^9}, 
-   3.6450207567319193`*^9}]
-}, Open  ]]
+ CellChangeTimes->{{3.64501281728986*^9, 3.645012820632036*^9}, {
+  3.6450272732443447`*^9, 3.645027274177361*^9}},
+ EmphasizeSyntaxErrors->True]
 },
 WindowSize->{808, 713},
-WindowMargins->{{-1, Automatic}, {Automatic, 11}},
+WindowMargins->{{26, Automatic}, {Automatic, 31}},
 FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
 2014)",
 StyleDefinitions->"Default.nb"
@@ -64,11 +46,7 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[558, 20, 70, 2, 28, "Input"],
-Cell[631, 24, 139, 2, 28, "Input"],
-Cell[CellGroupData[{
-Cell[795, 30, 348, 7, 28, "Input"],
-Cell[1146, 39, 330, 6, 447, "Output"]
-}, Open  ]]
+Cell[631, 24, 220, 4, 28, "Input"]
 }
 ]
 *)

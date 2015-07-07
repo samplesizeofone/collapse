@@ -1,6 +1,38 @@
 BeginPackage["collapse`"]
 
+(* Config *)
+$foldedExtensionLength = .000001;
+
 (* Data *)
+generateTwoBase[creaseType_] :=
+    <|{
+        "points" -> {
+            "a" -> {-1, 0},
+            "b" -> {1, 0},
+            "u" -> {0, -1},
+            "v" -> {0, 1}
+        },
+        "polygons" -> {
+            "p" -> {"a", "b", "u"},
+            "q" -> {"a", "b", "v"}
+        },
+        "creases" -> <|{
+            "mountain" -> {
+                If[creaseType == "mountain",
+                    {"a", "b"},
+                    Unevaluated[Sequence[]]
+                ]
+            },
+            "valley" -> {
+                If[creaseType == "valley",
+                    {"a", "b"},
+                    Unevaluated[Sequence[]]
+                ]
+            }
+        }|>,
+        "fractals" -> {}
+    }|>
+
 creasePatternLibrary =
     <|{
         "diamond_base" -> <|{
@@ -21,7 +53,7 @@ creasePatternLibrary =
                 "right_half_front" -> {1, 3},
                 "right_front" -> {2, 3}
             },
-            "polygons" -> {
+            "polygons" -> <|{
                 "left_back" -> {
                     "left_back", "center_back", "center_middle", "left_middle"
                 },
@@ -57,7 +89,7 @@ creasePatternLibrary =
                     "right_front", "right_half_front", "right_half_forward",
                     "right_forward"
                 }
-            },
+            }|>,
             "creases" -> <|{
                 "mountain" -> {
                     {"center_back", "center_middle"},
@@ -139,18 +171,72 @@ calculateNormal[{p1_, p2_, p3_}] :=
         Cross[calculateTangent[{p1, p2, p3}], calculateBinormal[{p1, p2, p3}]]
     ]
 
-convertCreasePatternTo3D[creasePattern_] :=
+convertCreasePatternTo3D[creasePattern_, offset_:{0, 0, 0}] :=
     Module[{newCreasePattern},
         newCreasePattern = creasePattern;
         newCreasePattern["points"] =
             creasePattern[["points"]] /. {x_ /; NumberQ[x], y_ /; NumberQ[y]} :>
-                {x, y, 0};
+                ({x, y, 0} + offset);
         newCreasePattern
+    ]
+
+calculateUp[foldedTriangle_, triangle_] :=
+    Module[{up},
+        up = calculateBinormal[triangle];
+        If[up[[3]] < 0,
+            -calculateBinormal[foldedTriangle],
+            calculateBinormal[foldedTriangle]
+        ]
+    ]
+
+calculateFoldedVectors[polygonName_, foldedCreasePattern_, creasePattern_] :=
+    Module[{points, triange, up},
+        triangle = Take[creasePattern[["polygons"]][[polygonName]], 3] /.
+            creasePattern[["points"]];
+        foldedTriangle =
+            Take[
+                foldedCreasePattern[["polygons"]][[polygonName]],
+                3
+            ] /. foldedCreasePattern[["points"]];
+        center = Mean[foldedTriangle];
+        up = $foldedExtensionLength calculateUp[
+            foldedTriangle,
+            triangle
+        ];
+        down = -up;
+        {
+            center + up,
+            center + down
+        }
+    ]
+
+calculateCreaseDirection[polygonName1_, polygonName2_,
+    foldedCreasePattern_, creasePattern_] :=
+    Module[{points, triange1, triange2, up1, down1, up2, down2, center1,
+        center2, upDistance, downDistance},
+        {up1, down1} =
+            calculateFoldedVectors[
+                polygonName1,
+                foldedCreasePattern,
+                creasePattern
+            ];
+        {up2, down2} =
+            calculateFoldedVectors[
+                polygonName2,
+                foldedCreasePattern,
+                creasePattern
+            ];
+        upDistance = EuclideanDistance[up1, up2];
+        downDistance = EuclideanDistance[down1, down2];
+        If[upDistance < downDistance,
+            {"valley", upDistance},
+            {"mountain", downDistance}
+        ]
     ]
 
 (* Render *)
 renderPolygon[polygon_, points_] :=
-    Polygon[polygon[[2]] /. points]
+    Polygon[polygon /. points]
 
 renderCrease[crease_, type_, points_] :=
     {
@@ -175,6 +261,79 @@ renderCreasePattern[creasePattern_] :=
                 {crease, creases[[type]]}
             ]
         }
+    ]
+
+(* Test *)
+testFlatTwoFoldCreasePattern =
+    <|
+        "points" -> {
+            "a" -> {0, 1, 0},
+            "b" -> {0, 0, 0},
+            "c" -> {1, 1, 0},
+            "u" -> {0, 1, 0},
+            "v" -> {1, 1, 0},
+            "w" -> {0, -1, 0}
+        },
+        "polygons" -> <|
+            "q" -> {"a", "b", "c"},
+            "r" -> {"u", "v", "w"}
+        |>
+    |>
+
+testConvertFlatTwoFoldToFolded[type_, reversed_] :=
+    Module[{creasePattern, flatCreasePattern, w},
+        w =
+            If[type == "mountain",
+                {0, 2, -1},
+                {1, 2, 1}
+            ];
+        creasePattern = testFlatTwoFoldCreasePattern;
+        creasePattern["creases"] =
+            <|
+                "mountain" ->
+                    {
+                        If[type == "mountain",
+                            {"a", "c"},
+                            Unevaluated[Sequence[]]
+                        ]
+                    },
+                "valley" ->
+                    {
+                        If[type == "valley",
+                            {"a", "c"},
+                            Unevaluated[Sequence[]]
+                        ]
+                    }
+            |>;
+        creasePattern["polygons"]["q"] =
+            If[reversed,
+                Reverse[creasePattern[["polygons"]][["q"]]],
+                creasePattern[["polygons"]][["q"]]
+            ];
+        flatCreasePattern = creasePattern;
+        If[type == "valley",
+            creasePattern["points"] =
+                {
+                    "a" -> {0, 1, -1},
+                    "b" -> {0, 0, -1},
+                    "c" -> {1, 1, -1},
+                    "u" -> {0, 1, -1},
+                    "v" -> {1, 1, -1},
+                    "w" -> {1, 2, 1}
+                }
+        ];
+        If[type == "mountain",
+            creasePattern["points"] =
+                {
+                    "a" -> {0, 1, 1},
+                    "b" -> {0, 0, 1},
+                    "c" -> {1, 1, 1},
+                    "u" -> {0, 1, 1},
+                    "v" -> {1, 1, 1},
+                    "w" -> {0, 2, -1}
+                }
+        ];
+        {creasePattern, flatCreasePattern}
     ]
 
 EndPackage[]
