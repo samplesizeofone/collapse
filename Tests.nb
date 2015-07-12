@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    277494,       6774]
-NotebookOptionsPosition[    241070,       5981]
-NotebookOutlinePosition[    274116,       6663]
-CellTagsIndexPosition[    274073,       6660]
+NotebookDataLength[    282968,       6929]
+NotebookOptionsPosition[    246275,       6126]
+NotebookOutlinePosition[    279319,       6808]
+CellTagsIndexPosition[    279276,       6805]
 WindowTitle->Tests.nb
 WindowFrame->Normal*)
 
@@ -230,7 +230,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
            StyleBox["\<\"\\!\\(\\*TagBox[TemplateBox[List[\\\"0.\
-01373999999998432`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
+010571999999999804`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \
 \\\"\\\\[InvisibleSpace]\\\", StyleBox[RowBox[List[\\\" \\\", \\\"\\\\\\\"s\\\
 \\\\\"\\\"]], \\\"QuantityUnitTraditionalLabel\\\"]]], \
@@ -260,7 +260,7 @@ Rule[InterpretationFunction, Function[RowBox[List[\\\"Quantity\\\", \
              "MUnitStrings", "CPUTimeUsed-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[TemplateBox[List[\"0.01373999999998432`\"], \
+          "\!\(\*TagBox[TemplateBox[List[\"0.010571999999999804`\"], \
 \"QuantityUnit\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \"\\[InvisibleSpace]\", \
 StyleBox[RowBox[List[\" \", \"\\\"s\\\"\"]], \
@@ -279,7 +279,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
     GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}}],
    "Grid"],
   ImageSize->Full]], "TestSuccess",
- CellID->1589453352],
+ CellID->22924637],
 
 Cell[BoxData[
  PaneBox[
@@ -564,7 +564,7 @@ Cell[BoxData[
     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
    "Grid"],
   ImageSize->Full]], "BottomCell",
- CellID->1393402031]
+ CellID->894801246]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -782,7 +782,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
            StyleBox["\<\"\\!\\(\\*TagBox[TemplateBox[List[\\\"0.\
-0016709999999875436`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
+0017999999999993577`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \
 \\\"\\\\[InvisibleSpace]\\\", StyleBox[RowBox[List[\\\" \\\", \\\"\\\\\\\"s\\\
 \\\\\"\\\"]], \\\"QuantityUnitTraditionalLabel\\\"]]], \
@@ -812,7 +812,7 @@ Rule[InterpretationFunction, Function[RowBox[List[\\\"Quantity\\\", \
              "MUnitStrings", "CPUTimeUsed-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[TemplateBox[List[\"0.0016709999999875436`\"], \
+          "\!\(\*TagBox[TemplateBox[List[\"0.0017999999999993577`\"], \
 \"QuantityUnit\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \"\\[InvisibleSpace]\", \
 StyleBox[RowBox[List[\" \", \"\\\"s\\\"\"]], \
@@ -831,7 +831,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
     GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}}],
    "Grid"],
   ImageSize->Full]], "TestSuccess",
- CellID->598764482],
+ CellID->96561581],
 
 Cell[BoxData[
  PaneBox[
@@ -1116,7 +1116,7 @@ Cell[BoxData[
     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
    "Grid"],
   ImageSize->Full]], "BottomCell",
- CellID->326279132]
+ CellID->1560338382]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1377,7 +1377,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
            StyleBox["\<\"\\!\\(\\*TagBox[TemplateBox[List[\\\"0.\
-00014999999996234692`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
+0001449999999998397`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \
 \\\"\\\\[InvisibleSpace]\\\", StyleBox[RowBox[List[\\\" \\\", \\\"\\\\\\\"s\\\
 \\\\\"\\\"]], \\\"QuantityUnitTraditionalLabel\\\"]]], \
@@ -1407,7 +1407,7 @@ Rule[InterpretationFunction, Function[RowBox[List[\\\"Quantity\\\", \
              "MUnitStrings", "CPUTimeUsed-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[TemplateBox[List[\"0.00014999999996234692`\"], \
+          "\!\(\*TagBox[TemplateBox[List[\"0.0001449999999998397`\"], \
 \"QuantityUnit\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \"\\[InvisibleSpace]\", \
 StyleBox[RowBox[List[\" \", \"\\\"s\\\"\"]], \
@@ -1426,7 +1426,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
     GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}}],
    "Grid"],
   ImageSize->Full]], "TestSuccess",
- CellID->1247620733],
+ CellID->1684372757],
 
 Cell[BoxData[
  PaneBox[
@@ -1711,7 +1711,7 @@ Cell[BoxData[
     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
    "Grid"],
   ImageSize->Full]], "BottomCell",
- CellID->731330223]
+ CellID->1123492145]
 }, Open  ]]
 }, Open  ]],
 
@@ -1972,7 +1972,7 @@ Rational[2, 3]]]]\)",
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
            StyleBox["\<\"\\!\\(\\*TagBox[TemplateBox[List[\\\"0.\
-002327999999977237`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
+002349999999999852`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \
 \\\"\\\\[InvisibleSpace]\\\", StyleBox[RowBox[List[\\\" \\\", \\\"\\\\\\\"s\\\
 \\\\\"\\\"]], \\\"QuantityUnitTraditionalLabel\\\"]]], \
@@ -2002,7 +2002,7 @@ Rule[InterpretationFunction, Function[RowBox[List[\\\"Quantity\\\", \
              "MUnitStrings", "CPUTimeUsed-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[TemplateBox[List[\"0.002327999999977237`\"], \
+          "\!\(\*TagBox[TemplateBox[List[\"0.002349999999999852`\"], \
 \"QuantityUnit\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \"\\[InvisibleSpace]\", \
 StyleBox[RowBox[List[\" \", \"\\\"s\\\"\"]], \
@@ -2021,7 +2021,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
     GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}}],
    "Grid"],
   ImageSize->Full]], "TestSuccess",
- CellID->1418146180],
+ CellID->1856256591],
 
 Cell[BoxData[
  PaneBox[
@@ -2306,7 +2306,7 @@ Cell[BoxData[
     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
    "Grid"],
   ImageSize->Full]], "BottomCell",
- CellID->2009332854]
+ CellID->1609584968]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2535,7 +2535,7 @@ Rational[2, 3]]]]\\)\"\>",
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
            StyleBox["\<\"\\!\\(\\*TagBox[TemplateBox[List[\\\"0.\
-00031799999999293505`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
+00031999999999943185`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \
 \\\"\\\\[InvisibleSpace]\\\", StyleBox[RowBox[List[\\\" \\\", \\\"\\\\\\\"s\\\
 \\\\\"\\\"]], \\\"QuantityUnitTraditionalLabel\\\"]]], \
@@ -2565,7 +2565,7 @@ Rule[InterpretationFunction, Function[RowBox[List[\\\"Quantity\\\", \
              "MUnitStrings", "CPUTimeUsed-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[TemplateBox[List[\"0.00031799999999293505`\"], \
+          "\!\(\*TagBox[TemplateBox[List[\"0.00031999999999943185`\"], \
 \"QuantityUnit\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \"\\[InvisibleSpace]\", \
 StyleBox[RowBox[List[\" \", \"\\\"s\\\"\"]], \
@@ -2584,7 +2584,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
     GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}}],
    "Grid"],
   ImageSize->Full]], "TestSuccess",
- CellID->1676928103],
+ CellID->443055917],
 
 Cell[BoxData[
  PaneBox[
@@ -2869,7 +2869,7 @@ Cell[BoxData[
     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
    "Grid"],
   ImageSize->Full]], "BottomCell",
- CellID->555243893]
+ CellID->1114992870]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -3100,7 +3100,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
            StyleBox["\<\"\\!\\(\\*TagBox[TemplateBox[List[\\\"0.\
-0003559999999538377`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
+00035199999999946385`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \
 \\\"\\\\[InvisibleSpace]\\\", StyleBox[RowBox[List[\\\" \\\", \\\"\\\\\\\"s\\\
 \\\\\"\\\"]], \\\"QuantityUnitTraditionalLabel\\\"]]], \
@@ -3130,7 +3130,7 @@ Rule[InterpretationFunction, Function[RowBox[List[\\\"Quantity\\\", \
              "MUnitStrings", "CPUTimeUsed-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[TemplateBox[List[\"0.0003559999999538377`\"], \
+          "\!\(\*TagBox[TemplateBox[List[\"0.00035199999999946385`\"], \
 \"QuantityUnit\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \"\\[InvisibleSpace]\", \
 StyleBox[RowBox[List[\" \", \"\\\"s\\\"\"]], \
@@ -3149,7 +3149,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
     GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}}],
    "Grid"],
   ImageSize->Full]], "TestSuccess",
- CellID->1167663436],
+ CellID->742862368],
 
 Cell[BoxData[
  PaneBox[
@@ -3434,7 +3434,7 @@ Cell[BoxData[
     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
    "Grid"],
   ImageSize->Full]], "BottomCell",
- CellID->1213802566]
+ CellID->1965378965]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -3663,7 +3663,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
            StyleBox["\<\"\\!\\(\\*TagBox[TemplateBox[List[\\\"0.\
-0001979999999548454`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
+00019200000000019202`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \
 \\\"\\\\[InvisibleSpace]\\\", StyleBox[RowBox[List[\\\" \\\", \\\"\\\\\\\"s\\\
 \\\\\"\\\"]], \\\"QuantityUnitTraditionalLabel\\\"]]], \
@@ -3693,7 +3693,7 @@ Rule[InterpretationFunction, Function[RowBox[List[\\\"Quantity\\\", \
              "MUnitStrings", "CPUTimeUsed-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[TemplateBox[List[\"0.0001979999999548454`\"], \
+          "\!\(\*TagBox[TemplateBox[List[\"0.00019200000000019202`\"], \
 \"QuantityUnit\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \"\\[InvisibleSpace]\", \
 StyleBox[RowBox[List[\" \", \"\\\"s\\\"\"]], \
@@ -3712,7 +3712,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
     GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}}],
    "Grid"],
   ImageSize->Full]], "TestSuccess",
- CellID->1432563909],
+ CellID->1678290248],
 
 Cell[BoxData[
  PaneBox[
@@ -3997,7 +3997,7 @@ Cell[BoxData[
     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
    "Grid"],
   ImageSize->Full]], "BottomCell",
- CellID->1662452046]
+ CellID->1973978438]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -4231,7 +4231,7 @@ Rational[2, 3]]]]\)",
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
            StyleBox["\<\"\\!\\(\\*TagBox[TemplateBox[List[\\\"0.\
-00019600000001673834`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
+00020299999999906504`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \
 \\\"\\\\[InvisibleSpace]\\\", StyleBox[RowBox[List[\\\" \\\", \\\"\\\\\\\"s\\\
 \\\\\"\\\"]], \\\"QuantityUnitTraditionalLabel\\\"]]], \
@@ -4261,7 +4261,7 @@ Rule[InterpretationFunction, Function[RowBox[List[\\\"Quantity\\\", \
              "MUnitStrings", "CPUTimeUsed-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[TemplateBox[List[\"0.00019600000001673834`\"], \
+          "\!\(\*TagBox[TemplateBox[List[\"0.00020299999999906504`\"], \
 \"QuantityUnit\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \"\\[InvisibleSpace]\", \
 StyleBox[RowBox[List[\" \", \"\\\"s\\\"\"]], \
@@ -4280,7 +4280,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
     GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}}],
    "Grid"],
   ImageSize->Full]], "TestSuccess",
- CellID->2069289652],
+ CellID->180744963],
 
 Cell[BoxData[
  PaneBox[
@@ -4393,11 +4393,13 @@ Cell[BoxData[
                     {
                     
                     DynamicBox[FEPrivate`FrontEndResource[
-                    "MUnitExpressions", "Add"]], 
+                    "MUnitExpressions", "Add"],
+                    ImageSizeCache->{16., {4., 8.}}], 
                     StyleBox[
                     
                     DynamicBox[FEPrivate`FrontEndResource[
-                    "MUnitStrings", "AddOptions-Label"]], "ButtonText",
+                    "MUnitStrings", "AddOptions-Label"],
+                    ImageSizeCache->{68., {2., 9.}}], "ButtonText",
                     StripOnInput->False,
                     LineColor->RGBColor[0.9059, 0.3451, 0.102],
                     FrontFaceColor->RGBColor[0.9059, 0.3451, 0.102],
@@ -4565,8 +4567,15 @@ Cell[BoxData[
     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
    "Grid"],
   ImageSize->Full]], "BottomCell",
- CellID->53517999]
+ CellID->1238716283]
+}, Open  ]]
 }, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Folding", "Section",
+ CellChangeTimes->{{3.6456993945127773`*^9, 3.6456993950641127`*^9}},
+ CellID->2100206959],
 
 Cell[CellGroupData[{
 
@@ -4608,41 +4617,14 @@ Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
    RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\"\<mountain\>\"", ",", "0.9428086507045021`"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\"\<mountain\>\"", ",", "0.9428086507045021`"}], "}"}]}], 
-    "}"}], ",", 
+    RowBox[{"\"\<mountain\>\"", ",", "\"\<mountain\>\""}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\"\<valley\>\"", ",", "0.9999996314771096`"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\"\<valley\>\"", ",", "0.9999996314771096`"}], "}"}]}], 
-    "}"}]}], "}"}]], "ExpectedOutput",
- CellChangeTimes->{3.645177808933943*^9, 3.6452829786419888`*^9, 
-  3.645283512181199*^9},
+    RowBox[{"\"\<valley\>\"", ",", "\"\<valley\>\""}], "}"}]}], 
+  "}"}]], "ExpectedOutput",
+ CellChangeTimes->{
+  3.645177808933943*^9, 3.6452829786419888`*^9, 3.645283512181199*^9, {
+   3.645654895914424*^9, 3.645654923974107*^9}},
  CellID->2068414602],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\"\<mountain\>\"", ",", "0.9428086507045021`"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\"\<mountain\>\"", ",", "0.9428086507045021`"}], "}"}]}], 
-    "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"\"\<valley\>\"", ",", "0.9999996314771096`"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"\"\<valley\>\"", ",", "0.9999996314771096`"}], "}"}]}], 
-    "}"}]}], "}"}]], "ActualOutput",
- CellID->1828844747],
 
 Cell[BoxData[
  PaneBox[
@@ -4653,8 +4635,8 @@ Cell[BoxData[
           StyleBox[
            
            DynamicBox[FEPrivate`FrontEndResource[
-            "MUnitStrings", "Failure-TestFailure"],
-            ImageSizeCache->{46., {1., 10.}}],
+            "MUnitStrings", "Success-TestSuccess"],
+            ImageSizeCache->{57., {1., 11.}}],
            StripOnInput->False,
            LineColor->GrayLevel[1],
            FrontFaceColor->GrayLevel[1],
@@ -4666,8 +4648,8 @@ Cell[BoxData[
            FontColor->GrayLevel[1]], 
           
           DynamicBox[FEPrivate`FrontEndResource[
-           "MUnitExpressions", "FailureX"],
-           ImageSizeCache->{12., {4., 8.}}]}
+           "MUnitExpressions", "SuccessCheck"],
+           ImageSizeCache->{16., {4., 8.}}]}
         },
         AutoDelete->False,
         GridBoxAlignment->{"Columns" -> {{Automatic}}, "Rows" -> {{Center}}},
@@ -4762,11 +4744,9 @@ Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
             GraphicsColor->RGBColor[0.458824, 0.458824, 0.458824],
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
-           StyleBox["\<\"\\!\\(\\*TagBox[\\({\\(\\({\\(\\({\\\"mountain\\\", \
-0.9428086507045021`}\\)\\), \\(\\(\[LeftSkeleton] 1 \
-\[RightSkeleton]\\)\\)}\\)\\), \\(\\(\[LeftSkeleton] 1 \
-\[RightSkeleton]\\)\\)}\\), Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
-            
+           StyleBox["\<\"\\!\\(\\*TagBox[\\({\\(\\({\\\"mountain\\\", \
+\\\"mountain\\\"}\\)\\), \\(\\({\\\"valley\\\", \\(\\(\\\"\\\" \[Ellipsis] \\\
+\"\\\"\\)\\)}\\)\\)}\\), Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
             StripOnInput->False,
             LineColor->RGBColor[0.14902, 0.14902, 0.14902],
             FrontFaceColor->RGBColor[0.14902, 0.14902, 0.14902],
@@ -4788,9 +4768,9 @@ Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
              "MUnitStrings", "ActualOutput-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[\({\(\({\(\({\"mountain\", 0.9428086507045021`}\)\), \
-\(\(\[LeftSkeleton] 1 \[RightSkeleton]\)\)}\)\), \(\(\[LeftSkeleton] 1 \
-\[RightSkeleton]\)\)}\), Function[Short[Slot[1], Rational[2, 3]]]]\)", 
+          "\!\(\*TagBox[\({\(\({\"mountain\", \"mountain\"}\)\), \
+\(\({\"valley\", \(\(\"\" \[Ellipsis] \"\"\)\)}\)\)}\), \
+Function[Short[Slot[1], Rational[2, 3]]]]\)", 
            RGBColor[0.14902, 0.14902, 0.14902]]}}, 
         BaseStyle -> {FontFamily -> "Helvetica", FontWeight -> "Bold"}, 
         Spacings -> {{2 -> 0.5}, Automatic}], 
@@ -4807,11 +4787,9 @@ Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
             GraphicsColor->RGBColor[0.458824, 0.458824, 0.458824],
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
-           StyleBox["\<\"\\!\\(\\*TagBox[\\({\\(\\({\\(\\({\\\"mountain\\\", \
-0.9424196171434179`}\\)\\), \\(\\(\[LeftSkeleton] 1 \
-\[RightSkeleton]\\)\\)}\\)\\), \\(\\(\[LeftSkeleton] 1 \
-\[RightSkeleton]\\)\\)}\\), Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
-            
+           StyleBox["\<\"\\!\\(\\*TagBox[\\({\\(\\({\\\"mountain\\\", \
+\\\"mountain\\\"}\\)\\), \\(\\({\\\"valley\\\", \\(\\(\\\"\\\" \[Ellipsis] \\\
+\"\\\"\\)\\)}\\)\\)}\\), Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
             StripOnInput->False,
             LineColor->RGBColor[0.14902, 0.14902, 0.14902],
             FrontFaceColor->RGBColor[0.14902, 0.14902, 0.14902],
@@ -4833,9 +4811,9 @@ Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
              "MUnitStrings", "ExpectedOutput-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[\({\(\({\(\({\"mountain\", 0.9424196171434179`}\)\), \
-\(\(\[LeftSkeleton] 1 \[RightSkeleton]\)\)}\)\), \(\(\[LeftSkeleton] 1 \
-\[RightSkeleton]\)\)}\), Function[Short[Slot[1], Rational[2, 3]]]]\)", 
+          "\!\(\*TagBox[\({\(\({\"mountain\", \"mountain\"}\)\), \
+\(\({\"valley\", \(\(\"\" \[Ellipsis] \"\"\)\)}\)\)}\), \
+Function[Short[Slot[1], Rational[2, 3]]]]\)", 
            RGBColor[0.14902, 0.14902, 0.14902]]}}, 
         BaseStyle -> {FontFamily -> "Helvetica", FontWeight -> "Bold"}, 
         Spacings -> {{2 -> 0.5}, Automatic}], 
@@ -4853,7 +4831,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
            StyleBox["\<\"\\!\\(\\*TagBox[TemplateBox[List[\\\"0.\
-006412000000011631`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
+006428999999999796`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \
 \\\"\\\\[InvisibleSpace]\\\", StyleBox[RowBox[List[\\\" \\\", \\\"\\\\\\\"s\\\
 \\\\\"\\\"]], \\\"QuantityUnitTraditionalLabel\\\"]]], \
@@ -4883,7 +4861,7 @@ Rule[InterpretationFunction, Function[RowBox[List[\\\"Quantity\\\", \
              "MUnitStrings", "CPUTimeUsed-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[TemplateBox[List[\"0.006412000000011631`\"], \
+          "\!\(\*TagBox[TemplateBox[List[\"0.006428999999999796`\"], \
 \"QuantityUnit\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \"\\[InvisibleSpace]\", \
 StyleBox[RowBox[List[\" \", \"\\\"s\\\"\"]], \
@@ -4901,8 +4879,8 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
     GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Right}}},
     GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}}],
    "Grid"],
-  ImageSize->Full]], "TestFailure",
- CellID->460223318],
+  ImageSize->Full]], "TestSuccess",
+ CellID->1398094363],
 
 Cell[BoxData[
  PaneBox[
@@ -4941,11 +4919,13 @@ Cell[BoxData[
                   {
                    
                    DynamicBox[FEPrivate`FrontEndResource[
-                    "MUnitExpressions", "Add"]], 
+                    "MUnitExpressions", "Add"],
+                    ImageSizeCache->{16., {4., 8.}}], 
                    StyleBox[
                     
                     DynamicBox[FEPrivate`FrontEndResource[
-                    "MUnitStrings", "AddMessages-Label"]], "ButtonText",
+                    "MUnitStrings", "AddMessages-Label"],
+                    ImageSizeCache->{81., {3., 8.}}], "ButtonText",
                     StripOnInput->False,
                     LineColor->RGBColor[0.9059, 0.3451, 0.102],
                     FrontFaceColor->RGBColor[0.9059, 0.3451, 0.102],
@@ -4957,7 +4937,6 @@ Cell[BoxData[
                  
                  GridBoxAlignment->{
                   "Columns" -> {{Automatic}}, "Rows" -> {{Center}}},
-                 
                  GridBoxItemSize->{
                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
                 "Grid"]}, Dynamic[
@@ -5120,93 +5099,6 @@ Cell[BoxData[
          PaneSelectorBox[{False->
           TagBox[GridBox[{
              {
-              PaneBox[
-               DynamicBox[FEPrivate`FrontEndResource[
-                "MUnitExpressions", "ReplaceOutput"],
-                ImageSizeCache->{14., {4., 8.}}],
-               ImageMargins->{{0, 0}, {3, 0}}], 
-              StyleBox[
-               
-               DynamicBox[FEPrivate`FrontEndResource[
-                "MUnitStrings", "ReplaceOutput-Label"],
-                ImageSizeCache->{85., {2., 9.}}], "ButtonText",
-               StripOnInput->False,
-               AdjustmentBoxOptions->{BoxBaselineShift->-50}]}
-            },
-            AutoDelete->False,
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Automatic}}, "Rows" -> {{Center}}},
-            
-            GridBoxItemSize->{
-             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
-           "Grid"], True->
-          TagBox[GridBox[{
-             {
-              PaneBox[
-               
-               DynamicBox[FEPrivate`FrontEndResource[
-                "MUnitExpressions", "ReplaceOutput"]],
-               ImageMargins->{{0, 0}, {3, 0}}], 
-              StyleBox[
-               
-               DynamicBox[FEPrivate`FrontEndResource[
-                "MUnitStrings", "ReplaceOutput-Label"]], "ButtonText",
-               StripOnInput->False,
-               LineColor->RGBColor[0.9059, 0.3451, 0.102],
-               FrontFaceColor->RGBColor[0.9059, 0.3451, 0.102],
-               BackFaceColor->RGBColor[0.9059, 0.3451, 0.102],
-               GraphicsColor->RGBColor[0.9059, 0.3451, 0.102],
-               FontColor->RGBColor[0.9059, 0.3451, 0.102]]}
-            },
-            AutoDelete->False,
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Automatic}}, "Rows" -> {{Center}}},
-            
-            GridBoxItemSize->{
-             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
-           "Grid"]}, Dynamic[
-           CurrentValue["MouseOver"]],
-          FrameMargins->0,
-          ImageSize->Automatic],
-         DynamicBox[
-          FEPrivate`FrontEndResource["MUnitStrings", "ReplaceOutput-Tooltip"]],
-         TooltipDelay->0.5],
-        Annotation[#, 
-         Dynamic[
-          RawBoxes[
-           FEPrivate`FrontEndResource[
-           "MUnitStrings", "ReplaceOutput-Tooltip"]]], "Tooltip"]& ],
-       Appearance->FEPrivate`FrontEndResource[
-        "MUnitExpressions", "ButtonAppearances"],
-       ButtonFunction:>MUnit`testReplaceOutput[
-         TestResultObject[
-          Association[
-          "TestIndex" -> 9, "TestID" -> None, "Outcome" -> "Failure", 
-           "ExpectedOutput" -> 
-           HoldForm[{{{"mountain", 0.9424196171434179}, {
-               "mountain", 0.9424196171434179}}, {{
-               "valley", 0.9996328555464038}, {
-               "valley", 0.9996328555464038}}}], "ActualOutput" -> 
-           HoldForm[{{{"mountain", 0.9428086507045021}, {
-               "mountain", 0.9428086507045021}}, {{
-               "valley", 0.9999996314771096}, {
-               "valley", 0.9999996314771096}}}], "ExpectedMessages" -> {}, 
-           "ActualMessages" -> {}, "AbsoluteTimeUsed" -> 
-           Quantity[0.006417`3.9578470371231846, "Seconds"], "CPUTimeUsed" -> 
-           Quantity[0.006412000000011631, "Seconds"], "MemoryUsed" -> 
-           Quantity[2080, "Bytes"]]]],
-       Evaluator->Automatic,
-       FrameMargins->{{10, 10}, {0, 0}},
-       ImageSize->Automatic,
-       Method->"Queued"], 
-      ButtonBox[
-       TagBox[
-        TooltipBox[
-         PaneSelectorBox[{False->
-          TagBox[GridBox[{
-             {
               
               DynamicBox[FEPrivate`FrontEndResource[
                "MUnitExpressions", "Rerun"],
@@ -5274,7 +5166,264 @@ Cell[BoxData[
     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
    "Grid"],
   ImageSize->Full]], "BottomCell",
- CellID->1884692779]
+ CellID->5893467]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "mountain", ",", "valley", ",", "mountainFolded", ",", "valleyFolded"}], 
+    "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"mountain", ",", "valley"}], "}"}], "=", "\[IndentingNewLine]", 
+     
+     RowBox[{
+      RowBox[{
+       RowBox[{"convertCreasePatternTo3D", "[", 
+        RowBox[{"generateTwoBase", "[", "#", "]"}], "]"}], "&"}], "/@", 
+      RowBox[{"{", 
+       RowBox[{"\"\<mountain\>\"", ",", "\"\<valley\>\""}], "}"}]}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"mountainFolded", ",", "valleyFolded"}], "}"}], "=", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"manipulateCrease", "[", 
+        RowBox[{"\"\<p\>\"", ",", "\"\<q\>\"", ",", "1", ",", "#"}], "]"}], 
+       "&"}], "/@", 
+      RowBox[{"{", 
+       RowBox[{"mountain", ",", "valley"}], "}"}]}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"calculateCreaseDirection", "[", 
+       RowBox[{
+       "\"\<p\>\"", ",", "\"\<q\>\"", ",", "mountainFolded", ",", 
+        "mountain"}], "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"calculateCreaseDirection", "[", 
+       RowBox[{
+       "\"\<p\>\"", ",", "\"\<q\>\"", ",", "valleyFolded", ",", "valley"}], 
+       "]"}]}], "\[IndentingNewLine]", "}"}]}]}], "\[IndentingNewLine]", 
+  "]"}]], "VerificationTest",
+ CellChangeTimes->{{3.645699404133795*^9, 3.645699590850225*^9}},
+ CellID->63877825],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\"\<mountain\>\"", ",", "\"\<valley\>\""}], 
+  "}"}]], "ExpectedOutput",
+ CellChangeTimes->{{3.645699576428115*^9, 3.6456995823620777`*^9}},
+ CellID->2000264922],
+
+Cell[BoxData[
+ PaneBox[
+  TagBox[GridBox[{
+     {
+      ButtonBox[
+       TagBox[
+        TooltipBox[
+         PaneSelectorBox[{False->
+          TagBox[GridBox[{
+             {
+              DynamicBox[FEPrivate`FrontEndResource["MUnitExpressions", "Add"],
+               ImageSizeCache->{16., {4., 8.}}], 
+              StyleBox[
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "MUnitStrings", "AddMessages-Label"],
+                ImageSizeCache->{81., {3., 8.}}], "ButtonText",
+               StripOnInput->False,
+               AdjustmentBoxOptions->{BoxBaselineShift->-50}]}
+            },
+            AutoDelete->False,
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Center}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+           "Grid"], True->
+          TagBox[GridBox[{
+             {
+              DynamicBox[FEPrivate`FrontEndResource["MUnitExpressions", "Add"],
+               ImageSizeCache->{16., {4., 8.}}], 
+              StyleBox[
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "MUnitStrings", "AddMessages-Label"],
+                ImageSizeCache->{81., {3., 8.}}], "ButtonText",
+               StripOnInput->False,
+               LineColor->RGBColor[0.9059, 0.3451, 0.102],
+               FrontFaceColor->RGBColor[0.9059, 0.3451, 0.102],
+               GraphicsColor->RGBColor[0.9059, 0.3451, 0.102],
+               FontColor->RGBColor[0.9059, 0.3451, 0.102],
+               $CellContext`BackFaceColor -> 
+               RGBColor[0.9059, 0.3451, 0.102]]}
+            },
+            AutoDelete->False,
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Center}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+           "Grid"]}, Dynamic[
+           CurrentValue["MouseOver"]],
+          FrameMargins->0,
+          ImageSize->Automatic],
+         DynamicBox[
+          FEPrivate`FrontEndResource["MUnitStrings", "AddMessages-Tooltip"]],
+         TooltipDelay->0.5],
+        Annotation[#, 
+         Dynamic[
+          RawBoxes[
+           FEPrivate`FrontEndResource[
+           "MUnitStrings", "AddMessages-Tooltip"]]], "Tooltip"]& ],
+       Appearance->FEPrivate`FrontEndResource[
+        "MUnitExpressions", "ButtonAppearances"],
+       ButtonFunction:>
+        Block[{$ContextPath}, Needs["MUnit`"]; MUnit`addMessages[]],
+       Evaluator->Automatic,
+       FrameMargins->{{10, 10}, {0, 0}},
+       ImageSize->Automatic,
+       Method->"Queued"], 
+      TagBox[GridBox[{
+         {
+          ButtonBox[
+           TagBox[
+            TooltipBox[
+             PaneSelectorBox[{False->
+              TagBox[GridBox[{
+                 {
+                  
+                  DynamicBox[FEPrivate`FrontEndResource[
+                   "MUnitExpressions", "Add"],
+                   ImageSizeCache->{16., {4., 8.}}], 
+                  StyleBox[
+                   
+                   DynamicBox[FEPrivate`FrontEndResource[
+                    "MUnitStrings", "AddOptions-Label"],
+                    ImageSizeCache->{68., {2., 9.}}], "ButtonText",
+                   StripOnInput->False,
+                   AdjustmentBoxOptions->{BoxBaselineShift->-50}]}
+                },
+                AutoDelete->False,
+                
+                GridBoxAlignment->{
+                 "Columns" -> {{Automatic}}, "Rows" -> {{Center}}},
+                
+                GridBoxItemSize->{
+                 "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+               "Grid"], True->
+              TagBox[GridBox[{
+                 {
+                  
+                  DynamicBox[FEPrivate`FrontEndResource[
+                   "MUnitExpressions", "Add"],
+                   ImageSizeCache->{16., {4., 8.}}], 
+                  StyleBox[
+                   
+                   DynamicBox[FEPrivate`FrontEndResource[
+                    "MUnitStrings", "AddOptions-Label"],
+                    ImageSizeCache->{68., {2., 9.}}], "ButtonText",
+                   StripOnInput->False,
+                   LineColor->RGBColor[0.9059, 0.3451, 0.102],
+                   FrontFaceColor->RGBColor[0.9059, 0.3451, 0.102],
+                   GraphicsColor->RGBColor[0.9059, 0.3451, 0.102],
+                   FontColor->RGBColor[0.9059, 0.3451, 0.102],
+                   $CellContext`BackFaceColor -> 
+                   RGBColor[0.9059, 0.3451, 0.102]]}
+                },
+                AutoDelete->False,
+                
+                GridBoxAlignment->{
+                 "Columns" -> {{Automatic}}, "Rows" -> {{Center}}},
+                
+                GridBoxItemSize->{
+                 "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+               "Grid"]}, Dynamic[
+               CurrentValue["MouseOver"]],
+              FrameMargins->0,
+              ImageSize->Automatic],
+             DynamicBox[
+              FEPrivate`FrontEndResource[
+              "MUnitStrings", "AddOptions-Tooltip"]],
+             TooltipDelay->0.5],
+            Annotation[#, 
+             Dynamic[
+              RawBoxes[
+               FEPrivate`FrontEndResource[
+               "MUnitStrings", "AddOptions-Tooltip"]]], "Tooltip"]& ],
+           
+           Appearance->FEPrivate`FrontEndResource[
+            "MUnitExpressions", "ButtonAppearances"],
+           
+           ButtonFunction:>
+            Block[{$ContextPath}, Needs["MUnit`"]; MUnit`addOptions[]],
+           Evaluator->Automatic,
+           FrameMargins->{{10, 10}, {0, 0}},
+           ImageSize->Automatic,
+           Method->"Queued"], 
+          ActionMenuBox[
+           ButtonBox["\<\"\"\>",
+            
+            Appearance->FEPrivate`FrontEndResource[
+             "MUnitExpressions", "ButtonAppearancesNoLeftBorder"],
+            ButtonFunction:>{},
+            ContentPadding->False,
+            Evaluator->None,
+            Method->"Preemptive"], {
+           
+           DynamicBox[FEPrivate`FrontEndResource[
+            "MUnitStrings", "MemoryConstraint-Label"]]:>
+           Block[{$ContextPath}, Needs["MUnit`"]; 
+            MUnit`InsertOptionRule["MemoryConstraint"]], 
+           
+           DynamicBox[FEPrivate`FrontEndResource[
+            "MUnitStrings", "SameTest-Label"]]:>
+           Block[{$ContextPath}, Needs["MUnit`"]; 
+            MUnit`InsertOptionRule["SameTest"]], 
+           
+           DynamicBox[FEPrivate`FrontEndResource[
+            "MUnitStrings", "TestID-Label"]]:>
+           Block[{$ContextPath}, Needs["MUnit`"]; 
+            MUnit`InsertOptionRule["TestID"]], 
+           
+           DynamicBox[FEPrivate`FrontEndResource[
+            "MUnitStrings", "TimeConstraint-Label"]]:>
+           Block[{$ContextPath}, Needs["MUnit`"]; 
+            MUnit`InsertOptionRule["TimeConstraint"]]},
+           
+           Appearance->FEPrivate`FrontEndResource[
+            "MUnitExpressions", "ButtonAppearancesNoLeftBorder"],
+           FrameMargins->{{0, 0}, {0, 0}},
+           Method->"Queued"]}
+        },
+        AutoDelete->False,
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> Dynamic[
+            If[$OperatingSystem === "Windows", {{-0.1}}, {{0}}]], 
+          "Rows" -> {{Automatic}}}],
+       "Grid"]}
+    },
+    AutoDelete->False,
+    GridBoxAlignment->{"Columns" -> {{Automatic}}, "Rows" -> {{Center}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{2}}},
+    GridBoxSpacings->{
+     "ColumnsIndexed" -> {2 -> 0.5, 3 -> 2, 4 -> 0.5}, 
+      "Rows" -> {{Automatic}}}],
+   "Grid"],
+  Alignment->{Left, Center},
+  ImageSize->Full]], "BottomCell",
+ CellID->1743533916]
 }, Open  ]]
 }, Open  ]],
 
@@ -5303,16 +5452,14 @@ Cell[BoxData[
    RowBox[{
     RowBox[{"{", 
      RowBox[{"Polygon", "[", 
-      RowBox[{"\"\<p\>\"", "\\[Rule]", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"1", ",", "0", ",", "0"}], "}"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"0", ",", "1", ",", "0"}], "}"}]}], "}"}]}], "]"}], "}"}], 
-    ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1", ",", "0"}], "}"}]}], "}"}], "]"}], "}"}], ",", 
     RowBox[{"{", 
      RowBox[{
       RowBox[{"{", 
@@ -5427,7 +5574,7 @@ Cell[BoxData[
   ShowStringCharacters->True,
   NumberMarks->True]], "ExpectedOutput",
  CellChangeTimes->{{3.645020483107836*^9, 3.645020513233667*^9}, 
-   3.645020588587427*^9, 3.6452830895813217`*^9},
+   3.645020588587427*^9, 3.6452830895813217`*^9, 3.6456549609257927`*^9},
  CellID->1783544552],
 
 Cell[BoxData[
@@ -5548,11 +5695,11 @@ Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
             GraphicsColor->RGBColor[0.458824, 0.458824, 0.458824],
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
-           StyleBox["\<\"\\!\\(\\*TagBox[\\({\\(\\({\\(Polygon[\\(\\(\\\"p\\\"\
- \[Rule] \\(\\({\\(\\({0, 0, 0}\\)\\), \\(\\(\[LeftSkeleton] 1 \
-\[RightSkeleton]\\)\\), \\(\\({0, 1, 0}\\)\\)}\\)\\)\\)\\)]\\)}\\)\\), \\(\\(\
-\[LeftSkeleton] 1 \[RightSkeleton]\\)\\)}\\), Function[Short[Slot[1], \
-Rational[2, 3]]]]\\)\"\>",
+           StyleBox["\<\"\\!\\(\\*TagBox[\\({\\(\\({\\(Polygon[\\(\\({\\(\\({\
+0, 0, 0}\\)\\), \\(\\({1, 0, 0}\\)\\), \\(\\({0, 1, \
+0}\\)\\)}\\)\\)]\\)}\\)\\), \\(\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)\\)}\\), Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
+            
             StripOnInput->False,
             LineColor->RGBColor[0.14902, 0.14902, 0.14902],
             FrontFaceColor->RGBColor[0.14902, 0.14902, 0.14902],
@@ -5574,10 +5721,9 @@ Rational[2, 3]]]]\\)\"\>",
              "MUnitStrings", "ActualOutput-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[\({\(\({\(Polygon[\(\(\"p\" \[Rule] \(\({\(\({0, 0, \
-0}\)\), \(\(\[LeftSkeleton] 1 \[RightSkeleton]\)\), \(\({0, 1, \
-0}\)\)}\)\)\)\)]\)}\)\), \(\(\[LeftSkeleton] 1 \[RightSkeleton]\)\)}\), \
-Function[Short[Slot[1], Rational[2, 3]]]]\)", 
+          "\!\(\*TagBox[\({\(\({\(Polygon[\(\({\(\({0, 0, 0}\)\), \(\({1, 0, \
+0}\)\), \(\({0, 1, 0}\)\)}\)\)]\)}\)\), \(\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\)\)}\), Function[Short[Slot[1], Rational[2, 3]]]]\)", 
            RGBColor[0.14902, 0.14902, 0.14902]]}}, 
         BaseStyle -> {FontFamily -> "Helvetica", FontWeight -> "Bold"}, 
         Spacings -> {{2 -> 0.5}, Automatic}], 
@@ -5594,11 +5740,11 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
             GraphicsColor->RGBColor[0.458824, 0.458824, 0.458824],
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
-           StyleBox["\<\"\\!\\(\\*TagBox[\\({\\(\\({\\(Polygon[\\(\\(\\\"p\\\"\
- \[Rule] \\(\\({\\(\\({0, 0, 0}\\)\\), \\(\\(\[LeftSkeleton] 1 \
-\[RightSkeleton]\\)\\), \\(\\({0, 1, 0}\\)\\)}\\)\\)\\)\\)]\\)}\\)\\), \\(\\(\
-\[LeftSkeleton] 1 \[RightSkeleton]\\)\\)}\\), Function[Short[Slot[1], \
-Rational[2, 3]]]]\\)\"\>",
+           StyleBox["\<\"\\!\\(\\*TagBox[\\({\\(\\({\\(Polygon[\\(\\({\\(\\({\
+0, 0, 0}\\)\\), \\(\\({1, 0, 0}\\)\\), \\(\\({0, 1, \
+0}\\)\\)}\\)\\)]\\)}\\)\\), \\(\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)\\)}\\), Function[Short[Slot[1], Rational[2, 3]]]]\\)\"\>",
+            
             StripOnInput->False,
             LineColor->RGBColor[0.14902, 0.14902, 0.14902],
             FrontFaceColor->RGBColor[0.14902, 0.14902, 0.14902],
@@ -5620,10 +5766,9 @@ Rational[2, 3]]]]\\)\"\>",
              "MUnitStrings", "ExpectedOutput-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[\({\(\({\(Polygon[\(\(\"p\" \[Rule] \(\({\(\({0, 0, \
-0}\)\), \(\(\[LeftSkeleton] 1 \[RightSkeleton]\)\), \(\({0, 1, \
-0}\)\)}\)\)\)\)]\)}\)\), \(\(\[LeftSkeleton] 1 \[RightSkeleton]\)\)}\), \
-Function[Short[Slot[1], Rational[2, 3]]]]\)", 
+          "\!\(\*TagBox[\({\(\({\(Polygon[\(\({\(\({0, 0, 0}\)\), \(\({1, 0, \
+0}\)\), \(\({0, 1, 0}\)\)}\)\)]\)}\)\), \(\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\)\)}\), Function[Short[Slot[1], Rational[2, 3]]]]\)", 
            RGBColor[0.14902, 0.14902, 0.14902]]}}, 
         BaseStyle -> {FontFamily -> "Helvetica", FontWeight -> "Bold"}, 
         Spacings -> {{2 -> 0.5}, Automatic}], 
@@ -5641,7 +5786,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
             FontColor->RGBColor[0.458824, 0.458824, 0.458824]], 
            
            StyleBox["\<\"\\!\\(\\*TagBox[TemplateBox[List[\\\"0.\
-00024999999993724487`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
+0002459999999997464`\\\"], \\\"QuantityUnit\\\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \
 \\\"\\\\[InvisibleSpace]\\\", StyleBox[RowBox[List[\\\" \\\", \\\"\\\\\\\"s\\\
 \\\\\"\\\"]], \\\"QuantityUnitTraditionalLabel\\\"]]], \
@@ -5671,7 +5816,7 @@ Rule[InterpretationFunction, Function[RowBox[List[\\\"Quantity\\\", \
              "MUnitStrings", "CPUTimeUsed-Detail"]]], 
            RGBColor[0.458824, 0.458824, 0.458824]], 
           Style[
-          "\!\(\*TagBox[TemplateBox[List[\"0.00024999999993724487`\"], \
+          "\!\(\*TagBox[TemplateBox[List[\"0.0002459999999997464`\"], \
 \"QuantityUnit\", Rule[DisplayFunction, \
 Function[TooltipBox[StyleBox[RowBox[List[Slot[1], \"\\[InvisibleSpace]\", \
 StyleBox[RowBox[List[\" \", \"\\\"s\\\"\"]], \
@@ -5690,7 +5835,7 @@ Function[Short[Slot[1], Rational[2, 3]]]]\)",
     GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}}],
    "Grid"],
   ImageSize->Full]], "TestSuccess",
- CellID->647743403],
+ CellID->267252107],
 
 Cell[BoxData[
  PaneBox[
@@ -5975,7 +6120,7 @@ Cell[BoxData[
     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
    "Grid"],
   ImageSize->Full]], "BottomCell",
- CellID->1028767578]
+ CellID->1317856472]
 }, Open  ]]
 }, Open  ]]
 },
@@ -6299,7 +6444,7 @@ DockedCells->{
                11, 
               RGBColor[0.34902, 0.34902, 0.34902], StripOnInput -> False], 
              FrameBox[
-              StyleBox["\"9\"", 11, Bold, 
+              StyleBox["\"10\"", 11, Bold, 
                GrayLevel[1], StripOnInput -> False], Background -> 
               RGBColor[0.380392, 0.603922, 0.384314], FrameStyle -> 
               RGBColor[0.380392, 0.603922, 0.384314], 
@@ -6337,7 +6482,7 @@ DockedCells->{
                 "ColumnsIndexed" -> {2 -> 0.3}, "Rows" -> {{Automatic}}}], 
               "Grid"], 
              FrameBox[
-              StyleBox["\"1\"", 11, Bold, 
+              StyleBox["\"0\"", 11, Bold, 
                GrayLevel[1], StripOnInput -> False], Background -> 
               RGBColor[0.74902, 0.403922, 0.4], FrameStyle -> 
               RGBColor[0.74902, 0.403922, 0.4], 
@@ -6408,10 +6553,10 @@ DockedCells->{
               DynamicBox[
                ToBoxes[
                 
-                MUnit`resultColorBar[{1589453352, 598764482, 1247620733, 
-                 1418146180, 1676928103, 1167663436, 1432563909, 2069289652, 
-                 460223318, 647743403}, {1, 2, 3, 4, 5, 6, 7, 8, 10}, {}, {
-                 9}, {}, 250, 12], StandardForm]], 
+                MUnit`resultColorBar[{22924637, 96561581, 1684372757, 
+                 1856256591, 443055917, 742862368, 1678290248, 180744963, 
+                 1398094363, 267252107}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 
+                 10}, {}, {}, {}, 250, 12], StandardForm]], 
               ActionMenuBox[
                PaneSelectorBox[{False -> DynamicBox[
                    FEPrivate`FrontEndResource[
@@ -6668,112 +6813,122 @@ Cell[602, 23, 176, 3, 44, "VerificationTest",
 Cell[781, 28, 55, 1, 36, "ExpectedOutput",
  CellID->411515764],
 Cell[839, 31, 10620, 250, 25, "TestSuccess",
- CellID->1589453352],
-Cell[11462, 283, 11279, 283, 43, "BottomCell",
- CellID->1393402031]
+ CellID->22924637],
+Cell[11462, 283, 11278, 283, 43, "BottomCell",
+ CellID->894801246]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[22778, 571, 404, 7, 44, "VerificationTest",
+Cell[22777, 571, 404, 7, 44, "VerificationTest",
  CellID->934499214],
-Cell[23185, 580, 56, 1, 36, "ExpectedOutput",
+Cell[23184, 580, 56, 1, 36, "ExpectedOutput",
  CellID->1580379187],
-Cell[23244, 583, 10623, 250, 25, "TestSuccess",
- CellID->598764482],
-Cell[33870, 835, 11278, 283, 43, "BottomCell",
- CellID->326279132]
+Cell[23243, 583, 10622, 250, 25, "TestSuccess",
+ CellID->96561581],
+Cell[33868, 835, 11279, 283, 43, "BottomCell",
+ CellID->1560338382]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[45185, 1123, 116, 2, 64, "Section",
+Cell[45184, 1123, 116, 2, 64, "Section",
  CellID->356654529],
 Cell[CellGroupData[{
-Cell[45326, 1129, 1979, 44, 368, "VerificationTest",
+Cell[45325, 1129, 1979, 44, 368, "VerificationTest",
  CellID->1009463993],
-Cell[47308, 1175, 55, 1, 36, "ExpectedOutput",
+Cell[47307, 1175, 55, 1, 36, "ExpectedOutput",
  CellID->940519051],
-Cell[47366, 1178, 10626, 250, 25, "TestSuccess",
- CellID->1247620733],
-Cell[57995, 1430, 11278, 283, 43, "BottomCell",
- CellID->731330223]
+Cell[47365, 1178, 10624, 250, 25, "TestSuccess",
+ CellID->1684372757],
+Cell[57992, 1430, 11279, 283, 43, "BottomCell",
+ CellID->1123492145]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[69322, 1719, 114, 2, 64, "Section",
+Cell[69320, 1719, 114, 2, 64, "Section",
  CellID->1259846913],
 Cell[CellGroupData[{
-Cell[69461, 1725, 796, 21, 62, "VerificationTest",
+Cell[69459, 1725, 796, 21, 62, "VerificationTest",
  CellID->245315318],
-Cell[70260, 1748, 431, 13, 54, "ExpectedOutput",
+Cell[70258, 1748, 431, 13, 54, "ExpectedOutput",
  CellID->1993431033],
-Cell[70694, 1763, 11342, 260, 25, "TestSuccess",
- CellID->1418146180],
-Cell[82039, 2025, 11279, 283, 43, "BottomCell",
- CellID->2009332854]
+Cell[70692, 1763, 11342, 260, 25, "TestSuccess",
+ CellID->1856256591],
+Cell[82037, 2025, 11279, 283, 43, "BottomCell",
+ CellID->1609584968]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[93355, 2313, 561, 16, 44, "VerificationTest",
+Cell[93353, 2313, 561, 16, 44, "VerificationTest",
  CellID->1926703879],
-Cell[93919, 2331, 139, 3, 36, "ExpectedOutput",
+Cell[93917, 2331, 139, 3, 36, "ExpectedOutput",
  CellID->206181240],
-Cell[94061, 2336, 10634, 250, 25, "TestSuccess",
- CellID->1676928103],
-Cell[104698, 2588, 11278, 283, 43, "BottomCell",
- CellID->555243893]
+Cell[94059, 2336, 10633, 250, 25, "TestSuccess",
+ CellID->443055917],
+Cell[104695, 2588, 11279, 283, 43, "BottomCell",
+ CellID->1114992870]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[116013, 2876, 623, 17, 62, "VerificationTest",
+Cell[116011, 2876, 623, 17, 62, "VerificationTest",
  CellID->108981833],
-Cell[116639, 2895, 131, 4, 62, "ExpectedOutput",
+Cell[116637, 2895, 131, 4, 62, "ExpectedOutput",
  CellID->2001599987],
-Cell[116773, 2901, 10632, 250, 25, "TestSuccess",
- CellID->1167663436],
-Cell[127408, 3153, 11279, 283, 43, "BottomCell",
- CellID->1213802566]
+Cell[116771, 2901, 10633, 250, 25, "TestSuccess",
+ CellID->742862368],
+Cell[127407, 3153, 11279, 283, 43, "BottomCell",
+ CellID->1965378965]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[138724, 3441, 490, 15, 44, "VerificationTest",
+Cell[138723, 3441, 490, 15, 44, "VerificationTest",
  CellID->2097011684],
-Cell[139217, 3458, 156, 4, 36, "ExpectedOutput",
+Cell[139216, 3458, 156, 4, 36, "ExpectedOutput",
  CellID->2121242071],
-Cell[139376, 3464, 10640, 250, 25, "TestSuccess",
- CellID->1432563909],
-Cell[150019, 3716, 11279, 283, 43, "BottomCell",
- CellID->1662452046]
+Cell[139375, 3464, 10642, 250, 25, "TestSuccess",
+ CellID->1678290248],
+Cell[150020, 3716, 11279, 283, 43, "BottomCell",
+ CellID->1973978438]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[161335, 4004, 599, 17, 62, "VerificationTest",
+Cell[161336, 4004, 599, 17, 62, "VerificationTest",
  CellID->1761654195],
-Cell[161937, 4023, 221, 7, 56, "ExpectedOutput",
+Cell[161938, 4023, 221, 7, 56, "ExpectedOutput",
  CellID->765014176],
-Cell[162161, 4032, 10684, 250, 25, "TestSuccess",
- CellID->2069289652],
-Cell[172848, 4284, 11277, 283, 43, "BottomCell",
- CellID->53517999]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[184162, 4572, 1308, 32, 164, "VerificationTest",
- CellID->1933586658],
-Cell[185473, 4606, 641, 19, 54, "ExpectedOutput",
- CellID->2068414602],
-Cell[186117, 4627, 548, 17, 54, "ActualOutput",
- CellID->1828844747],
-Cell[186668, 4646, 11247, 258, 25, "TestFailure",
- CellID->460223318],
-Cell[197918, 4906, 14820, 370, 43, "BottomCell",
- CellID->1884692779]
+Cell[162162, 4032, 10683, 250, 25, "TestSuccess",
+ CellID->180744963],
+Cell[172848, 4284, 11385, 285, 43, "BottomCell",
+ CellID->1238716283]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[212787, 5282, 112, 2, 64, "Section",
+Cell[184282, 4575, 117, 2, 64, "Section",
+ CellID->2100206959],
+Cell[CellGroupData[{
+Cell[184424, 4581, 1308, 32, 164, "VerificationTest",
+ CellID->1933586658],
+Cell[185735, 4615, 400, 11, 36, "ExpectedOutput",
+ CellID->2068414602],
+Cell[186138, 4628, 11038, 254, 25, "TestSuccess",
+ CellID->1398094363],
+Cell[197179, 4884, 11364, 284, 43, "BottomCell",
+ CellID->5893467]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[208580, 5173, 1582, 43, 198, "VerificationTest",
+ CellID->63877825],
+Cell[210165, 5218, 201, 5, 36, "ExpectedOutput",
+ CellID->2000264922],
+Cell[210369, 5225, 7793, 200, 42, "BottomCell",
+ CellID->1743533916]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[218211, 5431, 112, 2, 64, "Section",
  CellID->2080826629],
 Cell[CellGroupData[{
-Cell[212924, 5288, 432, 9, 62, "VerificationTest",
+Cell[218348, 5437, 432, 9, 62, "VerificationTest",
  CellID->442967922],
-Cell[213359, 5299, 4981, 131, 74, "ExpectedOutput",
+Cell[218783, 5448, 4950, 129, 74, "ExpectedOutput",
  CellID->1783544552],
-Cell[218343, 5432, 11417, 260, 25, "TestSuccess",
- CellID->647743403],
-Cell[229763, 5694, 11279, 283, 43, "BottomCell",
- CellID->1028767578]
+Cell[223736, 5579, 11229, 258, 25, "TestSuccess",
+ CellID->267252107],
+Cell[234968, 5839, 11279, 283, 43, "BottomCell",
+ CellID->1317856472]
 }, Open  ]]
 }, Open  ]]
 }

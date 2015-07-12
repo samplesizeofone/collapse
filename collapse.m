@@ -262,8 +262,7 @@ getCreaseType[crease_, creasePattern_] :=
         "valley"
     ]
 
-manipulateCrease[polygonName1_, polygonName2_, angle_, pointName_,
-    creasePattern_] :=
+manipulateCrease[polygonName1_, polygonName2_, angle_, creasePattern_] :=
     Module[{axialCrease, creaseStart, creaseEnd, creasePattern1,
         creasePattern2, creaseType, creaseDirection},
         creases1 = convertPolygonToCreases[
@@ -273,7 +272,6 @@ manipulateCrease[polygonName1_, polygonName2_, angle_, pointName_,
             creasePattern[["polygons"]][[polygonName2]]
         ];
         axialCrease = Intersection[creases1, creases2][[1]];
-        Print[axialCrease];
         {creaseStart, creaseEnd} = axialCrease /. creasePattern[["points"]];
         creasePattern1 = rotatePolygonInCreasePattern[
             polygonName1,
