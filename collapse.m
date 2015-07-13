@@ -1,16 +1,13 @@
 BeginPackage["collapse`"]
 
-(* Config *)
-$foldedExtensionLength = .000001;
-
 (* Data *)
 generateTwoBase[creaseType_] :=
     <|{
         "points" -> {
-            "a" -> {-1, 0},
-            "b" -> {1, 0},
-            "u" -> {0, -1},
-            "v" -> {0, 1}
+            "a" -> {-1, 0, 0},
+            "b" -> {1, 0, 0},
+            "u" -> {0, -1, 0},
+            "v" -> {0, 1, 0}
         },
         "polygons" -> <|{
             "p" -> {"a", "b", "u"},
@@ -37,21 +34,21 @@ creasePatternLibrary =
     <|{
         "diamond_base" -> <|{
             "points" -> {
-                "left_back" -> {-2, 0},
-                "center_back" -> {0, 0},
-                "right_back" -> {2, 0},
-                "left_middle" -> {-2, 1},
-                "center_middle" -> {0, 1},
-                "right_middle" -> {2, 1},
-                "left_forward" -> {-2, 2},
-                "left_half_forward" -> {-1, 2},
-                "right_half_forward" -> {1, 2},
-                "right_forward" -> {2, 2},
-                "left_front" -> {-2, 3},
-                "left_half_front" -> {-1, 3},
-                "center_front" -> {0, 3},
-                "right_half_front" -> {1, 3},
-                "right_front" -> {2, 3}
+                "left_back" -> {-2, 0, 0},
+                "center_back" -> {0, 0, 0},
+                "right_back" -> {2, 0, 0},
+                "left_middle" -> {-2, 1, 0},
+                "center_middle" -> {0, 1, 0},
+                "right_middle" -> {2, 1, 0},
+                "left_forward" -> {-2, 2, 0},
+                "left_half_forward" -> {-1, 2, 0},
+                "right_half_forward" -> {1, 2, 0},
+                "right_forward" -> {2, 2, 0},
+                "left_front" -> {-2, 3, 0},
+                "left_half_front" -> {-1, 3, 0},
+                "center_front" -> {0, 3, 0},
+                "right_half_front" -> {1, 3, 0},
+                "right_front" -> {2, 3, 0}
             },
             "polygons" -> <|{
                 "left_back" -> {
@@ -172,15 +169,6 @@ calculateNormal[{p1_, p2_, p3_}] :=
     ]
 
 (* Folding *)
-convertCreasePatternTo3D[creasePattern_, offset_:{0, 0, 0}] :=
-    Module[{newCreasePattern},
-        newCreasePattern = creasePattern;
-        newCreasePattern["points"] =
-            creasePattern[["points"]] /. {x_ /; NumberQ[x], y_ /; NumberQ[y]} :>
-                ({x, y, 0} + offset);
-        newCreasePattern
-    ]
-
 calculateUp[foldedTriangle_, triangle_] :=
     Module[{up},
         up = calculateBinormal[triangle];
@@ -200,7 +188,7 @@ calculateFoldedVectors[polygonName_, foldedCreasePattern_, creasePattern_] :=
                 3
             ] /. foldedCreasePattern[["points"]];
         center = Mean[foldedTriangle];
-        up = $foldedExtensionLength calculateUp[
+        up = calculateUp[
             foldedTriangle,
             triangle
         ];
@@ -209,6 +197,20 @@ calculateFoldedVectors[polygonName_, foldedCreasePattern_, creasePattern_] :=
             center + up,
             center + down
         }
+    ]
+
+calculatePolygonVectorAngle[polygonName1_, polygonName2_,
+    foldedCreasePattern_] :=
+    Module[{creases1, creases2, axialCrease, axialMidpoint, binormal1,
+        binormal2, points},
+        points = foldedCreasePattern[["points"]];
+        creases1 = foldedCreasePattern[["polygons"]][[polygonName1]];
+        creases2 = foldedCreasePattern[["polygons"]][[polygonName2]];
+        axialCrease = Intersection[creases1, creases2][[1]];
+        axialMidpoint = Mean[axialCrease /. points];
+        binormal1 = calculateBinormal[Take[creases1, 3] /. points];
+        binormal2 = calculateBinormal[Take[creases2, 3] /. points];
+        2 Pi - VectorAngle[binormal1, binormal2]
     ]
 
 calculateCreaseDirection[polygonName1_, polygonName2_,
@@ -229,6 +231,7 @@ calculateCreaseDirection[polygonName1_, polygonName2_,
             ];
         upDistance = EuclideanDistance[up1, up2];
         downDistance = EuclideanDistance[down1, down2];
+
         If[upDistance < downDistance,
             "valley",
             "mountain"
@@ -238,17 +241,19 @@ calculateCreaseDirection[polygonName1_, polygonName2_,
 convertPolygonToCreases[polygon_] :=
     Sort /@ Partition[polygon, 2, 1, {1, 1}]
 
-rotatePolygonInCreasePattern[polygonName_, angle_, {creaseStart_, creaseEnd_},
+rotatePolygonsInCreasePattern[polygonNames_, angle_, {creaseStart_, creaseEnd_},
     creasePattern_] :=
-    Module[{pointName, points, point, newCreasePattern},
+    Module[{pointName, points, point, newCreasePattern, rotation},
         points = <|creasePattern[["points"]]|>;
+        rotation = RotationMatrix[
+                angle,
+                creaseEnd - creaseStart
+            ];
         Do[
-            point = points[[pointName]];
+            point = <|creasePattern[["points"]]|>[[pointName]];
             points[pointName] =
-                RotationMatrix[
-                    angle,
-                    creaseEnd - creaseStart
-            ].(point - creaseStart) + creaseStart,
+                rotation.(point - creaseStart) + creaseStart,
+            {polygonName, polygonNames},
             {pointName, creasePattern[["polygons"]][[polygonName]]}
         ];
         newCreasePattern = creasePattern;
@@ -262,9 +267,11 @@ getCreaseType[crease_, creasePattern_] :=
         "valley"
     ]
 
-manipulateCrease[polygonName1_, polygonName2_, angle_, creasePattern_] :=
+manipulateCrease[polygonName1_, polygonName2_, polygons_ ,angle_,
+    creasePattern_] :=
     Module[{axialCrease, creaseStart, creaseEnd, creasePattern1,
-        creasePattern2, creaseType, creaseDirection},
+        creasePattern2, creaseType, creaseDirection, newCreasePattern,
+        newAngle},
         creases1 = convertPolygonToCreases[
             creasePattern[["polygons"]][[polygonName1]]
         ];
@@ -273,14 +280,14 @@ manipulateCrease[polygonName1_, polygonName2_, angle_, creasePattern_] :=
         ];
         axialCrease = Intersection[creases1, creases2][[1]];
         {creaseStart, creaseEnd} = axialCrease /. creasePattern[["points"]];
-        creasePattern1 = rotatePolygonInCreasePattern[
-            polygonName1,
+        creasePattern1 = rotatePolygonsInCreasePattern[
+            Append[polygons, polygonName1],
             angle,
             {creaseStart, creaseEnd},
             creasePattern
         ];
-        creasePattern2 = rotatePolygonInCreasePattern[
-            polygonName1,
+        creasePattern2 = rotatePolygonsInCreasePattern[
+            Append[polygons, polygonName1],
             -angle,
             {creaseStart, creaseEnd},
             creasePattern
@@ -295,6 +302,32 @@ manipulateCrease[polygonName1_, polygonName2_, angle_, creasePattern_] :=
         If[creaseType == creaseDirection,
             creasePattern1,
             creasePattern2
+        ]
+    ]
+
+findPointNeighbors[pointName_, polygons_] :=
+    Flatten[Cases[polygons, polygon_ /; MemberQ[polygon, pointName]]];
+
+findReferenceNeighbors[pointName_, foldedCreasePattern_, creasePattern_] :=
+    Module[{neighborNames, referencePoints, point},
+        point = pointName /. creasePattern[["points"]];
+        neighborNames = findPointNeighbors[
+            pointName,
+            Values[foldedCreasePattern[["polygons"]]]
+        ];
+        referenceNeighborNames = Cases[
+                foldedCreasePattern[["points"]],
+                (name_ -> point_) /; MemberQ[neighborNames, name] :> name
+            ];
+        Take[
+            Thread[
+                    {
+                        referenceNeighborNames /. foldedCreasePattern[["points"]],
+                        EuclideanDistance[point, #]& /@
+                            (referenceNeighborNames /. creasePattern[["points"]])
+                    }
+                ],
+            3
         ]
     ]
 
