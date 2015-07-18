@@ -267,11 +267,32 @@ getCreaseType[crease_, creasePattern_] :=
         "valley"
     ]
 
-manipulateCrease[polygonName1_, polygonName2_, polygons_ ,angle_,
+calculateCreaseDirectionalAngle[polygonName1_, polygonName2_, axialCrease_,
+    foldedCreasePattern_, creasePattern_] :=
+    Module[{creaseDirection, angle},
+        creaseType = getCreaseType[axialCrease, creasePattern];
+        creaseDirection = calculateCreaseDirection[
+            polygonName1,
+            polygonName2,
+            foldedCreasePattern,
+            creasePattern
+        ];
+        angle = calculatePolygonVectorAngle[
+            polygonName1,
+            polygonName2,
+            foldedCreasePattern
+        ];
+        If[creaseDirection == creaseType,
+            Pi - angle,
+            -(Pi - angle)
+        ]
+    ]
+
+manipulateCrease[polygonName1_, polygonName2_, polygons_, angle_,
     creasePattern_] :=
     Module[{axialCrease, creaseStart, creaseEnd, creasePattern1,
-        creasePattern2, creaseType, creaseDirection, newCreasePattern,
-        newAngle},
+        creasePattern2, creaseType, creaseDirection1, creaseDirection2,
+        angle1, angle2},
         creases1 = convertPolygonToCreases[
             creasePattern[["polygons"]][[polygonName1]]
         ];
@@ -293,13 +314,23 @@ manipulateCrease[polygonName1_, polygonName2_, polygons_ ,angle_,
             creasePattern
         ];
         creaseType = getCreaseType[axialCrease, creasePattern];
-        creaseDirection = calculateCreaseDirection[
+
+        angle1 = calculateCreaseDirectionalAngle[
             polygonName1,
             polygonName2,
+            axialCrease,
             creasePattern1,
             creasePattern
         ];
-        If[creaseType == creaseDirection,
+        angle2 = calculateCreaseDirectionalAngle[
+            polygonName1,
+            polygonName2,
+            axialCrease, 
+            creasePattern2,
+            creasePattern
+        ];
+
+        If[angle2 > angle1,
             creasePattern1,
             creasePattern2
         ]
@@ -309,26 +340,57 @@ findPointNeighbors[pointName_, polygons_] :=
     Flatten[Cases[polygons, polygon_ /; MemberQ[polygon, pointName]]];
 
 findReferenceNeighbors[pointName_, foldedCreasePattern_, creasePattern_] :=
-    Module[{neighborNames, referencePoints, point},
+    Module[{neighborNames, referencePoints, point, referenceDistances},
         point = pointName /. creasePattern[["points"]];
         neighborNames = findPointNeighbors[
             pointName,
-            Values[foldedCreasePattern[["polygons"]]]
+            Values[creasePattern[["polygons"]]]
         ];
         referenceNeighborNames = Cases[
                 foldedCreasePattern[["points"]],
                 (name_ -> point_) /; MemberQ[neighborNames, name] :> name
             ];
+        referencePoints = referenceNeighborNames /.
+            foldedCreasePattern[["points"]];
+        EuclideanDistance[point, #]& /@
+            (referenceNeighborNames /. creasePattern[["points"]]);
         Take[
             Thread[
                     {
-                        referenceNeighborNames /. foldedCreasePattern[["points"]],
-                        EuclideanDistance[point, #]& /@
-                            (referenceNeighborNames /. creasePattern[["points"]])
+                        referencePoints,
+                        referenceDistances
                     }
                 ],
             3
         ]
+    ]
+
+reduceCreasePattern[pointNames_, creasePattern_] :=
+    Module[{newCreasePattern, points},
+        newCreasePattern = creasePattern;
+
+        points = <|newCreasePattern[["points"]]|>;
+        newCreasePattern["points"] =
+            # -> points[[#]]& /@
+                pointNames;
+
+        newCreasePattern["polygons"] = <|Cases[
+            Normal[newCreasePattern[["polygons"]]],
+            (name_ -> polygon_) /;
+                And@@(MemberQ[pointNames, #]& /@ polygon)
+        ]|>;
+
+        newCreasePattern["creases"]["mountain"] = Cases[
+            newCreasePattern[["creases"]][["mountain"]],
+            {a_, b_} /; MemberQ[pointNames, a] && MemberQ[pointNames, b]
+        ];
+
+        newCreasePattern["creases"]["valley"] = Cases[
+            newCreasePattern[["creases"]][["valley"]],
+            {a_, b_} /; MemberQ[pointNames, a] && MemberQ[pointNames, b]
+        ];
+
+        newCreasePattern
     ]
 
 (* Render *)
