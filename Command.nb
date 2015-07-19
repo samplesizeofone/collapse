@@ -10,25 +10,16 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     73627,       1716]
-NotebookOptionsPosition[     69398,       1572]
-NotebookOutlinePosition[     70217,       1602]
-CellTagsIndexPosition[     70047,       1595]
+NotebookDataLength[     11108,        275]
+NotebookOptionsPosition[     10425,        247]
+NotebookOutlinePosition[     10779,        263]
+CellTagsIndexPosition[     10736,        260]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
-Cell[BoxData[
- RowBox[{
-  RowBox[{"Quit", "[", "]"}], ";"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"Needs", "[", "\"\<collapse`\>\"", "]"}]], "Input",
- CellChangeTimes->{{3.64501281728986*^9, 3.645012820632036*^9}, {
-  3.6450272732443447`*^9, 3.645027274177361*^9}}],
 
 Cell[CellGroupData[{
-
 Cell["Manipulate creases", "Section",
  CellChangeTimes->{{3.645785676273158*^9, 3.645785679575232*^9}}],
 
@@ -55,155 +46,105 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"setup", "[", "t_", "]"}], ":=", "\[IndentingNewLine]", 
-  RowBox[{"(", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"myDiamondBaseFold1", "=", "\[IndentingNewLine]", 
-     RowBox[{"manipulateCrease", "[", "\[IndentingNewLine]", 
-      RowBox[{
-      "\"\<right_back\>\"", ",", "\[IndentingNewLine]", " ", 
-       "\"\<left_back\>\"", ",", "\[IndentingNewLine]", 
-       RowBox[{"{", 
-        RowBox[{
-        "\"\<right_middle\>\"", ",", "\"\<right_center\>\"", ",", 
-         "\"\<right_front\>\"", ",", "\"\<right_half_front\>\""}], "}"}], ",",
-        "\[IndentingNewLine]", 
-       RowBox[{
-        SuperscriptBox["t", "2"], 
-        FractionBox["\[Pi]", "2"]}], ",", "\[IndentingNewLine]", 
-       "myDiamondBaseCreasePattern"}], "\[IndentingNewLine]", "]"}]}], ";", 
-    "\[IndentingNewLine]", 
-    RowBox[{"myDiamondBaseFold1", "=", "\[IndentingNewLine]", 
-     RowBox[{"manipulateCrease", "[", "\[IndentingNewLine]", 
-      RowBox[{
-      "\"\<left_back\>\"", ",", "\[IndentingNewLine]", " ", 
-       "\"\<right_back\>\"", ",", "\[IndentingNewLine]", 
-       RowBox[{"{", 
-        RowBox[{
-        "\"\<left_middle\>\"", ",", "\"\<left_center\>\"", ",", 
-         "\"\<left_front\>\"", ",", "\"\<left_half_front\>\""}], "}"}], ",", 
-       "\[IndentingNewLine]", 
-       RowBox[{
-        SuperscriptBox["t", "2"], 
-        FractionBox["\[Pi]", "2"]}], ",", "\[IndentingNewLine]", 
-       "myDiamondBaseFold1"}], "\[IndentingNewLine]", "]"}]}], ";", 
-    "\[IndentingNewLine]", 
-    RowBox[{"myDiamondBaseFold2", "=", "\[IndentingNewLine]", 
-     RowBox[{"manipulateCrease", "[", "\[IndentingNewLine]", 
-      RowBox[{
-      "\"\<right_middle\>\"", ",", "\[IndentingNewLine]", 
-       "\"\<right_back\>\"", ",", "\[IndentingNewLine]", 
-       RowBox[{"{", 
-        RowBox[{
-        "\"\<right_center\>\"", ",", "\"\<right_front\>\"", ",", 
-         "\"\<right_half_front\>\""}], "}"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"t", " ", "\[Pi]"}], ",", "\[IndentingNewLine]", 
-       "myDiamondBaseFold1"}], "\[IndentingNewLine]", "]"}]}], ";", 
-    "\[IndentingNewLine]", 
-    RowBox[{"myDiamondBaseFold2", "=", "\[IndentingNewLine]", 
-     RowBox[{"manipulateCrease", "[", "\[IndentingNewLine]", 
-      RowBox[{
-      "\"\<left_middle\>\"", ",", "\[IndentingNewLine]", "\"\<left_back\>\"", 
-       ",", "\[IndentingNewLine]", 
-       RowBox[{"{", 
-        RowBox[{
-        "\"\<left_center\>\"", ",", "\"\<left_front\>\"", ",", 
-         "\"\<left_half_front\>\""}], "}"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"t", " ", "\[Pi]"}], ",", "\[IndentingNewLine]", 
-       "myDiamondBaseFold2"}], "\[IndentingNewLine]", "]"}]}], ";", 
-    "\[IndentingNewLine]", 
+  RowBox[{"myDiamondBaseCreaser", "=", "\[IndentingNewLine]", 
+   RowBox[{"Function", "[", 
     RowBox[{
-    "myReducedDiamondBase", "=", "\[IndentingNewLine]", 
-     "myDiamondBaseFold2"}], ";", "\n", 
-    RowBox[{"myReducedDiamondBase", "=", "\[IndentingNewLine]", 
-     RowBox[{"sizeCreasePattern", "[", "\[IndentingNewLine]", 
+     RowBox[{"{", "time", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Module", "[", 
       RowBox[{
-       RowBox[{"{", "\[IndentingNewLine]", 
-        RowBox[{
-        "\"\<left_back\>\"", ",", "\[IndentingNewLine]", 
-         "\"\<center_back\>\"", ",", "\[IndentingNewLine]", 
-         "\"\<right_back\>\"", ",", "\[IndentingNewLine]", 
-         "\"\<left_middle\>\"", ",", "\[IndentingNewLine]", 
-         "\"\<center_middle\>\"", ",", "\[IndentingNewLine]", 
-         "\"\<right_middle\>\"", ",", "\[IndentingNewLine]", 
-         "\"\<left_forward\>\"", ",", "\[IndentingNewLine]", 
-         "\"\<left_half_forward\>\"", ",", "\[IndentingNewLine]", 
-         "\"\<right_half_forward\>\"", ",", "\[IndentingNewLine]", 
-         "\"\<right_forward\>\""}], "\[IndentingNewLine]", "}"}], ",", 
-       "\[IndentingNewLine]", "myReducedDiamondBase", ",", 
-       "\[IndentingNewLine]", "myDiamondBaseCreasePattern"}], 
-      "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
-    RowBox[{"Module", "[", 
-     RowBox[{
-      RowBox[{"{", "x", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", "creasePattern", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"creasePattern", "=", "\[IndentingNewLine]", 
+         RowBox[{"manipulateCrease", "[", "\[IndentingNewLine]", 
+          RowBox[{
+          "\"\<right_back\>\"", ",", "\[IndentingNewLine]", " ", 
+           "\"\<left_back\>\"", ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+            "\"\<right_middle\>\"", ",", "\"\<right_center\>\"", ",", 
+             "\"\<right_front\>\"", ",", "\"\<right_half_front\>\""}], "}"}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{
+            SuperscriptBox["time", "2"], 
+            FractionBox["\[Pi]", "2"]}], ",", "\[IndentingNewLine]", 
+           "myDiamondBaseCreasePattern"}], "\[IndentingNewLine]", "]"}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"creasePattern", "=", "\[IndentingNewLine]", 
+         RowBox[{"manipulateCrease", "[", "\[IndentingNewLine]", 
+          RowBox[{
+          "\"\<left_back\>\"", ",", "\[IndentingNewLine]", " ", 
+           "\"\<right_back\>\"", ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+            "\"\<left_middle\>\"", ",", "\"\<left_center\>\"", ",", 
+             "\"\<left_front\>\"", ",", "\"\<left_half_front\>\""}], "}"}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{
+            SuperscriptBox["time", "2"], 
+            FractionBox["\[Pi]", "2"]}], ",", "\[IndentingNewLine]", 
+           "creasePattern"}], "\[IndentingNewLine]", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"creasePattern", "=", "\[IndentingNewLine]", 
+         RowBox[{"manipulateCrease", "[", "\[IndentingNewLine]", 
+          RowBox[{
+          "\"\<right_middle\>\"", ",", "\[IndentingNewLine]", 
+           "\"\<right_back\>\"", ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+            "\"\<right_center\>\"", ",", "\"\<right_front\>\"", ",", 
+             "\"\<right_half_front\>\""}], "}"}], ",", "\[IndentingNewLine]", 
+           
+           RowBox[{"time", " ", "\[Pi]"}], ",", "\[IndentingNewLine]", 
+           "creasePattern"}], "\[IndentingNewLine]", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"creasePattern", "=", "\[IndentingNewLine]", 
+         RowBox[{"manipulateCrease", "[", "\[IndentingNewLine]", 
+          RowBox[{
+          "\"\<left_middle\>\"", ",", "\[IndentingNewLine]", 
+           "\"\<left_back\>\"", ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+            "\"\<left_center\>\"", ",", "\"\<left_front\>\"", ",", 
+             "\"\<left_half_front\>\""}], "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"time", " ", "\[Pi]"}], ",", "\[IndentingNewLine]", 
+           "creasePattern"}], "\[IndentingNewLine]", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"creasePattern", "=", "\[IndentingNewLine]", 
+         RowBox[{"sizeCreasePattern", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"{", "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<left_back\>\"", ",", "\[IndentingNewLine]", 
+             "\"\<center_back\>\"", ",", "\[IndentingNewLine]", 
+             "\"\<right_back\>\"", ",", "\[IndentingNewLine]", 
+             "\"\<left_middle\>\"", ",", "\[IndentingNewLine]", 
+             "\"\<center_middle\>\"", ",", "\[IndentingNewLine]", 
+             "\"\<right_middle\>\"", ",", "\[IndentingNewLine]", 
+             "\"\<left_forward\>\"", ",", "\[IndentingNewLine]", 
+             "\"\<left_half_forward\>\"", ",", "\[IndentingNewLine]", 
+             "\"\<right_half_forward\>\"", ",", "\[IndentingNewLine]", 
+             "\"\<right_forward\>\""}], "\[IndentingNewLine]", "}"}], ",", 
+           "\[IndentingNewLine]", "creasePattern", ",", "\[IndentingNewLine]",
+            "myDiamondBaseCreasePattern"}], "\[IndentingNewLine]", 
+          "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.646307926938566*^9, 3.6463079688688917`*^9}, {
+  3.6463080363805933`*^9, 3.6463080798883343`*^9}, {3.646308118178541*^9, 
+  3.6463082766609983`*^9}, {3.646308435493273*^9, 3.6463084382516117`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Table", "[", 
+  RowBox[{
+   RowBox[{"Graphics3D", "[", 
+    RowBox[{"renderCreasePattern", "[", 
+     RowBox[{"fold", "[", 
       RowBox[{
-       RowBox[{"cp", "=", "myReducedDiamondBase"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"x", "=", "cp"}], ";", "\[IndentingNewLine]", 
-       RowBox[{"While", "[", 
-        RowBox[{
-         RowBox[{"x", "=!=", "Null"}], ",", "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{"cp", "=", "x"}], ";", "\[IndentingNewLine]", 
-          RowBox[{"x", "=", 
-           RowBox[{"calculateAnyPoint", "[", 
-            RowBox[{"cp", ",", "myDiamondBaseCreasePattern"}], "]"}]}]}]}], 
-        "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
-    "\[IndentingNewLine]", 
-    RowBox[{"renderCreasePattern", "[", "cp", "]"}]}], "\[IndentingNewLine]", 
-   ")"}]}]], "Input",
- CellChangeTimes->{{3.646246061824065*^9, 3.646246097385214*^9}, {
-  3.646246148113701*^9, 3.6462461661263933`*^9}, {3.646246199671274*^9, 
-  3.646246423406435*^9}, {3.646246454741621*^9, 3.646246489075906*^9}, {
-  3.6462465699989223`*^9, 3.646246570873251*^9}}],
+       RowBox[{"myDiamondBaseCreaser", "[", "t", "]"}], ",", 
+       "myDiamondBaseCreasePattern"}], "]"}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", ".9999", ",", ".1"}], "}"}]}], "]"}]], "Input",\
 
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"?", "IntegerDigits"}]], "Input",
- CellChangeTimes->{{3.6462467555456667`*^9, 3.6462467574166327`*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"IntegerDigits\\\", \\\"[\\\", \
-StyleBox[\\\"n\\\", \\\"TI\\\"], \\\"]\\\"}]\\) gives a list of the decimal \
-digits in the integer \\!\\(\\*StyleBox[\\\"n\\\", \\\"TI\\\"]\\). \
-\\n\\!\\(\\*RowBox[{\\\"IntegerDigits\\\", \\\"[\\\", \
-RowBox[{StyleBox[\\\"n\\\", \\\"TI\\\"], \\\",\\\", StyleBox[\\\"b\\\", \
-\\\"TI\\\"]}], \\\"]\\\"}]\\) gives a list of the base \
-\\!\\(\\*StyleBox[\\\"b\\\", \\\"TI\\\"]\\) digits in the integer \
-\\!\\(\\*StyleBox[\\\"n\\\", \\\"TI\\\"]\\). \
-\\n\\!\\(\\*RowBox[{\\\"IntegerDigits\\\", \\\"[\\\", \
-RowBox[{StyleBox[\\\"n\\\", \\\"TI\\\"], \\\",\\\", StyleBox[\\\"b\\\", \
-\\\"TI\\\"], \\\",\\\", StyleBox[\\\"len\\\", \\\"TI\\\"]}], \\\"]\\\"}]\\) \
-pads the list on the left with zeros to give a list of length \
-\\!\\(\\*StyleBox[\\\"len\\\", \\\"TI\\\"]\\). \"\>", "MSG"], 
-  "\[NonBreakingSpace]", 
-  ButtonBox[
-   StyleBox["\[RightSkeleton]", "SR"],
-   Active->True,
-   BaseStyle->"Link",
-   ButtonData->"paclet:ref/IntegerDigits"]}]], "Print", "PrintUsage",
- CellChangeTimes->{3.646246757708253*^9},
- CellTags->"Info3646221557-6778994"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"\"\<Desktop/ani/\>\"", "<>", 
-  RowBox[{"(", 
-   RowBox[{"StringJoin", "@@", 
-    RowBox[{"(", 
-     RowBox[{"ToString", "/@", 
-      RowBox[{"IntegerDigits", "[", 
-       RowBox[{"500", ",", "10", ",", "10"}], "]"}]}], ")"}]}], ")"}], "<>", 
-  "\"\<.png\>\""}]], "Input",
- CellChangeTimes->{{3.646246828670576*^9, 3.646246834891987*^9}}],
-
-Cell[BoxData["\<\"Desktop/ani/0000000500.png\"\>"], "Output",
- CellChangeTimes->{{3.646246829397788*^9, 3.6462468351696663`*^9}}]
-}, Open  ]],
+ CellChangeTimes->{{3.646308464467906*^9, 3.646308544326221*^9}}],
 
 Cell[BoxData[
  RowBox[{"Do", "[", "\[IndentingNewLine]", 
@@ -220,9 +161,11 @@ Cell[BoxData[
       "<>", "\"\<.png\>\""}], ",", "\[IndentingNewLine]", 
      RowBox[{"Graphics3D", "[", 
       RowBox[{
-       RowBox[{"setup", "[", 
-        RowBox[{
-         FractionBox["t", "1000"], "//", "N"}], "]"}], ",", 
+       RowBox[{"renderCreasePattern", "[", 
+        RowBox[{"fold", "[", 
+         RowBox[{"myDiamondBaseCreaser", "[", 
+          RowBox[{
+           FractionBox["t", "1000"], "//", "N"}], "]"}], "]"}], "]"}], ",", 
        RowBox[{"ViewPoint", "\[Rule]", 
         RowBox[{"{", 
          RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], ",", 
@@ -235,191 +178,9 @@ Cell[BoxData[
   "\[IndentingNewLine]", "]"}]], "Input",
  CellChangeTimes->{{3.646246575233295*^9, 3.646246593470667*^9}, {
   3.646246671659203*^9, 3.64624676638379*^9}, {3.646246803152079*^9, 
-  3.646246862988674*^9}, {3.6462469934701233`*^9, 3.646247008773625*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Graphics3D", "[", 
-  RowBox[{
-   RowBox[{"setup", "[", 
-    RowBox[{
-     FractionBox["500", "1000"], "//", "N"}], "]"}], ",", 
-   RowBox[{"ViewPoint", "\[Rule]", 
-    RowBox[{"{", 
-     RowBox[{"1", ",", "1", ",", "1"}], "}"}]}]}], "]"}]], "Input",
- CellChangeTimes->{{3.6462467938395357`*^9, 3.646246799998011*^9}}],
-
-Cell[BoxData[
- Graphics3DBox[{{
-    Polygon3DBox[{{-1.8477590650225735`, 0., -0.7653668647301796}, {0., 0., 
-     0.}, {0., 1., 0.}, {-1.8477590650225735`, 1., -0.7653668647301797}}], 
-    Polygon3DBox[{{1.8477590650225735`, 0., -0.7653668647301796}, {0., 0., 
-     0.}, {0., 1., 0.}, {1.8477590650225735`, 1., -0.7653668647301797}}], 
-    Polygon3DBox[{{-1.8477590650225735`, 1., -0.7653668647301797}, {0., 1., 
-     0.}, {-0.541196100146197, 
-     1., -1.3065629648763766`}, {-1.4650756326574836`, 
-     1., -1.6892463972414664`}}], 
-    Polygon3DBox[{{1.8477590650225735`, 1., -0.7653668647301797}, {0., 1., 
-     0.}, {0.541196100146197, 1., -1.3065629648763766`}, {1.4650756326574836`,
-      1., -1.6892463972414664`}}], 
-    Polygon3DBox[{{0., 1., 0.}, {2.220446049250313*^-16, 
-     2.2871885058111654`, -1.5307337294603591`}, {-0.541196100146197, 
-     1., -1.3065629648763766`}}], 
-    Polygon3DBox[{{0., 1., 0.}, {2.220446049250313*^-16, 
-     2.2871885058111654`, -1.5307337294603591`}, {0.541196100146197, 
-     1., -1.3065629648763766`}}], 
-    Polygon3DBox[{{-1.6235883004385911`, 
-     1.910179721124455, -1.3065629648763768`}, {-0.6997087679273043, 
-     1.9101797211244547`, -0.9238795325112871}, {-0.541196100146197, 
-     1., -1.3065629648763766`}, {-1.4650756326574836`, 
-     1., -1.6892463972414664`}}], 
-    Polygon3DBox[{{-0.6997087679273043, 
-     1.9101797211244547`, -0.9238795325112871}, {2.220446049250313*^-16, 
-     2.2871885058111654`, -1.5307337294603591`}, {-0.541196100146197, 
-     1., -1.3065629648763766`}}], 
-    Polygon3DBox[{{0.6997087679273044, 
-     1.9101797211244544`, -0.9238795325112865}, {2.220446049250313*^-16, 
-     2.2871885058111654`, -1.5307337294603591`}, {0.541196100146197, 
-     1., -1.3065629648763766`}}], 
-    Polygon3DBox[{{1.6235883004385911`, 
-     1.9101797211244547`, -1.3065629648763764`}, {0.6997087679273044, 
-     1.9101797211244544`, -0.9238795325112865}, {0.541196100146197, 
-     1., -1.3065629648763766`}, {1.4650756326574836`, 
-     1., -1.6892463972414664`}}]}, {{
-     {RGBColor[1, 0, 0], TubeBox[{{0., 0., 0.}, {0., 1., 0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{-1.8477590650225735`, 1., -0.7653668647301797}, {0., 1., 
-       0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0., 1., 0.}, {1.8477590650225735`, 
-       1., -0.7653668647301797}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0., 1., 0.}, {2.220446049250313*^-16, 
-       2.2871885058111654`, -1.5307337294603591`}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0.6997087679273044, 
-       1.9101797211244544`, -0.9238795325112865}, {0.541196100146197, 
-       1., -1.3065629648763766`}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{-0.6997087679273043, 
-       1.9101797211244547`, -0.9238795325112871}, {-0.541196100146197, 
-       1., -1.3065629648763766`}}]}}, {
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {-0.541196100146197, 
-       1., -1.3065629648763766`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {0.541196100146197, 1., -1.3065629648763766`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-1.4650756326574836`, 
-       1., -1.6892463972414664`}, {-0.541196100146197, 
-       1., -1.3065629648763766`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0.541196100146197, 1., -1.3065629648763766`}, {
-       1.4650756326574836`, 1., -1.6892463972414664`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-0.541196100146197, 1., -1.3065629648763766`}, {
-       2.220446049250313*^-16, 
-       2.2871885058111654`, -1.5307337294603591`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{2.220446049250313*^-16, 
-       2.2871885058111654`, -1.5307337294603591`}, {0.541196100146197, 
-       1., -1.3065629648763766`}}]}}}},
-  ViewPoint->{1, 1, 1}]], "Output",
- CellChangeTimes->{{3.64624679725751*^9, 3.646246800384507*^9}, 
-   3.646246977917804*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Graphics3D", "[", 
-  RowBox[{
-   RowBox[{"setup", "[", ".5", "]"}], ",", 
-   RowBox[{"ViewPoint", "\[Rule]", 
-    RowBox[{"{", 
-     RowBox[{"1", ",", "1", ",", "1"}], "}"}]}]}], "]"}]], "Input",
- CellChangeTimes->{{3.6462466115989037`*^9, 3.6462466631591797`*^9}}],
-
-Cell[BoxData[
- Graphics3DBox[{{
-    Polygon3DBox[{{-1.8477590650225735`, 0., -0.7653668647301796}, {0., 0., 
-     0.}, {0., 1., 0.}, {-1.8477590650225735`, 1., -0.7653668647301797}}], 
-    Polygon3DBox[{{1.8477590650225735`, 0., -0.7653668647301796}, {0., 0., 
-     0.}, {0., 1., 0.}, {1.8477590650225735`, 1., -0.7653668647301797}}], 
-    Polygon3DBox[{{-1.8477590650225735`, 1., -0.7653668647301797}, {0., 1., 
-     0.}, {-0.541196100146197, 
-     1., -1.3065629648763766`}, {-1.4650756326574836`, 
-     1., -1.6892463972414664`}}], 
-    Polygon3DBox[{{1.8477590650225735`, 1., -0.7653668647301797}, {0., 1., 
-     0.}, {0.541196100146197, 1., -1.3065629648763766`}, {1.4650756326574836`,
-      1., -1.6892463972414664`}}], 
-    Polygon3DBox[{{0., 1., 0.}, {2.220446049250313*^-16, 
-     2.2871885058111654`, -1.5307337294603591`}, {-0.541196100146197, 
-     1., -1.3065629648763766`}}], 
-    Polygon3DBox[{{0., 1., 0.}, {2.220446049250313*^-16, 
-     2.2871885058111654`, -1.5307337294603591`}, {0.541196100146197, 
-     1., -1.3065629648763766`}}], 
-    Polygon3DBox[{{-1.6235883004385911`, 
-     1.910179721124455, -1.3065629648763768`}, {-0.6997087679273043, 
-     1.9101797211244547`, -0.9238795325112871}, {-0.541196100146197, 
-     1., -1.3065629648763766`}, {-1.4650756326574836`, 
-     1., -1.6892463972414664`}}], 
-    Polygon3DBox[{{-0.6997087679273043, 
-     1.9101797211244547`, -0.9238795325112871}, {2.220446049250313*^-16, 
-     2.2871885058111654`, -1.5307337294603591`}, {-0.541196100146197, 
-     1., -1.3065629648763766`}}], 
-    Polygon3DBox[{{0.6997087679273044, 
-     1.9101797211244544`, -0.9238795325112865}, {2.220446049250313*^-16, 
-     2.2871885058111654`, -1.5307337294603591`}, {0.541196100146197, 
-     1., -1.3065629648763766`}}], 
-    Polygon3DBox[{{1.6235883004385911`, 
-     1.9101797211244547`, -1.3065629648763764`}, {0.6997087679273044, 
-     1.9101797211244544`, -0.9238795325112865}, {0.541196100146197, 
-     1., -1.3065629648763766`}, {1.4650756326574836`, 
-     1., -1.6892463972414664`}}]}, {{
-     {RGBColor[1, 0, 0], TubeBox[{{0., 0., 0.}, {0., 1., 0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{-1.8477590650225735`, 1., -0.7653668647301797}, {0., 1., 
-       0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0., 1., 0.}, {1.8477590650225735`, 
-       1., -0.7653668647301797}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0., 1., 0.}, {2.220446049250313*^-16, 
-       2.2871885058111654`, -1.5307337294603591`}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0.6997087679273044, 
-       1.9101797211244544`, -0.9238795325112865}, {0.541196100146197, 
-       1., -1.3065629648763766`}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{-0.6997087679273043, 
-       1.9101797211244547`, -0.9238795325112871}, {-0.541196100146197, 
-       1., -1.3065629648763766`}}]}}, {
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {-0.541196100146197, 
-       1., -1.3065629648763766`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {0.541196100146197, 1., -1.3065629648763766`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-1.4650756326574836`, 
-       1., -1.6892463972414664`}, {-0.541196100146197, 
-       1., -1.3065629648763766`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0.541196100146197, 1., -1.3065629648763766`}, {
-       1.4650756326574836`, 1., -1.6892463972414664`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-0.541196100146197, 1., -1.3065629648763766`}, {
-       2.220446049250313*^-16, 
-       2.2871885058111654`, -1.5307337294603591`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{2.220446049250313*^-16, 
-       2.2871885058111654`, -1.5307337294603591`}, {0.541196100146197, 
-       1., -1.3065629648763766`}}]}}}},
-  ViewPoint->{1, 1, 1}]], "Output",
- CellChangeTimes->{{3.646246612196519*^9, 3.646246617933938*^9}, {
-  3.6462466527861834`*^9, 3.646246663631941*^9}}]
-}, Open  ]],
+  3.646246862988674*^9}, {3.6462469934701233`*^9, 3.646247008773625*^9}, {
+  3.646308581383013*^9, 3.646308590756838*^9}, {3.646308646649397*^9, 
+  3.646308653433305*^9}}],
 
 Cell[CellGroupData[{
 
@@ -427,37 +188,50 @@ Cell[BoxData[
  RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{"Graphics3D", "[", 
-    RowBox[{"setup", "[", "t", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"renderCreasePattern", "[", 
+      RowBox[{"fold", "[", 
+       RowBox[{
+        RowBox[{"myDiamondBaseCreaser", "[", "t", "]"}], ",", 
+        "myDiamondBaseCreasePattern"}], "]"}], "]"}], ",", 
+     RowBox[{"ViewPoint", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "1", ",", "1"}], "}"}]}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
    RowBox[{"{", 
     RowBox[{"t", ",", "0", ",", ".999"}], "}"}]}], "\[IndentingNewLine]", 
   "]"}]], "Input",
  CellChangeTimes->{{3.6462462448768263`*^9, 3.64624627908257*^9}, {
   3.646246525540168*^9, 3.646246546195578*^9}, {3.64624660338527*^9, 
-  3.646246606629612*^9}}],
+  3.646246606629612*^9}, {3.646308661833548*^9, 3.6463087232225027`*^9}, {
+  3.646308753502541*^9, 3.6463087581656523`*^9}}],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`t$$ = 0.358, Typeset`show$$ = True, 
+   DynamicModuleBox[{$CellContext`t$$ = 0., Typeset`show$$ = True, 
     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{
-      Hold[$CellContext`t$$], 0, 0.999}}, Typeset`size$$ = {94., {3., 9.}}, 
-    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
-    True, $CellContext`t$178992$$ = 0}, 
+      Hold[$CellContext`t$$], 0, 0.999}}, Typeset`size$$ = {
+    360., {111., 116.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`t$34073$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`t$$ = 0}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`t$$, $CellContext`t$178992$$, 0]}, 
+        Hold[$CellContext`t$$, $CellContext`t$34073$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
         Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
-         Typeset`skipInitDone$$}, 
-      "Body" :> $CellContext`setup[$CellContext`t$$], 
+         Typeset`skipInitDone$$}, "Body" :> Graphics3D[
+        collapse`renderCreasePattern[
+         collapse`fold[
+          $CellContext`myDiamondBaseCreaser[$CellContext`t$$], \
+$CellContext`myDiamondBaseCreasePattern]], ViewPoint -> {1, 1, 1}], 
       "Specifications" :> {{$CellContext`t$$, 0, 0.999}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{245., {49., 54.}},
+     ImageSizeCache->{405., {155., 160.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -467,1111 +241,12 @@ Cell[BoxData[
    Deployed->True,
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{{3.6462462471552267`*^9, 3.646246279589902*^9}, {
-  3.646246321589514*^9, 3.646246402733987*^9}, {3.6462465273651533`*^9, 
-  3.646246546750166*^9}}]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"myDiamondBaseFold1", "=", "\[IndentingNewLine]", 
-   RowBox[{"manipulateCrease", "[", "\[IndentingNewLine]", 
-    RowBox[{
-    "\"\<left_back\>\"", ",", "\[IndentingNewLine]", " ", 
-     "\"\<right_back\>\"", ",", "\[IndentingNewLine]", 
-     RowBox[{"{", 
-      RowBox[{
-      "\"\<left_middle\>\"", ",", "\"\<left_center\>\"", ",", 
-       "\"\<left_front\>\"", ",", "\"\<left_half_front\>\""}], "}"}], ",", 
-     "\[IndentingNewLine]", ".5", ",", "\[IndentingNewLine]", 
-     "myDiamondBaseFold1"}], "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.645729222458153*^9, 3.64572922614478*^9}, 
-   3.645737191911092*^9, {3.645737301735997*^9, 3.645737311937912*^9}, {
-   3.645737437180909*^9, 3.645737437589055*^9}, {3.64573750605978*^9, 
-   3.645737545168585*^9}, {3.645785707802926*^9, 3.645785767860573*^9}, {
-   3.6457876446852694`*^9, 3.645787647072424*^9}, {3.645787715014077*^9, 
-   3.645787755302878*^9}, 3.645959114528474*^9, 3.6462360388525667`*^9, {
-   3.646236149864807*^9, 3.646236151720446*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Graphics3D", "[", 
-  RowBox[{"renderCreasePattern", "[", "myDiamondBaseFold1", "]"}], 
-  "]"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.645729284812175*^9, 3.645729296908342*^9}, {
-  3.645785789610077*^9, 3.645785793035262*^9}}],
-
-Cell[BoxData[
- Graphics3DBox[{{
-    Polygon3DBox[{{-1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-     0.}, {0., 1., 0.}, {-1.7551651237807455`, 1., -0.958851077208406}}], 
-    Polygon3DBox[{{1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-     0.}, {0., 1., 0.}, {1.7551651237807455`, 1., -0.958851077208406}}], 
-    Polygon3DBox[{{-1.7551651237807455`, 1., -0.958851077208406}, {0., 1., 
-     0.}, {-0.8775825618903728, 
-     2., -0.479425538604203}, {-1.7551651237807455`, 
-     2., -0.958851077208406}}], 
-    Polygon3DBox[{{1.7551651237807455`, 1., -0.958851077208406}, {0., 1., 
-     0.}, {0.8775825618903728, 2., -0.479425538604203}, {1.7551651237807455`, 
-     2., -0.958851077208406}}], 
-    Polygon3DBox[{{0., 1., 0.}, {0., 3., 0.}, {-0.8775825618903728, 
-     2., -0.479425538604203}}], 
-    Polygon3DBox[{{0., 1., 0.}, {0., 3., 0.}, {0.8775825618903728, 
-     2., -0.479425538604203}}], 
-    Polygon3DBox[{{-1.7551651237807455`, 
-     3., -0.958851077208406}, {-0.8775825618903728, 
-     3., -0.479425538604203}, {-0.8775825618903728, 
-     2., -0.479425538604203}, {-1.7551651237807455`, 
-     2., -0.958851077208406}}], 
-    Polygon3DBox[{{-0.8775825618903728, 3., -0.479425538604203}, {0., 3., 
-     0.}, {-0.8775825618903728, 2., -0.479425538604203}}], 
-    Polygon3DBox[{{0.8775825618903728, 3., -0.479425538604203}, {0., 3., 
-     0.}, {0.8775825618903728, 2., -0.479425538604203}}], 
-    Polygon3DBox[{{1.7551651237807455`, 3., -0.958851077208406}, {
-     0.8775825618903728, 3., -0.479425538604203}, {0.8775825618903728, 
-     2., -0.479425538604203}, {1.7551651237807455`, 
-     2., -0.958851077208406}}]}, {{
-     {RGBColor[1, 0, 0], TubeBox[{{0., 0., 0.}, {0., 1., 0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{-1.7551651237807455`, 1., -0.958851077208406}, {0., 1., 
-       0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0., 1., 0.}, {1.7551651237807455`, 1., -0.958851077208406}}]}, 
-     {RGBColor[1, 0, 0], TubeBox[{{0., 1., 0.}, {0., 3., 0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0.8775825618903728, 3., -0.479425538604203}, {
-       0.8775825618903728, 2., -0.479425538604203}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{-0.8775825618903728, 
-       3., -0.479425538604203}, {-0.8775825618903728, 
-       2., -0.479425538604203}}]}}, {
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {-0.8775825618903728, 2., -0.479425538604203}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {0.8775825618903728, 
-       2., -0.479425538604203}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-1.7551651237807455`, 
-       2., -0.958851077208406}, {-0.8775825618903728, 
-       2., -0.479425538604203}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0.8775825618903728, 2., -0.479425538604203}, {
-       1.7551651237807455`, 2., -0.958851077208406}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-0.8775825618903728, 2., -0.479425538604203}, {0., 3., 0.}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 3., 0.}, {0.8775825618903728, 
-       2., -0.479425538604203}}]}}}},
-  AutomaticImageSize->True,
-  ImageSize->{574.1204500288222, 504.2666386899074},
-  ViewPoint->{0.9788885524347856, 2.4481085260784616`, 2.120976625626525},
-  ViewVertical->{0.1611252097621809, 0.8683043430533515, 
-   5.660613372437058}]], "Output",
- CellChangeTimes->{{3.6457292971688147`*^9, 3.645729303098468*^9}, 
-   3.645729350822316*^9, {3.645737184019569*^9, 3.645737195180368*^9}, 
-   3.6457372598712587`*^9, 3.645737313702786*^9, {3.6457374278972816`*^9, 
-   3.6457374459485083`*^9}, {3.645737533160787*^9, 3.645737545980281*^9}, 
-   3.645737800739266*^9, {3.6457378522035007`*^9, 3.645737870403469*^9}, 
-   3.645737909288618*^9, 3.6457379473819857`*^9, 3.645737989589209*^9, 
-   3.64578579650563*^9, 3.645787383493661*^9, 3.645787414501402*^9, 
-   3.645787484304438*^9, 3.64578758137971*^9, 3.645787653184669*^9, {
-   3.6457877412306423`*^9, 3.6457877619937153`*^9}, 3.64578796871795*^9, 
-   3.645887349012413*^9, 3.6459591163051023`*^9, 3.6459591509970617`*^9, 
-   3.6459592894982367`*^9, 3.645959401615369*^9, 3.646046591950317*^9, 
-   3.6460468100318403`*^9, 3.646159269113456*^9, 3.6462348872860613`*^9, 
-   3.646234945042066*^9, 3.6462351508010283`*^9, 3.6462352267579317`*^9, 
-   3.6462352730645323`*^9, 3.646235378060668*^9, 3.646235531054411*^9, 
-   3.646235652838735*^9, 3.646235727781148*^9, {3.6462360400640583`*^9, 
-   3.6462360676813602`*^9}, 3.646236141430271*^9, 3.646236292500695*^9, {
-   3.6462448530783653`*^9, 3.6462448739288816`*^9}, 3.646244926118622*^9, 
-   3.646244974520533*^9, 3.646245042819816*^9, 3.646245080009207*^9, 
-   3.6462451306974382`*^9, 3.64624519002575*^9, 3.646245234572969*^9, 
-   3.6462453074870653`*^9, 3.646245370031608*^9, 3.646245552893283*^9, {
-   3.64624559179183*^9, 3.6462456084800177`*^9}, 3.646245810052349*^9, 
-   3.646245864730195*^9, 3.646245924479701*^9}]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"myDiamondBaseFold2", "=", "\[IndentingNewLine]", 
-   RowBox[{"manipulateCrease", "[", "\[IndentingNewLine]", 
-    RowBox[{
-    "\"\<right_middle\>\"", ",", "\[IndentingNewLine]", "\"\<right_back\>\"", 
-     ",", "\[IndentingNewLine]", 
-     RowBox[{"{", 
-      RowBox[{
-      "\"\<right_center\>\"", ",", "\"\<right_front\>\"", ",", 
-       "\"\<right_half_front\>\""}], "}"}], ",", "\[IndentingNewLine]", "1", 
-     ",", "\[IndentingNewLine]", "myDiamondBaseFold1"}], 
-    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.645729240866453*^9, 3.6457292639513493`*^9}, {
-   3.645729341487308*^9, 3.645729347274643*^9}, {3.645729446459055*^9, 
-   3.645729446694483*^9}, 3.645737180413608*^9, {3.645738008074458*^9, 
-   3.6457380242406807`*^9}, {3.645785799666884*^9, 3.6457858247472677`*^9}, {
-   3.645787640582431*^9, 3.6457876408886147`*^9}, {3.645887352745153*^9, 
-   3.645887352982986*^9}, {3.646236051446691*^9, 3.64623606154887*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"myDiamondBaseFold2", "=", "\[IndentingNewLine]", 
-   RowBox[{"manipulateCrease", "[", "\[IndentingNewLine]", 
-    RowBox[{
-    "\"\<left_middle\>\"", ",", "\[IndentingNewLine]", "\"\<left_back\>\"", 
-     ",", "\[IndentingNewLine]", 
-     RowBox[{"{", 
-      RowBox[{
-      "\"\<left_center\>\"", ",", "\"\<left_front\>\"", ",", 
-       "\"\<left_half_front\>\""}], "}"}], ",", "\[IndentingNewLine]", "1", 
-     ",", "\[IndentingNewLine]", "myDiamondBaseFold2"}], 
-    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.645729240866453*^9, 3.6457292639513493`*^9}, {
-   3.645729341487308*^9, 3.645729347274643*^9}, {3.645729446459055*^9, 
-   3.645729446694483*^9}, 3.645737180413608*^9, {3.645738008074458*^9, 
-   3.6457380242406807`*^9}, {3.645785799666884*^9, 3.6457858247472677`*^9}, {
-   3.645787640582431*^9, 3.6457876408886147`*^9}, {3.6457877775722837`*^9, 
-   3.645787794594346*^9}, 3.645887354749104*^9, {3.646236052867836*^9, 
-   3.646236063043748*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Graphics3D", "[", 
-  RowBox[{"renderCreasePattern", "[", "myDiamondBaseFold2", "]"}], 
-  "]"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.6457292680253553`*^9, 3.6457292724715652`*^9}, {
-  3.6457858296699266`*^9, 3.645785831643978*^9}}],
-
-Cell[BoxData[
- Graphics3DBox[{{
-    Polygon3DBox[{{-1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-     0.}, {0., 1., 0.}, {-1.7551651237807453`, 1., -0.958851077208406}}], 
-    Polygon3DBox[{{1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-     0.}, {0., 1., 0.}, {1.7551651237807453`, 1., -0.958851077208406}}], 
-    Polygon3DBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-     0.}, {-0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}, {-1.3517424436694103`, 
-     1.5403023058681398`, -1.6973113398125348`}}], 
-    Polygon3DBox[{{1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-     0.}, {0.4741598817790378, 1.5403023058681398`, -1.2178858012083318`}, {
-     1.3517424436694103`, 1.5403023058681398`, -1.6973113398125348`}}], 
-    Polygon3DBox[{{0., 1., 0.}, {-0.5713057522310367, 
-     0.8187057622185651, -1.9080728856139062`}, {-0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}}], 
-    Polygon3DBox[{{0., 1., 0.}, {-0.5713057522310367, 
-     0.8187057622185651, -1.9080728856139062`}, {0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}}], 
-    Polygon3DBox[{{-0.9483197635580756, 
-     2.0806046117362795`, -2.4357716024166636`}, {-0.07073720166770285, 
-     2.0806046117362795`, -1.9563460638124606`}, {-0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}, {-1.3517424436694103`, 
-     1.5403023058681398`, -1.6973113398125348`}}], 
-    Polygon3DBox[{{-0.07073720166770285, 
-     2.0806046117362795`, -1.9563460638124606`}, {-0.5713057522310367, 
-     0.8187057622185651, -1.9080728856139062`}, {-0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}}], 
-    Polygon3DBox[{{0.07073720166770285, 
-     2.0806046117362795`, -1.9563460638124606`}, {-0.5713057522310367, 
-     0.8187057622185651, -1.9080728856139062`}, {0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}}], 
-    Polygon3DBox[{{0.9483197635580756, 
-     2.0806046117362795`, -2.4357716024166636`}, {0.07073720166770285, 
-     2.0806046117362795`, -1.9563460638124606`}, {0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}, {1.3517424436694103`, 
-     1.5403023058681398`, -1.6973113398125348`}}]}, {{
-     {RGBColor[1, 0, 0], TubeBox[{{0., 0., 0.}, {0., 1., 0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-       0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0., 1., 0.}, {1.7551651237807453`, 1., -0.958851077208406}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0., 1., 0.}, {-0.5713057522310367, 
-       0.8187057622185651, -1.9080728856139062`}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0.07073720166770285, 
-       2.0806046117362795`, -1.9563460638124606`}, {0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{-0.07073720166770285, 
-       2.0806046117362795`, -1.9563460638124606`}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}}, {
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-1.3517424436694103`, 
-       1.5403023058681398`, -1.6973113398125348`}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}, {1.3517424436694103`, 
-       1.5403023058681398`, -1.6973113398125348`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}, {-0.5713057522310367, 
-       0.8187057622185651, -1.9080728856139062`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-0.5713057522310367, 
-       0.8187057622185651, -1.9080728856139062`}, {0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}}}},
-  AutomaticImageSize->True,
-  ImageSize->{387.7973578651255, 453.3297397202247},
-  ViewPoint->{-0.4204818487703469, -0.7374622196338132, -3.275567811764464},
-  ViewVertical->{
-   0.4055876887982135, -0.6950003770314801, -1.1759436347189713`}]], "Output",\
-
- InitializationCell->True,
- CellChangeTimes->{
-  3.645729273099538*^9, 3.645729305310998*^9, 3.64572935094664*^9, 
-   3.645729447698127*^9, {3.645737184135098*^9, 3.645737195286072*^9}, 
-   3.645738027502585*^9, 3.645785832207597*^9, 3.645787385277238*^9, 
-   3.645787418850628*^9, 3.645787484391767*^9, 3.645787581472636*^9, 
-   3.645787653260442*^9, 3.645787798364242*^9, 3.645787968930841*^9, 
-   3.645887357267417*^9, 3.645959297093013*^9, 3.645959405183292*^9, 
-   3.6460468272209682`*^9, 3.646159274615349*^9, 3.646234891751656*^9, 
-   3.6462349473772717`*^9, 3.646235157172698*^9, 3.6462352268630238`*^9, 
-   3.646235273170291*^9, 3.646235378257839*^9, 3.646235531246532*^9, 
-   3.646235653013693*^9, 3.646235728194544*^9, {3.646236055412244*^9, 
-   3.64623607129412*^9}, 3.646236246816122*^9, 3.646236292923621*^9, {
-   3.646244853305629*^9, 3.646244874140066*^9}, 3.646244930536632*^9, 
-   3.6462449747579737`*^9, 3.6462450430441113`*^9, 3.6462450802365637`*^9, 
-   3.646245131121587*^9, 3.6462451903585777`*^9, 3.646245234789668*^9, 
-   3.646245307716938*^9, 3.646245370207925*^9, 3.646245553115632*^9, {
-   3.646245592056178*^9, 3.646245608673586*^9}, 3.6462458102350197`*^9, 
-   3.6462458649240093`*^9, 3.646245924580933*^9}]
-}, Open  ]]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Fill", "Section",
- CellChangeTimes->{{3.645786299895823*^9, 3.645786300446509*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-  "myReducedDiamondBase", "=", "\[IndentingNewLine]", "myDiamondBaseFold2"}], 
-  ";"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.6457864507805977`*^9, 3.645786458354113*^9}, {
-  3.6457868408482227`*^9, 3.645786842282386*^9}, {3.6457875991892977`*^9, 
-  3.645787600997137*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"myReducedDiamondBase", "=", "\[IndentingNewLine]", 
-   RowBox[{"sizeCreasePattern", "[", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"{", "\[IndentingNewLine]", 
-      RowBox[{
-      "\"\<left_back\>\"", ",", "\[IndentingNewLine]", "\"\<center_back\>\"", 
-       ",", "\[IndentingNewLine]", "\"\<right_back\>\"", ",", 
-       "\[IndentingNewLine]", "\"\<left_middle\>\"", ",", 
-       "\[IndentingNewLine]", "\"\<center_middle\>\"", ",", 
-       "\[IndentingNewLine]", "\"\<right_middle\>\"", ",", 
-       "\[IndentingNewLine]", "\"\<left_forward\>\"", ",", 
-       "\[IndentingNewLine]", "\"\<left_half_forward\>\"", ",", 
-       "\[IndentingNewLine]", "\"\<right_half_forward\>\"", ",", 
-       "\[IndentingNewLine]", "\"\<right_forward\>\""}], 
-      "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
-     "myReducedDiamondBase", ",", "\[IndentingNewLine]", 
-     "myDiamondBaseCreasePattern"}], "\[IndentingNewLine]", "]"}]}], 
-  ";"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.645787429161488*^9, 3.645787459641633*^9}, 
-   3.645787608952079*^9, {3.6462348453344812`*^9, 3.6462348500017147`*^9}, {
-   3.646244907059263*^9, 3.6462449079971523`*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Graphics3D", "[", 
-  RowBox[{"renderCreasePattern", "[", "myReducedDiamondBase", "]"}], 
-  "]"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.6457865883324623`*^9, 3.645786595141056*^9}, {
-  3.645787611572495*^9, 3.645787612411232*^9}}],
-
-Cell[BoxData[
- Graphics3DBox[{{
-    Polygon3DBox[{{-1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-     0.}, {0., 1., 0.}, {-1.7551651237807453`, 1., -0.958851077208406}}], 
-    Polygon3DBox[{{1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-     0.}, {0., 1., 0.}, {1.7551651237807453`, 1., -0.958851077208406}}], 
-    Polygon3DBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-     0.}, {-0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}, {-1.3517424436694103`, 
-     1.5403023058681398`, -1.6973113398125348`}}], 
-    Polygon3DBox[{{1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-     0.}, {0.4741598817790378, 1.5403023058681398`, -1.2178858012083318`}, {
-     1.3517424436694103`, 1.5403023058681398`, -1.6973113398125348`}}]}, {{
-     {RGBColor[1, 0, 0], TubeBox[{{0., 0., 0.}, {0., 1., 0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-       0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0., 1., 0.}, {1.7551651237807453`, 
-       1., -0.958851077208406}}]}}, {
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-1.3517424436694103`, 
-       1.5403023058681398`, -1.6973113398125348`}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}, {1.3517424436694103`, 
-       1.5403023058681398`, -1.6973113398125348`}}]}}}},
-  AutomaticImageSize->True,
-  ImageSize->{515.3633488342349, 362.62839440472976`},
-  ViewPoint->{0.9741811799613451, 3.2303023493518097`, 0.2571337402623346},
-  ViewVertical->{-0.12945869956021788`, 1.1575794977372713`, 
-   1.7612777163933953`}]], "Output",
- CellChangeTimes->{
-  3.64623516158003*^9, 3.646235234248127*^9, 3.6462352782793007`*^9, 
-   3.6462353887345552`*^9, 3.6462355394746017`*^9, 3.646235658375588*^9, 
-   3.646235731058198*^9, 3.646236080700037*^9, {3.646236240599572*^9, 
-   3.646236251069819*^9}, 3.646236296625986*^9, {3.6462448538176003`*^9, 
-   3.646244874688777*^9}, 3.6462449404333887`*^9, 3.646244974872087*^9, 
-   3.6462450432022057`*^9, 3.6462450803535633`*^9, 3.646245131364243*^9, 
-   3.6462451907524233`*^9, 3.646245234872669*^9, 3.646245307832844*^9, 
-   3.646245370290991*^9, 3.646245553233389*^9, {3.646245592171773*^9, 
-   3.6462456087892923`*^9}, 3.6462458103506613`*^9, 3.6462458650501833`*^9, 
-   3.6462459247542686`*^9}]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"Quit", "[", "]"}], ";"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"Needs", "[", "\"\<collapse`\>\"", "]"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.64501281728986*^9, 3.645012820632036*^9}, {
-  3.6450272732443447`*^9, 3.645027274177361*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", "x", "}"}], ",", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"cp", "=", "myReducedDiamondBase"}], ";", "\[IndentingNewLine]", 
-     
-     RowBox[{"x", "=", "cp"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"While", "[", 
-      RowBox[{
-       RowBox[{"x", "=!=", "Null"}], ",", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"cp", "=", "x"}], ";", "\[IndentingNewLine]", 
-        RowBox[{"x", "=", 
-         RowBox[{"calculateAnyPoint", "[", 
-          RowBox[{"cp", ",", "myDiamondBaseCreasePattern"}], "]"}]}]}]}], 
-      "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.646245617001336*^9, 3.6462456952734337`*^9}, 
-   3.6462459291679153`*^9}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Graphics3D", "[", 
-  RowBox[{"renderCreasePattern", "[", "cp", "]"}], "]"}]], "Input",
- CellChangeTimes->{{3.646244838293487*^9, 3.6462448450582314`*^9}}],
-
-Cell[BoxData[
- Graphics3DBox[{{
-    Polygon3DBox[{{-1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-     0.}, {0., 1., 0.}, {-1.7551651237807453`, 1., -0.958851077208406}}], 
-    Polygon3DBox[{{1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-     0.}, {0., 1., 0.}, {1.7551651237807453`, 1., -0.958851077208406}}], 
-    Polygon3DBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-     0.}, {-0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}, {-1.3517424436694103`, 
-     1.5403023058681398`, -1.6973113398125348`}}], 
-    Polygon3DBox[{{1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-     0.}, {0.4741598817790378, 1.5403023058681398`, -1.2178858012083318`}, {
-     1.3517424436694103`, 1.5403023058681398`, -1.6973113398125348`}}], 
-    Polygon3DBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-     2.816810763959026, -0.8361809899552956}, {-0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}}], 
-    Polygon3DBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-     2.816810763959026, -0.8361809899552956}, {0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}}], 
-    Polygon3DBox[{{-1.6817789433963803`, 
-     2.265633649380117, -1.0931835793453633`}, {-0.8041963815060071, 
-     2.265633649380117, -0.61375804074116}, {-0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}, {-1.3517424436694103`, 
-     1.5403023058681398`, -1.6973113398125348`}}], 
-    Polygon3DBox[{{-0.8041963815060071, 
-     2.265633649380117, -0.61375804074116}, {-5.551115123125783*^-17, 
-     2.816810763959026, -0.8361809899552956}, {-0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}}], 
-    Polygon3DBox[{{0.8041963815060067, 
-     2.2656336493801175`, -0.6137580407411601}, {-5.551115123125783*^-17, 
-     2.816810763959026, -0.8361809899552956}, {0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}}], 
-    Polygon3DBox[{{1.6817789433963797`, 
-     2.265633649380117, -1.0931835793453635`}, {0.8041963815060067, 
-     2.2656336493801175`, -0.6137580407411601}, {0.4741598817790378, 
-     1.5403023058681398`, -1.2178858012083318`}, {1.3517424436694103`, 
-     1.5403023058681398`, -1.6973113398125348`}}]}, {{
-     {RGBColor[1, 0, 0], TubeBox[{{0., 0., 0.}, {0., 1., 0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-       0.}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0., 1., 0.}, {1.7551651237807453`, 1., -0.958851077208406}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-       2.816810763959026, -0.8361809899552956}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{0.8041963815060067, 
-       2.2656336493801175`, -0.6137580407411601}, {0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, 
-     {RGBColor[1, 0, 0], 
-      TubeBox[{{-0.8041963815060071, 
-       2.265633649380117, -0.61375804074116}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}}, {
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0., 1., 0.}, {0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-1.3517424436694103`, 
-       1.5403023058681398`, -1.6973113398125348`}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}, {1.3517424436694103`, 
-       1.5403023058681398`, -1.6973113398125348`}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}, {-5.551115123125783*^-17, 
-       2.816810763959026, -0.8361809899552956}}]}, 
-     {RGBColor[0, 0, 1], 
-      TubeBox[{{-5.551115123125783*^-17, 
-       2.816810763959026, -0.8361809899552956}, {0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}}}},
-  AutomaticImageSize->True,
-  ImageSize->{427.996518183034, 408.3341525336009},
-  ViewPoint->{-0.9325841146342486, 1.8903326173949178`, 2.6470605328826053`},
-  ViewVertical->{0.22577708531336624`, -0.21566727418131457`, 
-   1.982722872193632}]], "Output",
- CellChangeTimes->{3.6462459396560287`*^9}]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"cp", "=", "myReducedDiamondBase"}], ";"}]], "Input",
- CellChangeTimes->{{3.646245715386056*^9, 3.646245719535865*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"cp", "=", 
-   RowBox[{"calculateAnyPoint", "[", 
-    RowBox[{"cp", ",", "myDiamondBaseCreasePattern"}], "]"}]}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.646244818163642*^9, 3.646244837702116*^9}, {
-  3.646245726608964*^9, 3.64624573559986*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Graphics3D", "[", 
-  RowBox[{"renderCreasePattern", "[", "cp", "]"}], "]"}]], "Input",
- CellChangeTimes->{{3.646244838293487*^9, 3.6462448450582314`*^9}}],
-
-Cell[BoxData[
- Graphics3DBox[{Table[
-    collapse`renderPolygon[collapse`polygon, collapse`points$4254], {
-    collapse`polygon, 
-     Values[
-      Part[Null, "polygons"]]}], Table[
-    collapse`renderCrease[
-    collapse`crease, collapse`type, collapse`points$4254], {
-    collapse`type, {"mountain", "valley"}}, {collapse`crease, 
-     Part[collapse`creases$4254, collapse`type]}]},
-  AutomaticImageSize->True,
-  ImageSize->{378.22231978713387`, 379.6098580422895},
-  ViewPoint->{0.5727060216886181, -0.23315489689026953`, 3.32680726925647},
-  ViewVertical->{-0.5040781566249813, 0.5920533303333737, 
-   1.4916665627818226`}]], "Output",
- CellChangeTimes->{
-  3.6462455661261663`*^9, {3.646245704003044*^9, 3.646245740625098*^9}, {
-   3.646245816457209*^9, 3.6462458214230747`*^9}, {3.6462458701879168`*^9, 
-   3.6462458933181047`*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"calculateCreaseAngleAverage", "[", 
-  RowBox[{"myReducedDiamondBase", ",", "myDiamondBaseCreasePattern"}], 
-  "]"}]], "Input",
- CellChangeTimes->{{3.6462349722111397`*^9, 3.6462349920625677`*^9}}],
-
-Cell[BoxData[
- RowBox[{"-", "1.761061769059862`"}]], "Output",
- CellChangeTimes->{
-  3.6462360927427673`*^9, {3.646236281273765*^9, 3.6462363000982428`*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"FirstCase", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"2", ",", "4", ",", "6"}], "}"}], ",", 
-    RowBox[{"x_", "/;", 
-     RowBox[{"OddQ", "[", "x", "]"}]}]}], "]"}], "//", "FullForm"}]], "Input",\
-
- CellChangeTimes->{{3.646244186977756*^9, 3.646244202988577*^9}}],
-
-Cell[BoxData[
- TagBox[
-  StyleBox[
-   RowBox[{"Missing", "[", "\"\<NotFound\>\"", "]"}],
-   ShowSpecialCharacters->False,
-   ShowStringCharacters->True,
-   NumberMarks->True],
-  FullForm]], "Output",
- CellChangeTimes->{{3.6462441963758497`*^9, 3.646244203224186*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"?", "Missing"}]], "Input",
- CellChangeTimes->{{3.646244205980756*^9, 3.646244207641007*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"Missing\\\", \\\"[\\\", \\\"]\\\"}]\\) \
-represents data that is missing.\\n\\!\\(\\*RowBox[{\\\"Missing\\\", \
-\\\"[\\\", \
-StyleBox[\\\"\\\\\\\"\\\\!\\\\(\\\\*StyleBox[\\\\\\\"reason\\\\\\\",\\\\\\\"\
-TI\\\\\\\"]\\\\)\\\\\\\"\\\", ShowStringCharacters->True], \\\"]\\\"}]\\) \
-specifies a reason for the data's being \
-missing.\\n\\!\\(\\*RowBox[{\\\"Missing\\\", \\\"[\\\", RowBox[{StyleBox[\\\"\
-\\\\\\\"\\\\!\\\\(\\\\*StyleBox[\\\\\\\"reason\\\\\\\",\\\\\\\"TI\\\\\\\"]\\\\\
-)\\\\\\\"\\\", ShowStringCharacters->True], \\\",\\\", StyleBox[\\\"expr\\\", \
-\\\"TI\\\"]}], \\\"]\\\"}]\\) associates the expression \
-\\!\\(\\*StyleBox[\\\"expr\\\", \\\"TI\\\"]\\) with the missing data. \"\>", 
-   "MSG"], "\[NonBreakingSpace]", 
-  ButtonBox[
-   StyleBox["\[RightSkeleton]", "SR"],
-   Active->True,
-   BaseStyle->"Link",
-   ButtonData->"paclet:ref/Missing"]}]], "Print", "PrintUsage",
- CellChangeTimes->{3.6462442082140408`*^9},
- CellTags->"Info3646219008-7252571"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"findCalculablePoint", "[", 
-  RowBox[{"myReducedDiamondBase", ",", " ", "myDiamondBaseCreasePattern"}], 
-  "]"}]], "Input",
- CellChangeTimes->{{3.6462363117040157`*^9, 3.646236333210388*^9}}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"\<\"center_front\"\>", ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0.`", ",", "1.`", ",", "0.`"}], "}"}], ",", "2"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"-", "0.4741598817790378`"}], ",", "1.5403023058681398`", 
-         ",", 
-         RowBox[{"-", "1.2178858012083318`"}]}], "}"}], ",", 
-       SqrtBox["2"]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0.4741598817790378`", ",", "1.5403023058681398`", ",", 
-         RowBox[{"-", "1.2178858012083318`"}]}], "}"}], ",", 
-       SqrtBox["2"]}], "}"}]}], "}"}]}], "}"}]], "Output",
- CellChangeTimes->{3.646236333595475*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"myReferencePoints", "=", "\[IndentingNewLine]", 
-  RowBox[{"findReferenceNeighbors", "[", 
-   RowBox[{
-   "\"\<center_front\>\"", ",", "myReducedDiamondBase", ",", 
-    "myDiamondBaseCreasePattern"}], "]"}]}]], "Input",
- CellChangeTimes->{{3.645786323156952*^9, 3.645786328663433*^9}, {
-  3.64578636832545*^9, 3.645786434979044*^9}, {3.645787665917158*^9, 
-  3.645787666999721*^9}, {3.646235954864263*^9, 3.646235963859025*^9}}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"0.`", ",", "1.`", ",", "0.`"}], "}"}], ",", 
-     "referenceDistances$2796"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"-", "0.7607291684713686`"}], ",", "1.5403023058681398`", ",", 
-       
-       RowBox[{"-", "1.062715648943983`"}]}], "}"}], ",", 
-     "referenceDistances$2796"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"0.7607291684713686`", ",", "1.5403023058681398`", ",", 
-       RowBox[{"-", "1.062715648943983`"}]}], "}"}], ",", 
-     "referenceDistances$2796"}], "}"}]}], "}"}]], "Output",
- CellChangeTimes->{{3.645786406768155*^9, 3.645786435228114*^9}, 
-   3.645787671695842*^9, 3.6457878140037003`*^9, 3.6457879832636127`*^9, 
-   3.645887372285185*^9, 3.6459594200875063`*^9, 3.646046835163245*^9, {
-   3.646235956146776*^9, 3.646235964181151*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"myPoints", "=", 
-  RowBox[{"trilaterate", "@@", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0.`", ",", "1.`", ",", "0.`"}], "}"}], ",", "2"}], "}"}], 
-     ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"-", "0.4741598817790378`"}], ",", "1.5403023058681398`", 
-         ",", 
-         RowBox[{"-", "1.2178858012083318`"}]}], "}"}], ",", 
-       SqrtBox["2"]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0.4741598817790378`", ",", "1.5403023058681398`", ",", 
-         RowBox[{"-", "1.2178858012083318`"}]}], "}"}], ",", 
-       SqrtBox["2"]}], "}"}]}], "}"}]}]}]], "Input",
- CellChangeTimes->{{3.645786417253183*^9, 3.645786436882801*^9}, {
-   3.645788010699316*^9, 3.6457880126571407`*^9}, 3.646215470172532*^9, 
-   3.646236345557849*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"-", "5.551115123125783`*^-17"}], ",", "0.40065364431213446`", 
-     ",", 
-     RowBox[{"-", "1.9080838414293209`"}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"-", "5.551115123125783`*^-17"}], ",", "2.816810763959026`", ",", 
-     RowBox[{"-", "0.8361809899552956`"}]}], "}"}]}], "}"}]], "Output",
- CellChangeTimes->{
-  3.6457864372067127`*^9, {3.645787988693759*^9, 3.645788013187875*^9}, 
-   3.6458873724909487`*^9, 3.645959420223078*^9, 3.646046835373863*^9, 
-   3.646236346383937*^9}]
-}, Open  ]],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"cp1", "=", "myReducedDiamondBase"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"cp2", "=", "myReducedDiamondBase"}], ";"}]}], "Input",
- CellChangeTimes->{{3.6462363663168993`*^9, 3.6462363776402473`*^9}}],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{
-   RowBox[{"cp1", "[", 
-    RowBox[{"[", "\"\<points\>\"", "]"}], "]"}], "=", 
-   RowBox[{"Append", "[", 
-    RowBox[{
-     RowBox[{"cp1", "[", 
-      RowBox[{"[", "\"\<points\>\"", "]"}], "]"}], ",", 
-     RowBox[{"\"\<center_front\>\"", "\[Rule]", 
-      RowBox[{"myPoints", "[", 
-       RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"cp2", "[", 
-    RowBox[{"[", "\"\<points\>\"", "]"}], "]"}], "=", 
-   RowBox[{"Append", "[", 
-    RowBox[{
-     RowBox[{"cp2", "[", 
-      RowBox[{"[", "\"\<points\>\"", "]"}], "]"}], ",", 
-     RowBox[{"\"\<center_front\>\"", "\[Rule]", 
-      RowBox[{"myPoints", "[", 
-       RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}]}], ";"}]}], "Input",
- CellChangeTimes->{{3.646236380989307*^9, 3.646236497938333*^9}}],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"cp1", "=", 
-   RowBox[{"reduceCreasePattern", "[", 
-    RowBox[{
-     RowBox[{"Keys", "[", 
-      RowBox[{"<|", 
-       RowBox[{"cp1", "[", 
-        RowBox[{"[", "\"\<points\>\"", "]"}], "]"}], "|>"}], "]"}], ",", 
-     "cp1", ",", "myDiamondBaseCreasePattern"}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"cp2", "=", 
-   RowBox[{"reduceCreasePattern", "[", 
-    RowBox[{
-     RowBox[{"Keys", "[", 
-      RowBox[{"<|", 
-       RowBox[{"cp2", "[", 
-        RowBox[{"[", "\"\<points\>\"", "]"}], "]"}], "|>"}], "]"}], ",", 
-     "cp2", ",", "myDiamondBaseCreasePattern"}], "]"}]}], ";"}]}], "Input",
- CellChangeTimes->{{3.646236505248292*^9, 3.64623656536751*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"Graphics3D", "[", 
-    RowBox[{"renderCreasePattern", "[", "#", "]"}], "]"}], "&"}], "/@", 
-  RowBox[{"{", 
-   RowBox[{"cp1", ",", "cp2"}], "}"}]}]], "Input",
- CellChangeTimes->{{3.6457880069624443`*^9, 3.6457880310027437`*^9}, 
-   3.645788067085679*^9, 3.646215472469131*^9, {3.646236578493332*^9, 
-   3.646236592734455*^9}}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   Graphics3DBox[{{
-      Polygon3DBox[{{-1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-       0.}, {0., 1., 0.}, {-1.7551651237807453`, 1., -0.958851077208406}}], 
-      Polygon3DBox[{{1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-       0.}, {0., 1., 0.}, {1.7551651237807453`, 1., -0.958851077208406}}], 
-      Polygon3DBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-       0.}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}, {-1.3517424436694103`, 
-       1.5403023058681398`, -1.6973113398125348`}}], 
-      Polygon3DBox[{{1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-       0.}, {0.4741598817790378, 1.5403023058681398`, -1.2178858012083318`}, {
-       1.3517424436694103`, 1.5403023058681398`, -1.6973113398125348`}}], 
-      Polygon3DBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-       0.40065364431213446`, -1.9080838414293209`}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}], 
-      Polygon3DBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-       0.40065364431213446`, -1.9080838414293209`}, {0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, {{
-       {RGBColor[1, 0, 0], TubeBox[{{0., 0., 0.}, {0., 1., 0.}}]}, 
-       {RGBColor[1, 0, 0], 
-        TubeBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-         0.}}]}, 
-       {RGBColor[1, 0, 0], 
-        TubeBox[{{0., 1., 0.}, {1.7551651237807453`, 
-         1., -0.958851077208406}}]}, 
-       {RGBColor[1, 0, 0], 
-        TubeBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-         0.40065364431213446`, -1.9080838414293209`}}]}}, {
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{0., 1., 0.}, {-0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}]}, 
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{0., 1., 0.}, {0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}]}, 
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{-1.3517424436694103`, 
-         1.5403023058681398`, -1.6973113398125348`}, {-0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}]}, 
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}, {1.3517424436694103`, 
-         1.5403023058681398`, -1.6973113398125348`}}]}, 
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{-0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}, {-5.551115123125783*^-17,
-          0.40065364431213446`, -1.9080838414293209`}}]}, 
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{-5.551115123125783*^-17, 
-         0.40065364431213446`, -1.9080838414293209`}, {0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}]}}}},
-    AutomaticImageSize->True,
-    ImageSize->{225.26460533693768`, 124.73348422264534`},
-    ViewPoint->{-1.2224349644283021`, 1.2268001741139292`, 2.906993995614234},
-    
-    ViewVertical->{-0.231940561533415, -1.211115514419075, 
-     1.4988754517908818`}], ",", 
-   Graphics3DBox[{{
-      Polygon3DBox[{{-1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-       0.}, {0., 1., 0.}, {-1.7551651237807453`, 1., -0.958851077208406}}], 
-      Polygon3DBox[{{1.7551651237807455`, 0., -0.958851077208406}, {0., 0., 
-       0.}, {0., 1., 0.}, {1.7551651237807453`, 1., -0.958851077208406}}], 
-      Polygon3DBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-       0.}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}, {-1.3517424436694103`, 
-       1.5403023058681398`, -1.6973113398125348`}}], 
-      Polygon3DBox[{{1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-       0.}, {0.4741598817790378, 1.5403023058681398`, -1.2178858012083318`}, {
-       1.3517424436694103`, 1.5403023058681398`, -1.6973113398125348`}}], 
-      Polygon3DBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-       2.816810763959026, -0.8361809899552956}, {-0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}], 
-      Polygon3DBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-       2.816810763959026, -0.8361809899552956}, {0.4741598817790378, 
-       1.5403023058681398`, -1.2178858012083318`}}]}, {{
-       {RGBColor[1, 0, 0], TubeBox[{{0., 0., 0.}, {0., 1., 0.}}]}, 
-       {RGBColor[1, 0, 0], 
-        TubeBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-         0.}}]}, 
-       {RGBColor[1, 0, 0], 
-        TubeBox[{{0., 1., 0.}, {1.7551651237807453`, 
-         1., -0.958851077208406}}]}, 
-       {RGBColor[1, 0, 0], 
-        TubeBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-         2.816810763959026, -0.8361809899552956}}]}}, {
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{0., 1., 0.}, {-0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}]}, 
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{0., 1., 0.}, {0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}]}, 
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{-1.3517424436694103`, 
-         1.5403023058681398`, -1.6973113398125348`}, {-0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}]}, 
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}, {1.3517424436694103`, 
-         1.5403023058681398`, -1.6973113398125348`}}]}, 
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{-0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}, {-5.551115123125783*^-17,
-          2.816810763959026, -0.8361809899552956}}]}, 
-       {RGBColor[0, 0, 1], 
-        TubeBox[{{-5.551115123125783*^-17, 
-         2.816810763959026, -0.8361809899552956}, {0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}]}}}},
-    AutomaticImageSize->True,
-    ImageSize->{182.39621115681274`, 186.34461172069462`},
-    ViewPoint->{0.10024194284046464`, 0.6956929646401266, 3.309979282691329},
-    ViewVertical->{-0.5903235442068596, 0.8023869158474549, 
-     1.0067520956755442`}]}], "}"}]], "Output",
- CellChangeTimes->{{3.6457880201230927`*^9, 3.645788031290999*^9}, 
-   3.645788067496333*^9, 3.645887372573382*^9, 3.6459594202694197`*^9, 
-   3.646046835447768*^9, 3.646236348097761*^9, 3.64623659306283*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"?", "SubsetQ"}]], "Input",
- CellChangeTimes->{{3.646233892581621*^9, 3.646233894247609*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"SubsetQ\\\", \\\"[\\\", \
-RowBox[{SubscriptBox[StyleBox[\\\"list\\\", \\\"TI\\\"], StyleBox[\\\"1\\\", \
-\\\"TR\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"list\\\", \\\"TI\\\"], \
-StyleBox[\\\"2\\\", \\\"TR\\\"]]}], \\\"]\\\"}]\\) yields True if \
-\\!\\(\\*SubscriptBox[StyleBox[\\\"list\\\", \\\"TI\\\"], StyleBox[\\\"2\\\", \
-\\\"TR\\\"]]\\) is a subset of \\!\\(\\*SubscriptBox[StyleBox[\\\"list\\\", \
-\\\"TI\\\"], StyleBox[\\\"1\\\", \\\"TR\\\"]]\\), and False otherwise.\"\>", 
-   "MSG"], "\[NonBreakingSpace]", 
-  ButtonBox[
-   StyleBox["\[RightSkeleton]", "SR"],
-   Active->True,
-   BaseStyle->"Link",
-   ButtonData->"paclet:ref/SubsetQ"]}]], "Print", "PrintUsage",
- CellChangeTimes->{3.646233894529888*^9},
- CellTags->"Info3646208694-8238256"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Grid", "[", "\[IndentingNewLine]", 
-  RowBox[{"Thread", "[", "\[IndentingNewLine]", 
-   RowBox[{"{", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{
-      RowBox[{
-       RowBox[{"Graphics3D", "[", 
-        RowBox[{"renderCreasePattern", "[", "#", "]"}], "]"}], "&"}], "/@", 
-      RowBox[{"{", 
-       RowBox[{"cp1", ",", "cp2"}], "}"}]}], ",", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"calculateCreaseAngleAverage", "[", 
-        RowBox[{"#", ",", "myDiamondBaseCreasePattern"}], "]"}], "&"}], "/@", 
-      
-      RowBox[{"{", 
-       RowBox[{"cp1", ",", "cp2"}], "}"}]}]}], "\[IndentingNewLine]", "}"}], 
-   "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}]], "Input",
- CellChangeTimes->{{3.646236616073361*^9, 3.646236658196457*^9}}],
-
-Cell[BoxData[
- TagBox[GridBox[{
-    {
-     Graphics3DBox[{{
-        Polygon3DBox[{{-1.7551651237807455`, 0., -0.958851077208406}, {0., 0.,
-          0.}, {0., 1., 0.}, {-1.7551651237807453`, 1., -0.958851077208406}}],
-         Polygon3DBox[{{1.7551651237807455`, 0., -0.958851077208406}, {0., 0.,
-          0.}, {0., 1., 0.}, {1.7551651237807453`, 1., -0.958851077208406}}], 
-        Polygon3DBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1.,
-          0.}, {-0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}, {-1.3517424436694103`, 
-         1.5403023058681398`, -1.6973113398125348`}}], 
-        Polygon3DBox[{{1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-         0.}, {0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}, {1.3517424436694103`, 
-         1.5403023058681398`, -1.6973113398125348`}}], 
-        Polygon3DBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-         0.40065364431213446`, -1.9080838414293209`}, {-0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}], 
-        Polygon3DBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-         0.40065364431213446`, -1.9080838414293209`}, {0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}]}, {{
-         {RGBColor[1, 0, 0], TubeBox[{{0., 0., 0.}, {0., 1., 0.}}]}, 
-         {RGBColor[1, 0, 0], 
-          TubeBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-           0.}}]}, 
-         {RGBColor[1, 0, 0], 
-          TubeBox[{{0., 1., 0.}, {1.7551651237807453`, 
-           1., -0.958851077208406}}]}, 
-         {RGBColor[1, 0, 0], 
-          TubeBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-           0.40065364431213446`, -1.9080838414293209`}}]}}, {
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{0., 1., 0.}, {-0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}}]}, 
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{0., 1., 0.}, {0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}}]}, 
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{-1.3517424436694103`, 
-           1.5403023058681398`, -1.6973113398125348`}, {-0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}}]}, 
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}, {1.3517424436694103`, 
-           1.5403023058681398`, -1.6973113398125348`}}]}, 
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{-0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}, \
-{-5.551115123125783*^-17, 0.40065364431213446`, -1.9080838414293209`}}]}, 
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{-5.551115123125783*^-17, 
-           0.40065364431213446`, -1.9080838414293209`}, {0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}}]}}}},
-      AutomaticImageSize->True,
-      ImageSize->{207.80611131144582`, 139.09057882287576`},
-      ViewPoint->{-2.255971954292261, 2.502775744879274, 0.31097284815679643`},
-      ViewVertical->{-0.26748528932417714`, 1.030763443796255, 
-       1.5652561571697934`}], "0.030436589628651294`"},
-    {
-     Graphics3DBox[{{
-        Polygon3DBox[{{-1.7551651237807455`, 0., -0.958851077208406}, {0., 0.,
-          0.}, {0., 1., 0.}, {-1.7551651237807453`, 1., -0.958851077208406}}],
-         Polygon3DBox[{{1.7551651237807455`, 0., -0.958851077208406}, {0., 0.,
-          0.}, {0., 1., 0.}, {1.7551651237807453`, 1., -0.958851077208406}}], 
-        Polygon3DBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1.,
-          0.}, {-0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}, {-1.3517424436694103`, 
-         1.5403023058681398`, -1.6973113398125348`}}], 
-        Polygon3DBox[{{1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-         0.}, {0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}, {1.3517424436694103`, 
-         1.5403023058681398`, -1.6973113398125348`}}], 
-        Polygon3DBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-         2.816810763959026, -0.8361809899552956}, {-0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}], 
-        Polygon3DBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-         2.816810763959026, -0.8361809899552956}, {0.4741598817790378, 
-         1.5403023058681398`, -1.2178858012083318`}}]}, {{
-         {RGBColor[1, 0, 0], TubeBox[{{0., 0., 0.}, {0., 1., 0.}}]}, 
-         {RGBColor[1, 0, 0], 
-          TubeBox[{{-1.7551651237807453`, 1., -0.958851077208406}, {0., 1., 
-           0.}}]}, 
-         {RGBColor[1, 0, 0], 
-          TubeBox[{{0., 1., 0.}, {1.7551651237807453`, 
-           1., -0.958851077208406}}]}, 
-         {RGBColor[1, 0, 0], 
-          TubeBox[{{0., 1., 0.}, {-5.551115123125783*^-17, 
-           2.816810763959026, -0.8361809899552956}}]}}, {
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{0., 1., 0.}, {-0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}}]}, 
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{0., 1., 0.}, {0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}}]}, 
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{-1.3517424436694103`, 
-           1.5403023058681398`, -1.6973113398125348`}, {-0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}}]}, 
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}, {1.3517424436694103`, 
-           1.5403023058681398`, -1.6973113398125348`}}]}, 
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{-0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}, \
-{-5.551115123125783*^-17, 2.816810763959026, -0.8361809899552956}}]}, 
-         {RGBColor[0, 0, 1], 
-          TubeBox[{{-5.551115123125783*^-17, 
-           2.816810763959026, -0.8361809899552956}, {0.4741598817790378, 
-           1.5403023058681398`, -1.2178858012083318`}}]}}}},
-      AutomaticImageSize->True,
-      ImageSize->{190.78240388958926`, 173.69154023865477`},
-      ViewPoint->{-2.0852823185670544`, 1.3659118216398596`, 
-       2.2882050929442683`},
-      ViewVertical->{-0.04286639176247953, -0.28658017040229106`, 
-       2.0107899253450476`}], 
-     RowBox[{"-", "1.9771897139286778`"}]}
-   },
-   AutoDelete->False,
-   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
-  "Grid"]], "Output",
- CellChangeTimes->{{3.6462366239672956`*^9, 3.646236658554743*^9}}]
+ CellChangeTimes->{3.6463087241035023`*^9, 3.64630875857808*^9}]
 }, Open  ]]
 }, Open  ]]
 },
 WindowSize->{724, 713},
-WindowMargins->{{159, Automatic}, {44, Automatic}},
+WindowMargins->{{38, Automatic}, {47, Automatic}},
 FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
 2014)",
 StyleDefinitions->"Default.nb"
@@ -1580,142 +255,26 @@ StyleDefinitions->"Default.nb"
 
 (* Internal cache information *)
 (*CellTagsOutline
-CellTagsIndex->{
- "Info3646221557-6778994"->{
-  Cell[6810, 165, 1142, 22, 74, "Print",
-   CellTags->"Info3646221557-6778994"]},
- "Info3646219008-7252571"->{
-  Cell[47558, 1064, 1027, 20, 74, "Print",
-   CellTags->"Info3646219008-7252571"]},
- "Info3646208694-8238256"->{
-  Cell[61244, 1404, 814, 16, 42, "Print",
-   CellTags->"Info3646208694-8238256"]}
- }
+CellTagsIndex->{}
 *)
 (*CellTagsIndex
-CellTagsIndex->{
- {"Info3646221557-6778994", 69717, 1583},
- {"Info3646219008-7252571", 69828, 1586},
- {"Info3646208694-8238256", 69941, 1589}
- }
+CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 70, 2, 28, "Input"],
-Cell[631, 24, 190, 3, 28, "Input"],
 Cell[CellGroupData[{
-Cell[846, 31, 103, 1, 64, "Section"],
-Cell[952, 34, 136, 3, 28, "Input"],
-Cell[1091, 39, 217, 4, 28, "Input",
+Cell[580, 22, 103, 1, 64, "Section"],
+Cell[686, 25, 136, 3, 28, "Input"],
+Cell[825, 30, 217, 4, 28, "Input",
  InitializationCell->True],
-Cell[1311, 45, 401, 8, 46, "Input",
+Cell[1045, 36, 401, 8, 46, "Input",
  InitializationCell->True],
-Cell[1715, 55, 4941, 102, 1194, "Input"],
+Cell[1449, 46, 4468, 86, 1051, "Input"],
+Cell[5920, 134, 455, 12, 80, "Input"],
+Cell[6378, 148, 1441, 34, 223, "Input"],
 Cell[CellGroupData[{
-Cell[6681, 161, 126, 2, 28, "Input"],
-Cell[6810, 165, 1142, 22, 74, "Print",
- CellTags->"Info3646221557-6778994"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[7989, 192, 362, 9, 46, "Input"],
-Cell[8354, 203, 129, 1, 28, "Output"]
-}, Open  ]],
-Cell[8498, 207, 1234, 30, 195, "Input"],
-Cell[CellGroupData[{
-Cell[9757, 241, 341, 9, 49, "Input"],
-Cell[10101, 252, 3834, 77, 326, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[13972, 334, 289, 7, 28, "Input"],
-Cell[14264, 343, 3860, 77, 326, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[18161, 425, 456, 10, 80, "Input"],
-Cell[18620, 437, 1635, 34, 120, "Output"]
-}, Open  ]],
-Cell[20270, 474, 1093, 20, 148, "Input",
- InitializationCell->True],
-Cell[CellGroupData[{
-Cell[21388, 498, 271, 6, 28, "Input",
- InitializationCell->True],
-Cell[21662, 506, 4865, 87, 519, "Output"]
-}, Open  ]],
-Cell[26542, 596, 1021, 19, 148, "Input",
- InitializationCell->True],
-Cell[27566, 617, 1045, 20, 148, "Input",
- InitializationCell->True],
-Cell[CellGroupData[{
-Cell[28636, 641, 277, 6, 28, "Input",
- InitializationCell->True],
-Cell[28916, 649, 5576, 100, 468, "Output",
- InitializationCell->True]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[34541, 755, 89, 1, 64, "Section"],
-Cell[34633, 758, 329, 8, 46, "Input",
- InitializationCell->True],
-Cell[34965, 768, 1221, 23, 301, "Input",
- InitializationCell->True],
-Cell[CellGroupData[{
-Cell[36211, 795, 275, 6, 28, "Input",
- InitializationCell->True],
-Cell[36489, 803, 2705, 49, 378, "Output"]
-}, Open  ]],
-Cell[39209, 855, 70, 2, 28, "Input"],
-Cell[39282, 859, 217, 4, 28, "Input",
- InitializationCell->True],
-Cell[39502, 865, 797, 20, 148, "Input"],
-Cell[CellGroupData[{
-Cell[40324, 889, 178, 3, 28, "Input"],
-Cell[40505, 894, 4369, 81, 423, "Output"]
-}, Open  ]],
-Cell[44889, 978, 153, 3, 28, "Input"],
-Cell[45045, 983, 281, 7, 28, "Input"],
-Cell[CellGroupData[{
-Cell[45351, 994, 178, 3, 28, "Input"],
-Cell[45532, 999, 839, 18, 395, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[46408, 1022, 220, 4, 28, "Input"],
-Cell[46631, 1028, 157, 3, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[46825, 1036, 307, 9, 28, "Input"],
-Cell[47135, 1047, 267, 8, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[47439, 1060, 116, 2, 28, "Input"],
-Cell[47558, 1064, 1027, 20, 74, "Print",
- CellTags->"Info3646219008-7252571"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[48622, 1089, 215, 4, 28, "Input"],
-Cell[48840, 1095, 792, 24, 59, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[49669, 1124, 452, 8, 63, "Input"],
-Cell[50124, 1134, 954, 25, 63, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[51115, 1164, 914, 26, 113, "Input"],
-Cell[52032, 1192, 588, 15, 35, "Output"]
-}, Open  ]],
-Cell[52635, 1210, 252, 6, 46, "Input"],
-Cell[52890, 1218, 844, 24, 46, "Input"],
-Cell[53737, 1244, 719, 20, 80, "Input"],
-Cell[CellGroupData[{
-Cell[54481, 1268, 373, 9, 28, "Input"],
-Cell[54857, 1279, 6231, 116, 203, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[61125, 1400, 116, 2, 28, "Input"],
-Cell[61244, 1404, 814, 16, 42, "Print",
- CellTags->"Info3646208694-8238256"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[62095, 1425, 777, 19, 148, "Input"],
-Cell[62875, 1446, 6495, 122, 369, "Output"]
+Cell[7844, 186, 854, 20, 114, "Input"],
+Cell[8701, 208, 1696, 35, 332, "Output"]
 }, Open  ]]
 }, Open  ]]
 }

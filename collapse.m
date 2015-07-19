@@ -438,6 +438,7 @@ calculateAnyPoint[foldedCreasePattern_, creasePattern_] :=
             points = <|foldedCreasePattern[["points"]]|>;
             creasePattern1 = foldedCreasePattern;
             points[pointName] = point1;
+
             creasePattern1["points"] = Normal[points];
             creasePattern1 = sizeCreasePattern[
                 Keys[points],
@@ -454,6 +455,21 @@ calculateAnyPoint[foldedCreasePattern_, creasePattern_] :=
                 creasePattern2
             ]
         ]
+    ]
+
+fold[foldedCreasePattern_, creasePattern_] :=
+    Module[{lastFoldedCreasePattern, nextFoldedCreasePattern},
+        lastFoldedCreasePattern = foldedCreasePattern;
+        nextFoldedCreasePattern = lastFoldedCreasePattern;
+        While[nextFoldedCreasePattern =!= Null,
+            lastFoldedCreasePattern = nextFoldedCreasePattern;
+            nextFoldedCreasePattern = calculateAnyPoint[
+                lastFoldedCreasePattern,
+                creasePattern
+            ]
+        ];
+
+        lastFoldedCreasePattern
     ]
 
 sizeCreasePattern[pointNames_, foldedCreasePattern_, creasePattern_] :=
