@@ -131,7 +131,7 @@ trilaterate[{p1 : {x1_, y1_, z1_}, radius1_}, {p2 : {x2_, y2_, z2_}, radius2_},
         d = Norm[p2 - p1];
         j = ehy.(p3 - p1);
         ehz = Cross[ehx, ehy];
-        {x, y, z} = trilaterate[{radius1, radius2, radius3}, {{d}, {i, j}}];
+        {x, y, z} = Re /@ trilaterate[{radius1, radius2, radius3}, {{d}, {i, j}}];
         {
             p1 + x ehx + y ehy + z ehz,
             p1 + x ehx + y ehy - z ehz
@@ -350,26 +350,117 @@ findReferenceNeighbors[pointName_, foldedCreasePattern_, creasePattern_] :=
                 foldedCreasePattern[["points"]],
                 (name_ -> point_) /; MemberQ[neighborNames, name] :> name
             ];
-        referencePoints = referenceNeighborNames /.
-            foldedCreasePattern[["points"]];
-        EuclideanDistance[point, #]& /@
-            (referenceNeighborNames /. creasePattern[["points"]]);
-        Take[
-            Thread[
-                    {
-                        referencePoints,
-                        referenceDistances
-                    }
-                ],
-            3
+        If[Length[referenceNeighborNames] >= 3,
+            referencePoints = referenceNeighborNames /.
+                foldedCreasePattern[["points"]];
+            referenceDistances = EuclideanDistance[point, #]& /@
+                (referenceNeighborNames /. creasePattern[["points"]]);
+            Take[
+                Thread[
+                        {
+                            referencePoints,
+                            referenceDistances
+                        }
+                    ],
+                3
+            ]
         ]
     ]
 
-reduceCreasePattern[pointNames_, creasePattern_] :=
+findUnknownPoints[foldedCreasePattern_, creasePattern_] :=
+    Complement[
+        Keys[<|creasePattern[["points"]]|>],
+        Keys[<|foldedCreasePattern[["points"]]|>]
+    ]
+
+findCalculablePoint[foldedCreasePattern_, creasePattern_] :=
+    FirstCase[
+        findUnknownPoints[foldedCreasePattern, creasePattern],
+        pointName_ /; findReferenceNeighbors[
+                pointName,
+                foldedCreasePattern,
+                creasePattern
+            ] =!= Null :> {
+                pointName,
+                findReferenceNeighbors[
+                    pointName,
+                    foldedCreasePattern,
+                    creasePattern
+                ]
+            }
+    ]
+
+calculateCreaseAngleAverage[foldedCreasePattern_, creasePattern_] :=
+    Module[{creases, polygons, polygonName1, polygonName2,
+        creasePolygons},
+        creases = Union[
+            foldedCreasePattern[["creases"]][["mountain"]],
+            foldedCreasePattern[["creases"]][["valley"]]
+        ];
+        polygons = foldedCreasePattern[["polygons"]];
+        Mean[
+            Table[
+                creasePolygons = Cases[
+                    Normal[polygons],
+                    (name_ ->
+                        polygon_ /; MemberQ[
+                            convertPolygonToCreases[polygon],
+                            Sort[crease]
+                        ]) :>
+                    name
+                ];
+                If[Length[creasePolygons] == 2,
+                    {polygonName1, polygonName2} = creasePolygons;
+                    calculateCreaseDirectionalAngle[
+                        polygonName1,
+                        polygonName2,
+                        crease,
+                        foldedCreasePattern,
+                        creasePattern
+                    ],
+                    Unevaluated[Sequence[]]
+                ],
+                {crease, creases}
+            ]
+        ]
+    ]
+
+calculateAnyPoint[foldedCreasePattern_, creasePattern_] :=
+    Module[{reference, point, pointName, points, point1, point2,
+        creasePattern1, creasePattern2},
+        point = findCalculablePoint[
+            foldedCreasePattern,
+            creasePattern
+        ];
+        If[Head[point] =!= Missing,
+            {pointName, reference} = point;
+            {point1, point2} = trilaterate@@reference;
+            points = <|foldedCreasePattern[["points"]]|>;
+            creasePattern1 = foldedCreasePattern;
+            points[pointName] = point1;
+            creasePattern1["points"] = Normal[points];
+            creasePattern1 = sizeCreasePattern[
+                Keys[points],
+                creasePattern1,
+                creasePattern    
+            ];
+            creasePattern2 = creasePattern1;
+            points[pointName] = point2;
+            creasePattern2["points"] = Normal[points];
+
+            If[calculateCreaseAngleAverage[creasePattern1, creasePattern] <
+                calculateCreaseAngleAverage[creasePattern2, creasePattern],
+                creasePattern1,
+                creasePattern2
+            ]
+        ]
+    ]
+
+sizeCreasePattern[pointNames_, foldedCreasePattern_, creasePattern_] :=
     Module[{newCreasePattern, points},
         newCreasePattern = creasePattern;
 
-        points = <|newCreasePattern[["points"]]|>;
+        points = <|foldedCreasePattern[["points"]]|>;
         newCreasePattern["points"] =
             # -> points[[#]]& /@
                 pointNames;
