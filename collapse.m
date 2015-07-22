@@ -501,60 +501,82 @@ sizeCreasePattern[pointNames_, foldedCreasePattern_, creasePattern_] :=
     ]
 
 (* Fractal *)
+createDiamondBaseRowEndPoints[scale_, creasePattern_] :=
+    Module[{newCreasePattern, parent, lastIteration, parentPoints, suffix,
+        side, step, parentName, referencePoint, newPoints, i},
+        newCreasePattern = creasePattern;
+        i = 2^scale + 1;
+        parentPoints = <|creasePattern[["points"]]|>;
+        suffix = ToString[scale] <> "_" <> ToString[i - 1]];
+        If[Mod[i, 2] == 0,
+            side = "right",
+            side = "center"
+        ];
+        If[scale == 1,
+            parentName = side <> "_front",
+            parentName = side <> "_front_" <> ToString[scale - 1] <>
+                "_" <> IntegerPart[i/2]
+        ];
+        step = 1/(2^scale);
+        referencePoint = parentPoints[[parentName]];
+        newCreasePattern["points"] = Join[
+            newCreasePattern[["points"]],
+            {
+                "right_forward_" <> suffix -> referencePoint + {8*step, step, 0},
+                "right_front_" <> suffix -> referencePoint + {8*step, 2*step, 0}
+            }
+        ];
+        newCreasePattern
+    ]
+
+
 createDiamondBaseRowPoints[scale_, creasePattern_] :=
-    Module[{leftMiddle, centerMiddle, rightMiddle, newCreasePattern, parent,
-        parentPoints, suffix, side, step, parentName, referencePoint, newPoints},
+    Module[{newCreasePattern, parent, lastIteration, parentPoints, suffix,
+        side, step, parentName, referencePoint, newPoints},
         newCreasePattern = creasePattern;
         newPoints = Table[
             parentPoints = <|creasePattern[["points"]]|>;
-            leftMiddle = parentPoints[["left_front"]];
-            centerMiddle = parentPoints[["center_front"]];
-            rightMiddle = parentPoints[["right_middle"]];
-            If[i == 2^scale + 2,
-                suffix = ToString[scale] <> "_" <> ToString[i - 2],
-                suffix = ToString[scale] <> "_" <> ToString[i - 1]
-            ];
+            suffix = ToString[scale] <> "_" <> ToString[Min[i - 1, 2^scale]];
+            lastIteration = (i == 2^scale + 2);
             If[Mod[i, 2] == 0,
                 side = "left",
-                If[i == 2^scale + 2,
+                If[lastIteration,
                     side = "right",
                     side = "center"
                 ]
             ];
             If[scale == 1,
                 parentName = side <> "_front",
-                If[i == 2^scale + 2,
-                    parentName = side <> "_front_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[(i - 1)/2]],
-                    parentName = side <> "_front_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[i/2]]
-                ]
+                parentName = side <> "_front_" <> ToString[scale - 1] <>
+                    "_" <>
+                        ToString[
+                            Min[
+                                IntegerPart[i/2],
+                                IntegerPart[(2^scale + 1)/2]
+                            ]
+                        ]
             ];
-            step = (1/(2^scale));
+            step = 1/(2^scale);
             referencePoint = parentPoints[[parentName]];
-            Join[
-                If[i == 2^scale + 2,
-                    {
-                        "right_forward_" <> suffix -> referencePoint + {8*step, step, 0},
-                        "right_front_" <> suffix -> referencePoint + {8*step, 2*step, 0}
-                    },
-                    {}
-                ],
-                If[i < 2^scale + 2,
-                    {
-                        "right_half_forward_" <> suffix -> referencePoint +
-                            {3*step, step, 0},
-                        "right_half_front_" <> suffix -> referencePoint +
-                            {3*step, 2*step, 0},
-                        "left_forward_" <> suffix -> referencePoint + {0, step, 0},
-                        "left_half_forward_" <> suffix -> referencePoint +
-                            {step, step, 0},
-                        "left_front_" <> suffix -> referencePoint + {0, 2*step, 0},
-                        "left_half_front_" <> suffix -> referencePoint +
-                            {step, 2*step, 0},
-                        "center_front_" <> suffix -> referencePoint +
-                            {2*step, 2*step, 0}
-                    },
-                    {}
-                ]
+            If[lastIteration,
+                {
+                    "right_forward_" <> suffix -> referencePoint + {8*step, step, 0},
+                    "right_front_" <> suffix -> referencePoint + {8*step, 2*step, 0}
+                },
+                {
+                    "right_half_forward_" <> suffix -> referencePoint +
+                        {3*step, step, 0},
+                    "right_half_front_" <> suffix -> referencePoint +
+                        {3*step, 2*step, 0},
+                    "left_forward_" <> suffix -> referencePoint + {0, step, 0},
+                    "left_half_forward_" <> suffix -> referencePoint +
+                        {step, step, 0},
+                    "left_front_" <> suffix -> referencePoint + {0, 2*step, 0},
+                    "left_half_front_" <> suffix -> referencePoint +
+                        {step, 2*step, 0},
+                    "center_front_" <> suffix -> referencePoint +
+                        {2*step, 2*step, 0}
+                },
             ],
             {i, 2, 2^scale + 2}
         ];
