@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     11108,        275]
-NotebookOptionsPosition[     10425,        247]
-NotebookOutlinePosition[     10779,        263]
-CellTagsIndexPosition[     10736,        260]
+NotebookDataLength[     29371,        684]
+NotebookOptionsPosition[     28139,        638]
+NotebookOutlinePosition[     28492,        654]
+CellTagsIndexPosition[     28449,        651]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -30,19 +30,409 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"Needs", "[", "\"\<collapse`\>\"", "]"}]], "Input",
- InitializationCell->True,
  CellChangeTimes->{{3.64501281728986*^9, 3.645012820632036*^9}, {
-  3.6450272732443447`*^9, 3.645027274177361*^9}}],
+  3.6450272732443447`*^9, 3.645027274177361*^9}, {3.646479220646965*^9, 
+  3.646479221293824*^9}}],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"myDiamondBaseCreasePattern", "=", "\[IndentingNewLine]", 
    RowBox[{"creasePatternLibrary", "[", 
     RowBox[{"[", "\"\<diamond_base\>\"", "]"}], "]"}]}], ";"}]], "Input",
- InitializationCell->True,
  CellChangeTimes->{{3.645653053802082*^9, 3.645653082232285*^9}, {
   3.645785691280903*^9, 3.64578569667109*^9}, {3.6457874080913754`*^9, 
   3.6457874110029087`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"myCP", "=", 
+   RowBox[{"createDiamondBaseRowPoints", "[", 
+    RowBox[{"1", ",", "myDiamondBaseCreasePattern"}], "]"}]}], ";"}]], "Input",\
+
+ CellChangeTimes->{{3.646518140788127*^9, 3.646518154169931*^9}, 
+   3.64651850321306*^9, {3.646518750041313*^9, 3.646518751020384*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"myCP", "=", 
+   RowBox[{"createDiamondBaseRowPoints", "[", 
+    RowBox[{"2", ",", 
+     RowBox[{"createDiamondBaseRowPoints", "[", 
+      RowBox[{"1", ",", "myDiamondBaseCreasePattern"}], "]"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.646479119634521*^9, 3.646479159576819*^9}, {
+  3.646479350610221*^9, 3.646479374528618*^9}, {3.646518046031436*^9, 
+  3.6465180954523983`*^9}, {3.646518662783744*^9, 3.646518666956571*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"myCP", "=", 
+   RowBox[{"createDiamondBaseRowPoints", "[", 
+    RowBox[{"3", ",", "myCP"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.646479119634521*^9, 3.646479159576819*^9}, {
+  3.646479350610221*^9, 3.646479374528618*^9}, {3.646518046031436*^9, 
+  3.6465180954523983`*^9}, {3.646518662783744*^9, 3.646518666956571*^9}, {
+  3.646520323145809*^9, 3.6465203271441717`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graphics3D", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Sphere", "[", 
+     RowBox[{"#", ",", ".1"}], "]"}], "&"}], "/@", 
+   RowBox[{"Values", "[", 
+    RowBox[{"<|", 
+     RowBox[{"myDiamondBaseCreasePattern", "[", 
+      RowBox[{"[", "\"\<points\>\"", "]"}], "]"}], "|>"}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.646518668383692*^9, 3.646518723365467*^9}, {
+  3.646518835431313*^9, 3.646518836469368*^9}}],
+
+Cell[BoxData[
+ Graphics3DBox[{SphereBox[{-2, 0, 0}, 0.1], SphereBox[{0, 0, 0}, 0.1], 
+   SphereBox[{2, 0, 0}, 0.1], SphereBox[{-2, 1, 0}, 0.1], 
+   SphereBox[{0, 1, 0}, 0.1], SphereBox[{2, 1, 0}, 0.1], 
+   SphereBox[{-2, 2, 0}, 0.1], SphereBox[{-1, 2, 0}, 0.1], 
+   SphereBox[{1, 2, 0}, 0.1], SphereBox[{2, 2, 0}, 0.1], 
+   SphereBox[{-2, 3, 0}, 0.1], SphereBox[{-1, 3, 0}, 0.1], 
+   SphereBox[{0, 3, 0}, 0.1], SphereBox[{1, 3, 0}, 0.1], 
+   SphereBox[{2, 3, 0}, 0.1]},
+  ImageSize->{301.37503735763624`, 223.75851955921524`},
+  ViewPoint->{0.2874508892136956, -1.1569853806584658`, 3.1668212477550486`},
+  ViewVertical->{0.09025696036961502, 0.7294711084065905, 
+   17.35461553245271}]], "Output",
+ CellChangeTimes->{3.646518837392703*^9, 3.646518960875491*^9, 
+  3.646519077060014*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"myCP", "[", 
+  RowBox[{"[", "\"\<points\>\"", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6465196887266607`*^9, 3.646519692322111*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"left_back\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "2"}], ",", "0", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"center_back\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_back\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "0", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_middle\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "2"}], ",", "1", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"center_middle\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_middle\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "1", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_forward\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "2"}], ",", "2", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_half_forward\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "1"}], ",", "2", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_half_forward\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_forward\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "2", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_front\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "2"}], ",", "3", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_half_front\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "1"}], ",", "3", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"center_front\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "3", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_half_front\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "3", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_front\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "3", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_half_forward_1_1\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", 
+       FractionBox["1", "2"]}], ",", 
+      FractionBox["7", "2"], ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_half_front_1_1\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", 
+       FractionBox["1", "2"]}], ",", "4", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_forward_1_1\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "2"}], ",", 
+      FractionBox["7", "2"], ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_half_forward_1_1\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", 
+       FractionBox["3", "2"]}], ",", 
+      FractionBox["7", "2"], ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_front_1_1\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "2"}], ",", "4", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_half_front_1_1\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", 
+       FractionBox["3", "2"]}], ",", "4", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"center_front_1_1\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "1"}], ",", "4", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_half_forward_1_2\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      FractionBox["3", "2"], ",", 
+      FractionBox["7", "2"], ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_half_front_1_2\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      FractionBox["3", "2"], ",", "4", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_forward_1_2\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", 
+      FractionBox["7", "2"], ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_half_forward_1_2\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      FractionBox["1", "2"], ",", 
+      FractionBox["7", "2"], ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_front_1_2\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "4", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"left_half_front_1_2\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      FractionBox["1", "2"], ",", "4", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"center_front_1_2\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "4", ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_forward_1_3\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "2"}], ",", 
+      FractionBox["7", "2"], ",", "0"}], "}"}]}], ",", 
+   RowBox[{"\<\"right_front_1_3\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "2"}], ",", "4", ",", "0"}], "}"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{3.64651969257276*^9, 3.6465197677709084`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"7", "/", "2"}], "//", "N"}]], "Input",
+ CellChangeTimes->{{3.646519708834317*^9, 3.646519710297447*^9}}],
+
+Cell[BoxData["3.5`"], "Output",
+ CellChangeTimes->{3.646519710543441*^9}]
+}, Open  ]],
+
+Cell[BoxData["myCP"], "Input",
+ CellChangeTimes->{{3.646520045432624*^9, 3.646520046011582*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graphics3D", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Sphere", "[", 
+     RowBox[{"#", ",", ".05"}], "]"}], "&"}], "/@", 
+   RowBox[{"Values", "[", 
+    RowBox[{"<|", 
+     RowBox[{"myCP", "[", 
+      RowBox[{"[", "\"\<points\>\"", "]"}], "]"}], "|>"}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.646518668383692*^9, 3.646518723365467*^9}, {
+  3.646520312756009*^9, 3.64652031360835*^9}}],
+
+Cell[BoxData[
+ Graphics3DBox[{SphereBox[{-2, 0, 0}, 0.05], SphereBox[{0, 0, 0}, 0.05], 
+   SphereBox[{2, 0, 0}, 0.05], SphereBox[{-2, 1, 0}, 0.05], 
+   SphereBox[{0, 1, 0}, 0.05], SphereBox[{2, 1, 0}, 0.05], 
+   SphereBox[{-2, 2, 0}, 0.05], SphereBox[{-1, 2, 0}, 0.05], 
+   SphereBox[{1, 2, 0}, 0.05], SphereBox[{2, 2, 0}, 0.05], 
+   SphereBox[{-2, 3, 0}, 0.05], SphereBox[{-1, 3, 0}, 0.05], 
+   SphereBox[{0, 3, 0}, 0.05], SphereBox[{1, 3, 0}, 0.05], 
+   SphereBox[{2, 3, 0}, 0.05], 
+   SphereBox[NCache[{Rational[-1, 2], Rational[7, 2], 0}, {-0.5, 3.5, 0}], 
+    0.05], SphereBox[NCache[{Rational[-1, 2], 4, 0}, {-0.5, 4, 0}], 0.05], 
+   SphereBox[NCache[{-2, Rational[7, 2], 0}, {-2, 3.5, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-3, 2], Rational[7, 2], 0}, {-1.5, 3.5, 0}], 
+    0.05], SphereBox[{-2, 4, 0}, 0.05], 
+   SphereBox[NCache[{Rational[-3, 2], 4, 0}, {-1.5, 4, 0}], 0.05], 
+   SphereBox[{-1, 4, 0}, 0.05], 
+   SphereBox[NCache[{Rational[3, 2], Rational[7, 2], 0}, {1.5, 3.5, 0}], 
+    0.05], SphereBox[NCache[{Rational[3, 2], 4, 0}, {1.5, 4, 0}], 0.05], 
+   SphereBox[NCache[{0, Rational[7, 2], 0}, {0, 3.5, 0}], 0.05], 
+   SphereBox[NCache[{Rational[1, 2], Rational[7, 2], 0}, {0.5, 3.5, 0}], 
+    0.05], SphereBox[{0, 4, 0}, 0.05], 
+   SphereBox[NCache[{Rational[1, 2], 4, 0}, {0.5, 4, 0}], 0.05], 
+   SphereBox[{1, 4, 0}, 0.05], 
+   SphereBox[NCache[{2, Rational[7, 2], 0}, {2, 3.5, 0}], 0.05], 
+   SphereBox[{2, 4, 0}, 0.05], 
+   SphereBox[NCache[{Rational[-5, 4], Rational[17, 4], 0}, {-1.25, 4.25, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[-5, 4], Rational[9, 2], 0}, {-1.25, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{-2, Rational[17, 4], 0}, {-2, 4.25, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-7, 4], Rational[17, 4], 0}, {-1.75, 4.25, 0}], 
+    0.05], SphereBox[NCache[{-2, Rational[9, 2], 0}, {-2, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-7, 4], Rational[9, 2], 0}, {-1.75, 4.5, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[-3, 2], Rational[9, 2], 0}, {-1.5, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-1, 4], Rational[17, 4], 0}, {-0.25, 4.25, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[-1, 4], Rational[9, 2], 0}, {-0.25, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{-1, Rational[17, 4], 0}, {-1, 4.25, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-3, 4], Rational[17, 4], 0}, {-0.75, 4.25, 0}], 
+    0.05], SphereBox[NCache[{-1, Rational[9, 2], 0}, {-1, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-3, 4], Rational[9, 2], 0}, {-0.75, 4.5, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[-1, 2], Rational[9, 2], 0}, {-0.5, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{Rational[3, 4], Rational[17, 4], 0}, {0.75, 4.25, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[3, 4], Rational[9, 2], 0}, {0.75, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{0, Rational[17, 4], 0}, {0, 4.25, 0}], 0.05], 
+   SphereBox[NCache[{Rational[1, 4], Rational[17, 4], 0}, {0.25, 4.25, 0}], 
+    0.05], SphereBox[NCache[{0, Rational[9, 2], 0}, {0, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{Rational[1, 4], Rational[9, 2], 0}, {0.25, 4.5, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[1, 2], Rational[9, 2], 0}, {0.5, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{Rational[7, 4], Rational[17, 4], 0}, {1.75, 4.25, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[7, 4], Rational[9, 2], 0}, {1.75, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{1, Rational[17, 4], 0}, {1, 4.25, 0}], 0.05], 
+   SphereBox[NCache[{Rational[5, 4], Rational[17, 4], 0}, {1.25, 4.25, 0}], 
+    0.05], SphereBox[NCache[{1, Rational[9, 2], 0}, {1, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{Rational[5, 4], Rational[9, 2], 0}, {1.25, 4.5, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[3, 2], Rational[9, 2], 0}, {1.5, 4.5, 0}], 0.05], 
+   SphereBox[NCache[{2, Rational[17, 4], 0}, {2, 4.25, 0}], 0.05], 
+   SphereBox[NCache[{2, Rational[9, 2], 0}, {2, 4.5, 0}], 0.05], 
+   SphereBox[
+    NCache[{Rational[-13, 8], Rational[37, 8], 0}, {-1.625, 4.625, 0}], 0.05],
+    SphereBox[
+    NCache[{Rational[-13, 8], Rational[19, 4], 0}, {-1.625, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{-2, Rational[37, 8], 0}, {-2, 4.625, 0}], 0.05], 
+   SphereBox[
+    NCache[{Rational[-15, 8], Rational[37, 8], 0}, {-1.875, 4.625, 0}], 0.05],
+    SphereBox[NCache[{-2, Rational[19, 4], 0}, {-2, 4.75, 0}], 0.05], 
+   SphereBox[
+    NCache[{Rational[-15, 8], Rational[19, 4], 0}, {-1.875, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-7, 4], Rational[19, 4], 0}, {-1.75, 4.75, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[-9, 8], Rational[37, 8], 0}, {-1.125, 4.625, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-9, 8], Rational[19, 4], 0}, {-1.125, 4.75, 0}],
+     0.05], SphereBox[
+    NCache[{Rational[-3, 2], Rational[37, 8], 0}, {-1.5, 4.625, 0}], 0.05], 
+   SphereBox[
+    NCache[{Rational[-11, 8], Rational[37, 8], 0}, {-1.375, 4.625, 0}], 0.05],
+    SphereBox[NCache[{Rational[-3, 2], Rational[19, 4], 0}, {-1.5, 4.75, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[-11, 8], Rational[19, 4], 0}, {-1.375, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-5, 4], Rational[19, 4], 0}, {-1.25, 4.75, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[-5, 8], Rational[37, 8], 0}, {-0.625, 4.625, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-5, 8], Rational[19, 4], 0}, {-0.625, 4.75, 0}],
+     0.05], SphereBox[NCache[{-1, Rational[37, 8], 0}, {-1, 4.625, 0}], 0.05],
+    SphereBox[
+    NCache[{Rational[-7, 8], Rational[37, 8], 0}, {-0.875, 4.625, 0}], 0.05], 
+   SphereBox[NCache[{-1, Rational[19, 4], 0}, {-1, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-7, 8], Rational[19, 4], 0}, {-0.875, 4.75, 0}],
+     0.05], SphereBox[
+    NCache[{Rational[-3, 4], Rational[19, 4], 0}, {-0.75, 4.75, 0}], 0.05], 
+   SphereBox[
+    NCache[{Rational[-1, 8], Rational[37, 8], 0}, {-0.125, 4.625, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-1, 8], Rational[19, 4], 0}, {-0.125, 4.75, 0}],
+     0.05], SphereBox[
+    NCache[{Rational[-1, 2], Rational[37, 8], 0}, {-0.5, 4.625, 0}], 0.05], 
+   SphereBox[
+    NCache[{Rational[-3, 8], Rational[37, 8], 0}, {-0.375, 4.625, 0}], 0.05], 
+   SphereBox[NCache[{Rational[-1, 2], Rational[19, 4], 0}, {-0.5, 4.75, 0}], 
+    0.05], 
+   SphereBox[NCache[{Rational[-3, 8], Rational[19, 4], 0}, {-0.375, 4.75, 0}],
+     0.05], SphereBox[
+    NCache[{Rational[-1, 4], Rational[19, 4], 0}, {-0.25, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{Rational[3, 8], Rational[37, 8], 0}, {0.375, 4.625, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[3, 8], Rational[19, 4], 0}, {0.375, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{0, Rational[37, 8], 0}, {0, 4.625, 0}], 0.05], 
+   SphereBox[NCache[{Rational[1, 8], Rational[37, 8], 0}, {0.125, 4.625, 0}], 
+    0.05], SphereBox[NCache[{0, Rational[19, 4], 0}, {0, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{Rational[1, 8], Rational[19, 4], 0}, {0.125, 4.75, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[1, 4], Rational[19, 4], 0}, {0.25, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{Rational[7, 8], Rational[37, 8], 0}, {0.875, 4.625, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[7, 8], Rational[19, 4], 0}, {0.875, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{Rational[1, 2], Rational[37, 8], 0}, {0.5, 4.625, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[5, 8], Rational[37, 8], 0}, {0.625, 4.625, 0}], 0.05], 
+   SphereBox[NCache[{Rational[1, 2], Rational[19, 4], 0}, {0.5, 4.75, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[5, 8], Rational[19, 4], 0}, {0.625, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{Rational[3, 4], Rational[19, 4], 0}, {0.75, 4.75, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[11, 8], Rational[37, 8], 0}, {1.375, 4.625, 0}], 0.05], 
+   SphereBox[NCache[{Rational[11, 8], Rational[19, 4], 0}, {1.375, 4.75, 0}], 
+    0.05], SphereBox[NCache[{1, Rational[37, 8], 0}, {1, 4.625, 0}], 0.05], 
+   SphereBox[NCache[{Rational[9, 8], Rational[37, 8], 0}, {1.125, 4.625, 0}], 
+    0.05], SphereBox[NCache[{1, Rational[19, 4], 0}, {1, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{Rational[9, 8], Rational[19, 4], 0}, {1.125, 4.75, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[5, 4], Rational[19, 4], 0}, {1.25, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{Rational[15, 8], Rational[37, 8], 0}, {1.875, 4.625, 0}],
+     0.05], 
+   SphereBox[NCache[{Rational[15, 8], Rational[19, 4], 0}, {1.875, 4.75, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[3, 2], Rational[37, 8], 0}, {1.5, 4.625, 0}], 0.05], 
+   SphereBox[NCache[{Rational[13, 8], Rational[37, 8], 0}, {1.625, 4.625, 0}],
+     0.05], SphereBox[
+    NCache[{Rational[3, 2], Rational[19, 4], 0}, {1.5, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{Rational[13, 8], Rational[19, 4], 0}, {1.625, 4.75, 0}], 
+    0.05], SphereBox[
+    NCache[{Rational[7, 4], Rational[19, 4], 0}, {1.75, 4.75, 0}], 0.05], 
+   SphereBox[NCache[{2, Rational[37, 8], 0}, {2, 4.625, 0}], 0.05], 
+   SphereBox[NCache[{2, Rational[19, 4], 0}, {2, 4.75, 0}], 0.05]},
+  ImageSize->{570.5551456946625, 422.},
+  ViewPoint->{0.22030783276688573`, 0.4172970774766647, 3.350720461027896},
+  ViewVertical->{0.07175415375025901, 0.4483146352936596, 
+   20.951966884242083`}]], "Output",
+ CellChangeTimes->{
+  3.646518675689869*^9, {3.646518718666504*^9, 3.6465188097936583`*^9}, 
+   3.646518961651185*^9, {3.6465190777461987`*^9, 3.646519097987431*^9}, 
+   3.646519162641205*^9, 3.6465194321113873`*^9, {3.646519661259499*^9, 
+   3.646519670663012*^9}, 3.646519764280686*^9, 3.646519960213757*^9, 
+   3.646520003469191*^9, 3.646520105288013*^9, 3.646520154370839*^9, 
+   3.646520197959016*^9, {3.6465202313922653`*^9, 3.646520333398737*^9}}]
+}, Open  ]],
 
 Cell[BoxData[
  RowBox[{
@@ -209,17 +599,17 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`t$$ = 0., Typeset`show$$ = True, 
+   DynamicModuleBox[{$CellContext`t$$ = 0.417, Typeset`show$$ = True, 
     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`t$$], 0, 0.999}}, Typeset`size$$ = {
-    360., {111., 116.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`t$34073$$ = 0}, 
+    360., {176., 180.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`t$1441$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`t$$ = 0}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`t$$, $CellContext`t$34073$$, 0]}, 
+        Hold[$CellContext`t$$, $CellContext`t$1441$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -231,7 +621,7 @@ Cell[BoxData[
 $CellContext`myDiamondBaseCreasePattern]], ViewPoint -> {1, 1, 1}], 
       "Specifications" :> {{$CellContext`t$$, 0, 0.999}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{405., {155., 160.}},
+     ImageSizeCache->{405., {220., 225.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -241,14 +631,15 @@ $CellContext`myDiamondBaseCreasePattern]], ViewPoint -> {1, 1, 1}],
    Deployed->True,
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{3.6463087241035023`*^9, 3.64630875857808*^9}]
+ CellChangeTimes->{3.6463087241035023`*^9, 3.64630875857808*^9, 
+  3.6463288064787817`*^9}]
 }, Open  ]]
 }, Open  ]]
 },
 WindowSize->{724, 713},
-WindowMargins->{{38, Automatic}, {47, Automatic}},
-FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
-2014)",
+WindowMargins->{{31, Automatic}, {Automatic, 39}},
+FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 6, \
+2015)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -265,16 +656,34 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 103, 1, 64, "Section"],
 Cell[686, 25, 136, 3, 28, "Input"],
-Cell[825, 30, 217, 4, 28, "Input",
- InitializationCell->True],
-Cell[1045, 36, 401, 8, 46, "Input",
- InitializationCell->True],
-Cell[1449, 46, 4468, 86, 1051, "Input"],
-Cell[5920, 134, 455, 12, 80, "Input"],
-Cell[6378, 148, 1441, 34, 223, "Input"],
+Cell[825, 30, 239, 4, 28, "Input"],
+Cell[1067, 36, 374, 7, 46, "Input"],
+Cell[1444, 45, 313, 7, 28, "Input"],
+Cell[1760, 54, 472, 10, 46, "Input"],
+Cell[2235, 66, 415, 8, 86, "Input"],
 Cell[CellGroupData[{
-Cell[7844, 186, 854, 20, 114, "Input"],
-Cell[8701, 208, 1696, 35, 332, "Output"]
+Cell[2675, 78, 466, 12, 46, "Input"],
+Cell[3144, 92, 787, 14, 239, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3968, 111, 161, 3, 28, "Input"],
+Cell[4132, 116, 4653, 126, 419, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8822, 247, 139, 3, 28, "Input"],
+Cell[8964, 252, 73, 1, 28, "Output"]
+}, Open  ]],
+Cell[9052, 256, 96, 1, 28, "Input"],
+Cell[CellGroupData[{
+Cell[9173, 261, 444, 12, 46, "Input"],
+Cell[9620, 275, 9500, 158, 471, "Output"]
+}, Open  ]],
+Cell[19135, 436, 4468, 86, 1051, "Input"],
+Cell[23606, 524, 455, 12, 80, "Input"],
+Cell[24064, 538, 1441, 34, 223, "Input"],
+Cell[CellGroupData[{
+Cell[25530, 576, 854, 20, 114, "Input"],
+Cell[26387, 598, 1724, 36, 462, "Output"]
 }, Open  ]]
 }, Open  ]]
 }

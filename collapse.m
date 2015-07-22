@@ -500,6 +500,71 @@ sizeCreasePattern[pointNames_, foldedCreasePattern_, creasePattern_] :=
         newCreasePattern
     ]
 
+(* Fractal *)
+createDiamondBaseRowPoints[scale_, creasePattern_] :=
+    Module[{leftMiddle, centerMiddle, rightMiddle, newCreasePattern, parent,
+        parentPoints, suffix, side, step, parentName, referencePoint, newPoints},
+        newCreasePattern = creasePattern;
+        newPoints = Table[
+            parentPoints = <|creasePattern[["points"]]|>;
+            leftMiddle = parentPoints[["left_front"]];
+            centerMiddle = parentPoints[["center_front"]];
+            rightMiddle = parentPoints[["right_middle"]];
+            If[i == 2^scale + 2,
+                suffix = ToString[scale] <> "_" <> ToString[i - 2],
+                suffix = ToString[scale] <> "_" <> ToString[i - 1]
+            ];
+            If[Mod[i, 2] == 0,
+                side = "left",
+                If[i == 2^scale + 2,
+                    side = "right",
+                    side = "center"
+                ]
+            ];
+            If[scale == 1,
+                parentName = side <> "_front",
+                If[i == 2^scale + 2,
+                    parentName = side <> "_front_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[(i - 1)/2]],
+                    parentName = side <> "_front_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[i/2]]
+                ]
+            ];
+            step = (1/(2^scale));
+            referencePoint = parentPoints[[parentName]];
+            Join[
+                If[i == 2^scale + 2,
+                    {
+                        "right_forward_" <> suffix -> referencePoint + {8*step, step, 0},
+                        "right_front_" <> suffix -> referencePoint + {8*step, 2*step, 0}
+                    },
+                    {}
+                ],
+                If[i < 2^scale + 2,
+                    {
+                        "right_half_forward_" <> suffix -> referencePoint +
+                            {3*step, step, 0},
+                        "right_half_front_" <> suffix -> referencePoint +
+                            {3*step, 2*step, 0},
+                        "left_forward_" <> suffix -> referencePoint + {0, step, 0},
+                        "left_half_forward_" <> suffix -> referencePoint +
+                            {step, step, 0},
+                        "left_front_" <> suffix -> referencePoint + {0, 2*step, 0},
+                        "left_half_front_" <> suffix -> referencePoint +
+                            {step, 2*step, 0},
+                        "center_front_" <> suffix -> referencePoint +
+                            {2*step, 2*step, 0}
+                    },
+                    {}
+                ]
+            ],
+            {i, 2, 2^scale + 2}
+        ];
+        newCreasePattern["points"] = Join[
+            newCreasePattern[["points"]],
+            Flatten[newPoints]
+        ];
+        newCreasePattern
+    ]
+
 (* Render *)
 renderPolygon[polygon_, points_] :=
     Polygon[polygon /. points]
