@@ -501,89 +501,165 @@ sizeCreasePattern[pointNames_, foldedCreasePattern_, creasePattern_] :=
     ]
 
 (* Fractal *)
-createDiamondBaseRowEndPoints[scale_, creasePattern_] :=
-    Module[{newCreasePattern, parent, lastIteration, parentPoints, suffix,
-        side, step, parentName, referencePoint, newPoints, i},
-        newCreasePattern = creasePattern;
-        i = 2^scale + 1;
-        parentPoints = <|creasePattern[["points"]]|>;
-        suffix = ToString[scale] <> "_" <> ToString[i - 1]];
+createDiamondBaseInstancePolygons[i_, terminal_, scale_, creasePattern_] :=
+    Module[{id, parentID, leftMiddle, centerMiddle, rightMiddle, nextParentID},
+        If[terminal,
+            id = "_" <> ToString[scale] <> "_" <> ToString[i],
+            id = "_" <> ToString[scale] <> "_" <> ToString[i],
+        ];
+        If[terminal,
+            nextID = "_" <> ToString[scale] <> "_" <> ToString[i],
+            nextID = "_" <> ToString[scale] <> "_" <> ToString[i + 1]
+        ];
+        If[scale == 1,
+            parentID = "",
+            If[terminal,
+                parentID = "_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[(i + 1)/2]],
+                parentID = "_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[(i + 1)/2]]
+            ]
+        ];
+        If[scale == 1,
+            nextParentID = "",
+            If[terminal,
+                nextParentID = "_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[(i + 1)/2]],
+                nextParentID = "_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[(i + 1)/2] + 1]
+            ]
+        ];
         If[Mod[i, 2] == 0,
-            side = "right",
+            side = "left";
+            If[terminal,
+                leftMiddle = "center_front" <> parentID;
+                centerMiddle = "right_half_front" <> parentID;
+                rightMiddle = "right_front" <> parentID,
+                rightMiddle = "left_front" <> nextParentID;
+                centerMiddle = "right_half_front" <> parentID;
+                leftMiddle = "center_front" <> parentID
+            ],
+            side = "right";
+            rightMiddle = "center_front" <> parentID;
+            centerMiddle = "left_half_front" <> parentID;
+            leftMiddle = "left_front" <> parentID
+        ];
+        Join[
+            {
+            "left_middle" <> id -> {
+                leftMiddle, centerMiddle, "left_half_forward" <> id,
+                "left_forward" <> id
+            },
+            "left_center" <> id -> {
+                centerMiddle, "left_half_forward" <> id,
+                "center_front" <> id
+            },
+            "right_center" <> id -> {
+                centerMiddle, "right_half_forward" <> id,
+                "center_front" <> id
+            },
+            "left_front" <> id -> {
+                "left_front" <> id, "left_half_front" <> id, "left_half_forward" <> id,
+                "left_forward" <> id
+            },
+            "left_half_front" <> id -> {
+                "left_half_front" <> id, "center_front" <> id, "left_half_forward" <> id
+            },
+            "right_half_front" <> id -> {
+                "right_half_front" <> id, "center_front" <> id, "right_half_forward" <> id
+            }
+        },
+        If[terminal,
+            {
+                "right_front" <> id -> {
+                    "right_front" <> id, "right_half_front" <> id, "right_half_forward" <> id,
+                    "right_forward" <> id
+                },
+                "right_middle" <> id -> {
+                    rightMiddle, centerMiddle, "right_half_forward" <> id,
+                    "right_forward" <> id
+                }
+            },
+
+            {
+                "right_front" <> id -> {
+                    "left_front" <> nextID, "right_half_front" <> id, "right_half_forward" <> id,
+                    "left_forward" <> nextID
+                },
+                "right_middle" <> id -> {
+                    rightMiddle, centerMiddle, "right_half_forward" <> id,
+                    "left_forward" <> nextID
+                }
+            }
+           ]
+        ]
+    ]
+
+createDiamondBaseInstancePoints[i_, terminal_, scale_, creasePattern_] :=
+    Module[{newCreasePattern, parent, parentPoints, suffix, side, step,
+        parentName, referencePoint, newPoints},
+        newCreasePattern = creasePattern;
+        parentPoints = <|creasePattern[["points"]]|>;
+        suffix = ToString[scale] <> "_" <> ToString[i - 1];
+        If[Mod[i, 2] == 0,
+            side = "left",
             side = "center"
         ];
         If[scale == 1,
             parentName = side <> "_front",
             parentName = side <> "_front_" <> ToString[scale - 1] <>
-                "_" <> IntegerPart[i/2]
+                "_" <> ToString[IntegerPart[i/2]]
         ];
         step = 1/(2^scale);
         referencePoint = parentPoints[[parentName]];
-        newCreasePattern["points"] = Join[
-            newCreasePattern[["points"]],
+        If[terminal,
             {
-                "right_forward_" <> suffix -> referencePoint + {8*step, step, 0},
-                "right_front_" <> suffix -> referencePoint + {8*step, 2*step, 0}
+                "right_forward_" <> suffix -> referencePoint + {4*step, step, 0},
+                "right_front_" <> suffix -> referencePoint + {4*step, 2*step, 0}
+            },
+            {
+                "right_half_forward_" <> suffix -> referencePoint +
+                    {3*step, step, 0},
+                "right_half_front_" <> suffix -> referencePoint +
+                    {3*step, 2*step, 0},
+                "left_forward_" <> suffix -> referencePoint + {0, step, 0},
+                "left_half_forward_" <> suffix -> referencePoint +
+                    {step, step, 0},
+                "left_front_" <> suffix -> referencePoint + {0, 2*step, 0},
+                "left_half_front_" <> suffix -> referencePoint +
+                    {step, 2*step, 0},
+                "center_front_" <> suffix -> referencePoint +
+                    {2*step, 2*step, 0}
             }
-        ];
-        newCreasePattern
+        ]
     ]
-
 
 createDiamondBaseRowPoints[scale_, creasePattern_] :=
     Module[{newCreasePattern, parent, lastIteration, parentPoints, suffix,
         side, step, parentName, referencePoint, newPoints},
         newCreasePattern = creasePattern;
         newPoints = Table[
-            parentPoints = <|creasePattern[["points"]]|>;
-            suffix = ToString[scale] <> "_" <> ToString[Min[i - 1, 2^scale]];
-            lastIteration = (i == 2^scale + 2);
-            If[Mod[i, 2] == 0,
-                side = "left",
-                If[lastIteration,
-                    side = "right",
-                    side = "center"
-                ]
-            ];
-            If[scale == 1,
-                parentName = side <> "_front",
-                parentName = side <> "_front_" <> ToString[scale - 1] <>
-                    "_" <>
-                        ToString[
-                            Min[
-                                IntegerPart[i/2],
-                                IntegerPart[(2^scale + 1)/2]
-                            ]
-                        ]
-            ];
-            step = 1/(2^scale);
-            referencePoint = parentPoints[[parentName]];
-            If[lastIteration,
-                {
-                    "right_forward_" <> suffix -> referencePoint + {8*step, step, 0},
-                    "right_front_" <> suffix -> referencePoint + {8*step, 2*step, 0}
-                },
-                {
-                    "right_half_forward_" <> suffix -> referencePoint +
-                        {3*step, step, 0},
-                    "right_half_front_" <> suffix -> referencePoint +
-                        {3*step, 2*step, 0},
-                    "left_forward_" <> suffix -> referencePoint + {0, step, 0},
-                    "left_half_forward_" <> suffix -> referencePoint +
-                        {step, step, 0},
-                    "left_front_" <> suffix -> referencePoint + {0, 2*step, 0},
-                    "left_half_front_" <> suffix -> referencePoint +
-                        {step, 2*step, 0},
-                    "center_front_" <> suffix -> referencePoint +
-                        {2*step, 2*step, 0}
-                },
-            ],
-            {i, 2, 2^scale + 2}
+            createDiamondBaseInstancePoints[i, False, scale, creasePattern],
+            {i, 2, 2^scale + 1}
         ];
         newCreasePattern["points"] = Join[
             newCreasePattern[["points"]],
-            Flatten[newPoints]
+            Flatten[newPoints],
+            createDiamondBaseInstancePoints[2^scale + 1, True, scale, creasePattern]
         ];
+        newCreasePattern
+    ]
+
+createDiamondBaseRow[scale_, creasePattern_] :=
+    Module[{newCreasePattern, newPolygons},
+        newCreasePattern = createDiamondBaseRowPoints[scale, creasePattern];
+        newPolygons = Table[
+            createDiamondBaseInstancePolygons[i, False, scale, newCreasePattern],
+            {i, 1, 2^scale}
+        ];
+        newCreasePattern[["polygons"]] = <|
+            Join[
+               Normal[creasePattern[["polygons"]]],
+               newPolygons,
+               createDiamondBaseInstancePolygons[2^scale, True, scale, newCreasePattern]
+            ]
+        |>;
         newCreasePattern
     ]
 
@@ -594,7 +670,7 @@ renderPolygon[polygon_, points_] :=
 renderCrease[crease_, type_, points_] :=
     {
         If[type == "mountain", Red, Blue],
-        Tube[(crease /. points)]
+        Tube[(crease /. points), .01]
     }
 
 renderCreasePattern[creasePattern_] :=
