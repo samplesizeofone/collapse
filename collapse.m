@@ -175,9 +175,9 @@ calculateNormal[{p1_, p2_, p3_}] :=
 (* Folding *)
 resetFolded[origami_] :=
     Module[{points, newOrigami},
-        points = Values[<|origami[["points"]]|>];
+        points = Union[Values[<|origami[["points"]]|>]];
         newOrigami = origami;
-        newOrigami["folded"] = Table[point -> point, {point, points}];
+        newOrigami["folded"] = Table[point -> N[point], {point, points}];
         newOrigami
     ]
 
@@ -305,8 +305,8 @@ calculateCreaseDirectionalAngle[polygonName1_, polygonName2_, axialCrease_,
             origami 
         ];
         If[creaseDirection == creaseType,
-            Pi - angle,
-            -(Pi - angle)
+            angle,
+            -angle
         ]
     ]
 
