@@ -98,7 +98,13 @@ creasePatternLibrary =
                     {"center_middle", "right_middle"},
                     {"center_middle", "center_front"},
                     {"right_half_front", "right_half_forward"},
-                    {"left_half_front", "left_half_forward"}
+                    {"left_half_front", "left_half_forward"},
+                    {"right_middle", "right_forward"},
+                    {"left_middle", "left_forward"},
+                    {"right_front", "right_half_front"},
+                    {"right_half_front", "center_front"},
+                    {"center_front", "left_half_front"},
+                    {"left_half_front", "left_front"}
                 },
                 "valley" -> {
                     {"center_middle", "left_half_forward"},
@@ -106,13 +112,44 @@ creasePatternLibrary =
                     {"left_forward", "left_half_forward"},
                     {"right_half_forward", "right_forward"},
                     {"left_half_forward", "center_front"},
-                    {"center_front", "right_half_forward"}
+                    {"center_front", "right_half_forward"},
+                    {"right_forward", "right_front"},
+                    {"left_forward", "left_front"}
                 }
             |>,
-            "fractals" -> {
-            }
+            "fractals" -> <|
+                "origin" -> "center_middle",
+                "anchors" -> <|
+                    "L" -> "left_half_front",
+                    "R" -> "right_half_front"
+                |>,
+                "scale" -> 2
+            |>
         |>
     |>
+
+creasePatternLibrary["fractal_diamond_base"] =
+    Module[{fractalDiamondBase},
+        fractalDiamondBase = creasePatternLibrary[["diamond_base"]];
+        fractalDiamondBase[["polygons"]] = Fold[
+            Delete[#1, #2]&,
+            fractalDiamondBase[["polygons"]],
+            {"right_back", "left_back"}
+        ];
+        fractalDiamondBase[["creases"]][["mountain"]] = Complement[
+            Normal[fractalDiamondBase[["creases"]][["mountain"]]],
+            {{"center_back", "center_middle"}}
+        ];
+        fractalDiamondBase[["points"]] = Complement[
+            fractalDiamondBase[["points"]],
+            {
+                "left_back" -> {-2, 0, 0},
+                "center_back" -> {0, 0, 0},
+                "right_back" -> {2, 0, 0}
+            }
+        ];
+        fractalDiamondBase
+    ];
 
 (* Geometry *)
 trilaterate[{r1_, r2_, r3_}, {{x2_}, {x3_, y3_}}] :=
@@ -184,6 +221,11 @@ resetFolded[origami_] :=
 getFolded[origami_] :=
     origami[["points"]] /. origami[["folded"]]
 
+getOnlyFolded[origami_]
+
+getCreases[creaseType_, origami_] :=
+    Union[Sort /@ (origami[["creases"]][[creaseType]] /. origami[["points"]])]
+
 updateFolded[points_, origami_] :=
     Module[{newFolded, newOrigami},
         newFolded = <|origami[["folded"]]|>;
@@ -194,6 +236,64 @@ updateFolded[points_, origami_] :=
         newOrigami = origami;
         newOrigami["folded"] = Normal[newFolded];
         newOrigami
+    ]
+
+compositeCreasePatterns[creasePattern1_, creasePattern2_] :=
+    Module[{newCreasePattern},
+        newCreasePattern = creasePattern1;
+        newCreasePattern[["points"]] = Join[
+            creasePattern1[["points"]],
+            creasePattern2[["points"]]
+        ];
+        newCreasePattern[["polygons"]] = Join[
+            creasePattern1[["polygons"]],
+            creasePattern2[["polygons"]]
+        ];
+        newCreasePattern[["creases"]][["mountain"]] = Join[
+            creasePattern1[["creases"]][["mountain"]],
+            creasePattern2[["creases"]][["mountain"]]
+        ];
+        newCreasePattern[["creases"]][["valley"]] = Join[
+            creasePattern1[["creases"]][["valley"]],
+            creasePattern2[["creases"]][["valley"]]
+        ];
+        newCreasePattern
+    ]
+
+fractureCreasePattern[anchorName_, creasePattern_] :=
+    Module[{newCreasePattern, origin, anchorPoint, scale, prefix},
+        newCreasePattern = creasePattern;
+        origin = creasePattern[["fractals"]][["origin"]] /.
+            creasePattern[["points"]];
+        anchorPoint = creasePattern[["fractals"]][["anchors"]][[anchorName]]
+            /. creasePattern[["points"]];
+        scale = creasePattern[["fractals"]][["scale"]];
+        newCreasePattern[["points"]] = Cases[
+            newCreasePattern[["points"]],
+            (name_ -> point_) :> (name -> ((point - origin)/scale + anchorPoint))
+        ];
+        prefix = anchorName;
+        newCreasePattern[["polygons"]] = <|
+            Normal[newCreasePattern[["polygons"]]] /.
+                x_ /; StringQ[x] :> prefix <> x
+        |>;
+        newCreasePattern[["points"]] = newCreasePattern[["points"]] /.
+            x_ /; StringQ[x] :> prefix <> x;
+        newCreasePattern[["creases"]][["mountain"]] =
+            newCreasePattern[["creases"]][["mountain"]] /.
+                x_ /; StringQ[x] :> prefix <> x;
+        newCreasePattern[["creases"]][["valley"]] =
+            newCreasePattern[["creases"]][["valley"]] /.
+                x_ /; StringQ[x] :> prefix <> x;
+        newCreasePattern[["fractals"]][["anchors"]] = <|
+            Cases[
+                Normal[newCreasePattern[["fractals"]][["anchors"]]],
+                (anchor_ -> point_) :> (anchor -> (prefix <> point))
+            ]
+        |>;
+        newCreasePattern[["fractals"]][["origin"]] =
+            prefix <> newCreasePattern[["fractals"]][["origin"]];
+        newCreasePattern
     ]
 
 calculateUp[foldedTriangle_, triangle_] :=
@@ -232,13 +332,13 @@ calculatePolygonVectorAngle[polygonName1_, polygonName2_, origami_] :=
         creases1 = origami[["polygons"]][[polygonName1]];
         creases2 = origami[["polygons"]][[polygonName2]];
         foldedPoints = getFolded[origami];
-        axialCrease = Intersection[creases1, creases2][[1]];
+(*)        axialCrease = Intersection[creases1, creases2][[1]];
         axialMidpoint = Mean[axialCrease /. foldedPoints];
-        binormal1 = calculateBinormal[Take[creases1, 3]
+ *)        binormal1 = calculateBinormal[Take[creases1, 3]
             /. foldedPoints];
         binormal2 = calculateBinormal[Take[creases2, 3]
             /. foldedPoints];
-        2 Pi - VectorAngle[binormal1, binormal2]
+        VectorAngle[binormal1, binormal2]
     ]
 
 calculateCreaseDirection[polygonName1_, polygonName2_, origami_] :=
@@ -285,7 +385,12 @@ rotatePolygonsInCreasePattern[polygonNames_, angle_, {creaseStart_, creaseEnd_},
     ]
 
 getCreaseType[crease_, origami_] :=
-    If[MemberQ[Sort /@ origami[["creases"]][["mountain"]], Sort[crease]],
+    If[MemberQ[Sort /@ origami[["creases"]][["mountain"]], Sort[crease]] ||
+        MemberQ[
+            Sort /@ (origami[["creases"]][["mountain"]] /.
+                origami[["points"]]),
+            Sort[crease]
+        ],
         "mountain",
         "valley"
     ]
@@ -310,17 +415,45 @@ calculateCreaseDirectionalAngle[polygonName1_, polygonName2_, axialCrease_,
         ]
     ]
 
+alignPolygon[polygonName1_, polygonName2_, origami_] :=
+    Module[{polygon1, polygon2, points1, points2, folded, frame, framePoints,
+        recastPoints, newPoints, newFolded},
+        polygon1 = origami[["polygons"]][[polygonName1]];
+        polygon2 = origami[["polygons"]][[polygonName2]];
+        points1 = (polygon1 /. origami[["points"]]);
+        points2 = (polygon2 /. origami[["points"]]);
+        folded = points2 /. origami[["folded"]];
+        framePoints = Take[points2, 3];
+        frame = {
+            calculateTangent[framePoints],
+            calculateBinormal[framePoints],
+            calculateNormal[framePoints]
+        };
+        recastPoints = recast[# - framePoints[[2]], frame]& /@ points1;
+        framePoints = Take[folded, 3];
+        frame = {
+            calculateTangent[framePoints],
+            calculateBinormal[framePoints],
+            calculateNormal[framePoints]
+        };
+        newPoints = (#[[1]]*frame[[1]] + #[[2]]*frame[[2]] + #[[3]]*frame[[3]])&
+            /@ recastPoints;
+        newPoints = # + framePoints[[2]]& /@ newPoints;
+        newFolded = (#[[1]] -> #[[2]])& /@ Thread[{points1, newPoints}];
+        updateFolded[newFolded, origami]
+    ]
+
 manipulateCrease[polygonName1_, polygonName2_, polygons_, angle_, origami_] :=
     Module[{axialCrease, creaseStart, creaseEnd, origami1, origami2,
         creaseType, creaseDirection1, creaseDirection2, angle1, angle2},
-        creases1 = convertPolygonToCreases[
+        creases1 = canonicalizeCrease[#, origami]& /@ convertPolygonToCreases[
             origami[["polygons"]][[polygonName1]]
         ];
-        creases2 = convertPolygonToCreases[
+        creases2 = canonicalizeCrease[#, origami]& /@ convertPolygonToCreases[
             origami[["polygons"]][[polygonName2]]
         ];
         axialCrease = Intersection[creases1, creases2][[1]];
-        {creaseStart, creaseEnd} = axialCrease /. getFolded[origami];
+        {creaseStart, creaseEnd} = axialCrease /. origami[["folded"]];
         origami1 = rotatePolygonsInCreasePattern[
             Append[polygons, polygonName1],
             angle,
@@ -341,44 +474,48 @@ manipulateCrease[polygonName1_, polygonName2_, polygons_, angle_, origami_] :=
             axialCrease,
             origami1
         ];
-        angle2 = calculateCreaseDirectionalAngle[
+        (* angle2 = calculateCreaseDirectionalAngle[
             polygonName1,
             polygonName2,
             axialCrease, 
             origami2
-        ];
+        ]; *)
 
-        If[angle2 > angle1,
+(*         Print[{angle1, angle2}];
+ *)
+        (* If[angle1 > angle2,
             origami1,
             origami2
-        ]
+        ] *)
+        origami2
     ]
 
 findPointNeighbors[pointName_, polygons_] :=
-    Flatten[Cases[polygons, polygon_ /; MemberQ[polygon, pointName]]]
+    Flatten[
+        Cases[
+            polygons,
+            polygon_ /; MemberQ[polygon, pointName]
+        ],
+        1
+    ]
 
 findReferenceNeighbors[pointName_, origami_] :=
     Module[{neighborNames, referencePoints, point, referenceDistances,
         foldedPoints},
-        foldedPoints = getFolded[origami];
-        point = pointName /. foldedPoints;
+        foldedPoints = origami[["folded"]];
+        point = pointName /. getFolded[origami];
         referenceNeighborNames = Intersection[
             findPointNeighbors[
-                pointName,
-                Values[origami[["polygons"]]]
+                pointName /. origami[["points"]],
+                Values[origami[["polygons"]]] /. origami[["points"]]
             ],
-            findKnownPoints[origami]
+            findKnownPoints[origami] /. origami[["points"]]
         ];
-(*         Print[neighborNames];
-        referenceNeighborNames = Cases[
-            Keys[<|origami[["points"]]|>],
-            (name_ -> point_) /; MemberQ[neighborNames, name] :> name
-        ]; *)
         If[Length[referenceNeighborNames] >= 3,
             referencePoints = referenceNeighborNames /.
                 foldedPoints;
             referenceDistances = EuclideanDistance[point, #]& /@
-                (referenceNeighborNames /. origami[["points"]]);
+                referenceNeighborNames;
             Take[
                 Thread[
                         {
@@ -405,59 +542,115 @@ findUnknownPoints[origami_] :=
     ]
 
 findCalculablePoint[origami_] :=
-    FirstCase[
-        findUnknownPoints[origami],
-        pointName_ /; findReferenceNeighbors[
-                pointName,
-                origami
-            ] =!= Null :> {
-                pointName,
-                findReferenceNeighbors[
+    Module[{calculable},
+        calculable = Cases[
+            findUnknownPoints[origami],
+            pointName_ /; findReferenceNeighbors[
                     pointName,
                     origami
-                ]
-            }
+                ] =!= Null :> {
+                    pointName,
+                    findReferenceNeighbors[
+                        pointName,
+                        origami
+                    ]
+                }
+            ];
+        If[Length[calculable] > 0,
+            RandomChoice[calculable]
+        ]
+    ]
+
+canonicalizeCrease[crease_, origami_] :=
+    Sort[crease /. origami[["points"]]]
+
+polygonFoundQ[polygonName_, origami_] :=
+    Length[
+        Intersection[
+            Keys[<|origami[["folded"]]|>],
+            origami[["polygons"]][[polygonName]] /. origami[["points"]]
+        ]
+    ] == Length[origami[["polygons"]][[polygonName]]]
+
+placePolygon[polygonName_, origami_] :=
+    Module[{pointLabels, foundLabels, placedPolygon, referenceLabels,
+        referencePoints, frame, newPoints, recastPoints, newFolded},
+        pointLabels = origami[["polygons"]][[polygonName]] /.
+            origami[["points"]];
+        foundLabels = Intersection[pointLabels, Keys[<|origami[["folded"]]|>]];
+        If[Length[foundLabels] < 3
+            || Length[foundLabels] == Length[pointLabels],
+            origami,
+            referenceLabels = Take[foundLabels, 3];
+            frame = {
+                calculateTangent[referenceLabels],
+                calculateBinormal[referenceLabels],
+                calculateNormal[referenceLabels]
+            };
+            recastPoints = recast[# - referenceLabels[[2]], frame]& /@
+                pointLabels;
+            referencePoints = referenceLabels /. origami[["folded"]];
+            frame = {
+                calculateTangent[referencePoints],
+                calculateBinormal[referencePoints],
+                calculateNormal[referencePoints]
+            };
+            newPoints = (#[[1]]*frame[[1]] + #[[2]]*frame[[2]] + #[[3]]*frame[[3]])&
+                /@ recastPoints;
+            newPoints = # + referencePoints[[2]]& /@ newPoints;
+            newFolded = (#[[1]] -> #[[2]])& /@ Thread[{pointLabels, newPoints}];
+            updateFolded[newFolded, origami]
+        ]
     ]
 
 calculateCreaseAngleAverage[origami_] :=
     Module[{creases, polygons, polygonName1, polygonName2,
         creasePolygons},
         creases = Union[
-            origami[["creases"]][["mountain"]],
-            origami[["creases"]][["valley"]]
+            canonicalizeCrease[#, origami]& /@
+                origami[["creases"]][["mountain"]],
+            canonicalizeCrease[#, origami]& /@
+                origami[["creases"]][["valley"]]
         ];
         polygons = origami[["polygons"]];
-        Mean[
-            Table[
-                creasePolygons = Cases[
-                    Normal[polygons],
-                    (name_ ->
-                        polygon_ /; MemberQ[
-                            convertPolygonToCreases[polygon],
-                            Sort[crease]
-                        ]) :>
-                    name
-                ];
-                If[Length[creasePolygons] == 2,
-                    {polygonName1, polygonName2} = creasePolygons;
-                    calculateCreaseDirectionalAngle[
-                        polygonName1,
-                        polygonName2,
-                        crease,
-                        origami
+        Re[
+            Mean[
+                Table[
+                    creasePolygons = Cases[
+                        Normal[polygons],
+                        (name_ ->
+                            polygon_ /; MemberQ[
+                                canonicalizeCrease[#, origami]& /@
+                                    convertPolygonToCreases[polygon],
+                                crease
+                            ]) :>
+                        name
+                    ];
+                    If[And@@(
+                            polygonFoundQ[#, origami]& /@
+                            creasePolygons
+                        ) && Length[creasePolygons] == 2,
+                        {polygonName1, polygonName2} = creasePolygons;
+                        calculateCreaseDirectionalAngle[
+                            polygonName1,
+                            polygonName2,
+                            crease,
+                            origami
+                        ],
+                        Unevaluated[Sequence[]]
                     ],
-                    Unevaluated[Sequence[]]
-                ],
-                {crease, creases}
+                    {crease, creases}
+                ]
             ]
         ]
     ]
 
 calculateAnyPoint[origami_, creasePattern_] :=
     Module[{reference, point, pointName, points, point1, point2,
-        origami1, origami2},
+        origami1, origami2, involvedPolygons, currentAverage, currentAverage1,
+        currentAverage2},
         point = findCalculablePoint[origami];
-        If[Head[point] =!= Missing,
+        If[point =!= Null,
             {pointName, reference} = point;
             {point1, point2} = trilaterate@@reference;
             points = <||>;
@@ -466,17 +659,66 @@ calculateAnyPoint[origami_, creasePattern_] :=
             origami1 = sizeCreasePattern[
                 findKnownPoints[origami1],
                 origami1,
+                creasePattern
+            ];
+            (* Do[
+                Print[Intersection[Keys[<|origami1[["folded"]]|>], polygon /. origami1[["points"]]]];
+                Print[Keys[<|origami1[["folded"]]|>]];
+                Print[polygon /. origami1[["points"]]];
+                Print["----"],
+                {polygon, Values[origami1[["polygons"]]]}
+            ]; *)
+            involvedPolygons = Cases[
+                Normal[origami1[["polygons"]]],
+                (name_ -> polygon_) /; Length[Intersection[Keys[<|origami1[["folded"]]|>], polygon /. origami1[["points"]]]] != Length[polygon] &&
+                    Length[Intersection[Keys[<|origami1[["folded"]]|>], polygon /. origami1[["points"]]]] > 2 :>
+                    name
+            ];
+            Do[
+                origami1 = placePolygon[polygonName, origami1],
+                {polygonName, involvedPolygons}
+            ];
+
+            points[pointName] = point2;
+            origami2 = updateFolded[Normal[points], origami];
+            origami2 = sizeCreasePattern[
+                findKnownPoints[origami2],
+                origami2,
                 creasePattern    
             ];
-            origami2 = origami1;
-            points[pointName] = point2;
-            origami2 = updateFolded[Normal[points], origami2];
+            involvedPolygons = Cases[
+                Normal[origami2[["polygons"]]],
+                (name_ -> polygon_) /; Length[Intersection[Keys[<|origami2[["folded"]]|>], polygon /. origami2[["points"]]]] != Length[polygon] &&
+                    Length[Intersection[Keys[<|origami2[["folded"]]|>], polygon /. origami2[["points"]]]] > 2 :>
+                    name
+            ];
+            Do[
+                origami2 = placePolygon[polygonName, origami2],
+                {polygonName, involvedPolygons}
+            ];
 
-            If[calculateCreaseAngleAverage[origami1] <
-                calculateCreaseAngleAverage[origami2],
+            currentAverage = calculateCreaseAngleAverage[origami];
+            currentAverage1 = calculateCreaseAngleAverage[origami1];
+            currentAverage2 = calculateCreaseAngleAverage[origami2];
+
+            If[currentAverage1 > currentAverage && currentAverage2 < currentAverage,
+                origami1,
+                If[currentAverage1 < currentAverage && currentAverage2 > currentAverage,
+                    origami2,
+                    If[Abs[currentAverage - currentAverage1] < Abs[currentAverage - currentAverage2],
+                        origami1,
+                        origami2
+                    ]
+                ]
+            ]
+
+
+
+            (* If[calculateCreaseAngleAverage[origami1] >
+                calculateCreaseAngleAverage[origami2] || Plus@@(Abs[Im[#]]& /@ point1) > .000001 && Plus@@(Abs[Im[#]]& /@ point1) < Plus@@(Abs[Im[#]]& /@ point2),
                 origami1,
                 origami2
-            ]
+            ] *)
         ]
     ]
 
@@ -489,7 +731,10 @@ fold[origami_, creasePattern_] :=
             nextOrigami = calculateAnyPoint[
                 lastOrigami,
                 creasePattern
-            ]
+            ];
+            (* Print[Graphics3D[renderOrigami[nextOrigami]]]; *)
+            (* Print[Values[<|lastOrigami[["points"]]|>]];
+            Print[Keys[<|lastOrigami[["folded"]]|>]]; *)
         ];
 
         lastOrigami
@@ -510,177 +755,14 @@ sizeCreasePattern[pointNames_, origami_, creasePattern_] :=
         newCreasePattern
     ]
 
-(* Fractal *)
-(* createDiamondBaseInstancePolygons[i_, terminal_, scale_, creasePattern_] :=
-    Module[{id, parentID, leftMiddle, centerMiddle, rightMiddle, nextParentID},
-        If[terminal,
-            id = "_" <> ToString[scale] <> "_" <> ToString[i],
-            id = "_" <> ToString[scale] <> "_" <> ToString[i],
-        ];
-        If[terminal,
-            nextID = "_" <> ToString[scale] <> "_" <> ToString[i],
-            nextID = "_" <> ToString[scale] <> "_" <> ToString[i + 1]
-        ];
-        If[scale == 1,
-            parentID = "",
-            If[terminal,
-                parentID = "_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[(i + 1)/2]],
-                parentID = "_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[(i + 1)/2]]
-            ]
-        ];
-        If[scale == 1,
-            nextParentID = "",
-            If[terminal,
-                nextParentID = "_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[(i + 1)/2]],
-                nextParentID = "_" <> ToString[scale - 1] <> "_" <> ToString[IntegerPart[(i + 1)/2] + 1]
-            ]
-        ];
-        If[Mod[i, 2] == 0,
-            side = "left";
-            If[terminal,
-                leftMiddle = "center_front" <> parentID;
-                centerMiddle = "right_half_front" <> parentID;
-                rightMiddle = "right_front" <> parentID,
-                rightMiddle = "left_front" <> nextParentID;
-                centerMiddle = "right_half_front" <> parentID;
-                leftMiddle = "center_front" <> parentID
-            ],
-            side = "right";
-            rightMiddle = "center_front" <> parentID;
-            centerMiddle = "left_half_front" <> parentID;
-            leftMiddle = "left_front" <> parentID
-        ];
-        Join[
-            {
-            "left_middle" <> id -> {
-                leftMiddle, centerMiddle, "left_half_forward" <> id,
-                "left_forward" <> id
-            },
-            "left_center" <> id -> {
-                centerMiddle, "left_half_forward" <> id,
-                "center_front" <> id
-            },
-            "right_center" <> id -> {
-                centerMiddle, "right_half_forward" <> id,
-                "center_front" <> id
-            },
-            "left_front" <> id -> {
-                "left_front" <> id, "left_half_front" <> id, "left_half_forward" <> id,
-                "left_forward" <> id
-            },
-            "left_half_front" <> id -> {
-                "left_half_front" <> id, "center_front" <> id, "left_half_forward" <> id
-            },
-            "right_half_front" <> id -> {
-                "right_half_front" <> id, "center_front" <> id, "right_half_forward" <> id
-            }
-        },
-        If[terminal,
-            {
-                "right_front" <> id -> {
-                    "right_front" <> id, "right_half_front" <> id, "right_half_forward" <> id,
-                    "right_forward" <> id
-                },
-                "right_middle" <> id -> {
-                    rightMiddle, centerMiddle, "right_half_forward" <> id,
-                    "right_forward" <> id
-                }
-            },
-
-            {
-                "right_front" <> id -> {
-                    "left_front" <> nextID, "right_half_front" <> id, "right_half_forward" <> id,
-                    "left_forward" <> nextID
-                },
-                "right_middle" <> id -> {
-                    rightMiddle, centerMiddle, "right_half_forward" <> id,
-                    "left_forward" <> nextID
-                }
-            }
-           ]
-        ]
-    ]
-
-createDiamondBaseInstancePoints[i_, terminal_, scale_, creasePattern_] :=
-    Module[{newCreasePattern, parent, parentPoints, suffix, side, step,
-        parentName, referencePoint, newPoints},
-        newCreasePattern = creasePattern;
-        parentPoints = <|creasePattern[["points"]]|>;
-        suffix = ToString[scale] <> "_" <> ToString[i - 1];
-        If[Mod[i, 2] == 0,
-            side = "left",
-            side = "center"
-        ];
-        If[scale == 1,
-            parentName = side <> "_front",
-            parentName = side <> "_front_" <> ToString[scale - 1] <>
-                "_" <> ToString[IntegerPart[i/2]]
-        ];
-        step = 1/(2^scale);
-        referencePoint = parentPoints[[parentName]];
-        If[terminal,
-            {
-                "right_forward_" <> suffix -> referencePoint + {4*step, step, 0},
-                "right_front_" <> suffix -> referencePoint + {4*step, 2*step, 0}
-            },
-            {
-                "right_half_forward_" <> suffix -> referencePoint +
-                    {3*step, step, 0},
-                "right_half_front_" <> suffix -> referencePoint +
-                    {3*step, 2*step, 0},
-                "left_forward_" <> suffix -> referencePoint + {0, step, 0},
-                "left_half_forward_" <> suffix -> referencePoint +
-                    {step, step, 0},
-                "left_front_" <> suffix -> referencePoint + {0, 2*step, 0},
-                "left_half_front_" <> suffix -> referencePoint +
-                    {step, 2*step, 0},
-                "center_front_" <> suffix -> referencePoint +
-                    {2*step, 2*step, 0}
-            }
-        ]
-    ]
-
-createDiamondBaseRowPoints[scale_, creasePattern_] :=
-    Module[{newCreasePattern, parent, lastIteration, parentPoints, suffix,
-        side, step, parentName, referencePoint, newPoints},
-        newCreasePattern = creasePattern;
-        newPoints = Table[
-            createDiamondBaseInstancePoints[i, False, scale, creasePattern],
-            {i, 2, 2^scale + 1}
-        ];
-        newCreasePattern["points"] = Join[
-            newCreasePattern[["points"]],
-            Flatten[newPoints],
-            createDiamondBaseInstancePoints[2^scale + 1, True, scale, creasePattern]
-        ];
-        newCreasePattern
-    ]
-
-createDiamondBaseRow[scale_, creasePattern_] :=
-    Module[{newCreasePattern, newPolygons},
-        newCreasePattern = createDiamondBaseRowPoints[scale, creasePattern];
-        newPolygons = Table[
-            createDiamondBaseInstancePolygons[i, False, scale, newCreasePattern],
-            {i, 1, 2^scale}
-        ];
-        newCreasePattern[["polygons"]] = <|
-            Join[
-               Normal[creasePattern[["polygons"]]],
-               newPolygons,
-               createDiamondBaseInstancePolygons[2^scale, True, scale, newCreasePattern]
-            ]
-        |>;
-        newCreasePattern
-    ] *)
-
 (* Render *)
 renderPolygon[polygon_, points_] :=
     Polygon[polygon /. points]
 
 renderCrease[crease_, type_, points_] :=
     {
-        If[type == "mountain", Red, Blue],
-        Tube[(crease /. points), .01]
+        (* If[type == "mountain", Red, Blue],
+        Tube[(crease /. points), .01] *)
     }
 
 renderOrigami[origami_] :=
@@ -691,7 +773,16 @@ renderOrigami[origami_] :=
 
         {
             Table[
-                renderPolygon[polygon, points],
+                If[Length[
+                        Complement[
+                            polygon /. origami[["points"]],
+                            Keys[<|origami[["folded"]]|>]
+                        ]
+                    ] == 0,
+                    renderPolygon[polygon, points],
+                    {(* Opacity[.1], Black, renderPolygon[polygon, points] *)}
+                    (* Unevaluated[Sequence[]] *)
+                ],
                 {polygon, Values[polygons]}
             ],
             Table[
