@@ -198,6 +198,24 @@ recast[{px_, py_, pz_}, {{x1_, y1_, z1_}, {x2_, y2_, z2_}, {x3_, y3_, z3_}}] :=
                 x2 y1 z3 + x1 y2 z3))}
     ]
 
+reframe[point_, sourceFramePoints_, destinationFramePoints_] :=
+    Module[{sourceFrameVectors, destinationFrameVectors, sourceFrame,
+        destinationFrame, framelessPoint},
+        sourceFrameVectors = # - sourceFramePoints[[2]]& /@ sourceFramePoints;
+        destinationFrameVectors = # - destinationFramePoints[[2]]& /@
+            destinationFramePoints;
+        {sourceFrame, destinationFrame} = Table[
+            axis[points],
+            {points, {sourceFrameVectors, destinationFrameVectors}},
+            {axis, {calculateTangent, calculateBinormal, calculateNormal}}
+        ];
+        framelessPoint = recast[
+            point - sourceFramePoints[[2]],
+            sourceFrame
+        ];
+        destinationFramePoints[[2]] + (Plus@@(framelessPoint destinationFrame))
+    ]
+
 calculateBinormal[{p1_, p2_, p3_}] :=
     Normalize[Cross[calculateTangent[{p1, p2, p3}], p1 - p2]]
 
@@ -220,8 +238,6 @@ resetFolded[origami_] :=
 
 getFolded[origami_] :=
     origami[["points"]] /. origami[["folded"]]
-
-getOnlyFolded[origami_]
 
 getCreases[creaseType_, origami_] :=
     Union[Sort /@ (origami[["creases"]][[creaseType]] /. origami[["points"]])]
@@ -332,9 +348,7 @@ calculatePolygonVectorAngle[polygonName1_, polygonName2_, origami_] :=
         creases1 = origami[["polygons"]][[polygonName1]];
         creases2 = origami[["polygons"]][[polygonName2]];
         foldedPoints = getFolded[origami];
-(*)        axialCrease = Intersection[creases1, creases2][[1]];
-        axialMidpoint = Mean[axialCrease /. foldedPoints];
- *)        binormal1 = calculateBinormal[Take[creases1, 3]
+        binormal1 = calculateBinormal[Take[creases1, 3]
             /. foldedPoints];
         binormal2 = calculateBinormal[Take[creases2, 3]
             /. foldedPoints];
@@ -416,29 +430,17 @@ calculateCreaseDirectionalAngle[polygonName1_, polygonName2_, axialCrease_,
     ]
 
 alignPolygon[polygonName1_, polygonName2_, origami_] :=
-    Module[{polygon1, polygon2, points1, points2, folded, frame, framePoints,
-        recastPoints, newPoints, newFolded},
+    Module[{polygon1, polygon2, points1, points2, folded, sourceFramePoints,
+        destinationFramePoints, newPoints, newFolded},
         polygon1 = origami[["polygons"]][[polygonName1]];
         polygon2 = origami[["polygons"]][[polygonName2]];
         points1 = (polygon1 /. origami[["points"]]);
         points2 = (polygon2 /. origami[["points"]]);
         folded = points2 /. origami[["folded"]];
-        framePoints = Take[points2, 3];
-        frame = {
-            calculateTangent[framePoints],
-            calculateBinormal[framePoints],
-            calculateNormal[framePoints]
-        };
-        recastPoints = recast[# - framePoints[[2]], frame]& /@ points1;
-        framePoints = Take[folded, 3];
-        frame = {
-            calculateTangent[framePoints],
-            calculateBinormal[framePoints],
-            calculateNormal[framePoints]
-        };
-        newPoints = (#[[1]]*frame[[1]] + #[[2]]*frame[[2]] + #[[3]]*frame[[3]])&
-            /@ recastPoints;
-        newPoints = # + framePoints[[2]]& /@ newPoints;
+        sourceFramePoints = Take[points2, 3];
+        destinationFramePoints = Take[folded, 3];
+        newPoints = reframe[#, sourceFramePoints, destinationFramePoints]& /@
+            points1;
         newFolded = (#[[1]] -> #[[2]])& /@ Thread[{points1, newPoints}];
         updateFolded[newFolded, origami]
     ]
@@ -491,12 +493,14 @@ manipulateCrease[polygonName1_, polygonName2_, polygons_, angle_, origami_] :=
     ]
 
 findPointNeighbors[pointName_, polygons_] :=
-    Flatten[
-        Cases[
-            polygons,
-            polygon_ /; MemberQ[polygon, pointName]
-        ],
-        1
+    Union[
+        Flatten[
+            Cases[
+                polygons,
+                polygon_ /; MemberQ[polygon, pointName]
+            ],
+            1
+        ]
     ]
 
 findReferenceNeighbors[pointName_, origami_] :=
@@ -582,22 +586,11 @@ placePolygon[polygonName_, origami_] :=
             || Length[foundLabels] == Length[pointLabels],
             origami,
             referenceLabels = Take[foundLabels, 3];
-            frame = {
-                calculateTangent[referenceLabels],
-                calculateBinormal[referenceLabels],
-                calculateNormal[referenceLabels]
-            };
-            recastPoints = recast[# - referenceLabels[[2]], frame]& /@
-                pointLabels;
-            referencePoints = referenceLabels /. origami[["folded"]];
-            frame = {
-                calculateTangent[referencePoints],
-                calculateBinormal[referencePoints],
-                calculateNormal[referencePoints]
-            };
-            newPoints = (#[[1]]*frame[[1]] + #[[2]]*frame[[2]] + #[[3]]*frame[[3]])&
-                /@ recastPoints;
-            newPoints = # + referencePoints[[2]]& /@ newPoints;
+            newPoints = reframe[
+                #,
+                referenceLabels,
+                referenceLabels /. origami[["folded"]]
+            ]& /@ pointLabels;
             newFolded = (#[[1]] -> #[[2]])& /@ Thread[{pointLabels, newPoints}];
             updateFolded[newFolded, origami]
         ]
