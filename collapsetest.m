@@ -1,6 +1,6 @@
 BeginPackage["collapsetest`", {"collapse`"}]
 
-testReport = TestReport[
+collapseTestReport = TestReport[
     {
         VerificationTest[
             reframe[
@@ -33,6 +33,63 @@ testReport = TestReport[
             recast[{1, 1, 1}, {{1, 1, 0}, {1, 0, 1}, {0, 1, 1}}],
             {1/2, 1/2, 1/2},
             TestID -> "recast"
+        ],
+        VerificationTest[
+            Module[{origami},
+                origami = makeOrigamiFromCreasePattern[
+                    generateTwoBase["valley"]
+                ];
+                origami = setOrigamiToCreasePattern[origami]
+            ],
+            <|
+                "points" ->
+                    {
+                        {-1, 0, 0} -> {-1., 0., 0.},
+                        {0, -1, 0} -> {0., -1., 0.},
+                        {0, 1, 0} -> {0., 1., 0.},
+                        {1, 0, 0} -> {1., 0., 0.}
+                    },
+                "crease_pattern" -> generateTwoBase["valley"],
+                "type" -> "origami"
+            |>,
+            TestID -> "setOrigamiToCreasePattern"
+        ],
+        VerificationTest[
+            Module[{origami},
+                origami = makeOrigamiFromCreasePattern[
+                    generateTwoBase["valley"]
+                ];
+                updateFoldedPoints[
+                    {("a" /. generateTwoBase["valley"][["points"]]) -> {5, 5, 5}},
+                    origami
+                ]
+            ],
+            <|
+                "points" -> {{-1, 0, 0} -> {5, 5, 5}},
+                "crease_pattern" -> generateTwoBase["valley"],
+                "type" -> "origami"
+            |>,
+            TestID -> "makeOrigamiFromCreasePattern"
+        ],
+        VerificationTest[
+            Module[{origami},
+                origami = makeOrigamiFromCreasePattern[
+                    generateTwoBase["valley"]
+                ];
+                calculateFoldedVectors["p", origami]
+            ],
+            {{0, -(1/3), 1}, {0, -(1/3), -1}},
+            TestID -> "calculateFoldedVectors"
+        ],
+        VerificationTest[
+            Module[{origami},
+                origami = makeOrigamiFromCreasePattern[
+                    generateTwoBase["valley"]
+                ];
+                calculatePolygonVectorAngle["p", "q", origami]
+            ],
+            Pi,
+            TestID -> "calculatePolygonVectorAngle"
         ]
     }
 ];

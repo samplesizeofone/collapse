@@ -11,7 +11,6 @@ generateTwoBase[creaseType_] :=
             "u" -> {0, -1, 0},
             "v" -> {0, 1, 0}
         },
-        "folded" -> {},
         "polygons" -> <|
             "p" -> {"a", "b", "u"},
             "q" -> {"a", "b", "v"}
@@ -30,7 +29,8 @@ generateTwoBase[creaseType_] :=
                 ]
             }
         |>,
-        "fractals" -> {}
+        "fractals" -> {},
+        "type" -> "crease_pattern"
     |>
 
 creasePatternLibrary =
@@ -53,7 +53,6 @@ creasePatternLibrary =
                 "right_half_front" -> {1, 3, 0},
                 "right_front" -> {2, 3, 0}
             },
-            "folded" -> {},
             "polygons" -> <|
                 "left_back" -> {
                     "left_back", "center_back", "center_middle", "left_middle"
@@ -124,7 +123,8 @@ creasePatternLibrary =
                     "R" -> "right_half_front"
                 |>,
                 "scale" -> 2
-            |>
+            |>,
+            "type" -> "crease_pattern"
         |>
     |>
 
@@ -228,29 +228,58 @@ calculateNormal[{p1_, p2_, p3_}] :=
     ]
 
 (* Folding *)
-resetFolded[origami_] :=
+extractPointKey[pointName_, paper_]  :=
+    extractPointKey[pointName, paper[["crease_pattern"]]] /;
+        paper[["type"]] === "origami"
+
+extractPointKey[pointName_, paper_]  :=
+    (pointName /. paper[["points"]]) /;
+        paper[["type"]] === "crease_pattern"
+
+extractPointKeys[pointNames_, paper_] :=
+    extractPointKey[#, paper]& /@ pointNames
+
+extractPointValue[pointName_, origami_] :=
+    extractPointKey[pointName, origami] /. origami[["points"]]
+
+extractPointValues[pointNames_, origami_] :=
+    extractPointValue[#, origami]& /@ pointNames
+
+makeOrigamiFromCreasePattern[creasePattern_] :=
+    <|
+        "points" -> {},
+        "crease_pattern" -> creasePattern,
+        "type" -> "origami"
+    |>
+
+setOrigamiToCreasePattern[origami_] :=
     Module[{points, newOrigami},
-        points = Union[Values[<|origami[["points"]]|>]];
+        points = Union[Values[<|origami[["crease_pattern"]][["points"]]|>]];
         newOrigami = origami;
-        newOrigami["folded"] = Table[point -> N[point], {point, points}];
+        newOrigami["points"] = Table[
+            point -> N[point], {point, points}
+        ];
         newOrigami
     ]
 
-getFolded[origami_] :=
-    origami[["points"]] /. origami[["folded"]]
+getCreases[creaseType_, paper_] :=
+    Union[Sort /@ (creasePattern[["creases"]][[creaseType]]
+        /. creasePattern[["points"]])] /;
+            paper[["type"]] === "crease_pattern"
 
-getCreases[creaseType_, origami_] :=
-    Union[Sort /@ (origami[["creases"]][[creaseType]] /. origami[["points"]])]
+getCreases[creaseType_, paper_] :=
+    getCreases[paper[["crease_pattern"]]] /;
+        paper[["type"]] === "origami"
 
-updateFolded[points_, origami_] :=
+updateFoldedPoints[points_, origami_] :=
     Module[{newFolded, newOrigami},
-        newFolded = <|origami[["folded"]]|>;
+        newFolded = <|origami[["points"]]|>;
         Do[
-            newFolded[Key[point[[1]] /. origami[["points"]]]] = point[[2]],
+            newFolded[Key[point[[1]] /. origami[["crease_pattern"]][["points"]]]] = point[[2]],
             {point, points}
         ];
         newOrigami = origami;
-        newOrigami["folded"] = Normal[newFolded];
+        newOrigami["points"] = Normal[newFolded];
         newOrigami
     ]
 
@@ -323,13 +352,17 @@ calculateUp[foldedTriangle_, triangle_] :=
 
 calculateFoldedVectors[polygonName_, origami_] :=
     Module[{points, triange, up},
-        triangle = Take[origami[["polygons"]][[polygonName]], 3] /.
-            origami[["points"]];
-        foldedTriangle =
+        triangle = extractPointKeys[
+            Take[origami[["crease_pattern"]][["polygons"]][[polygonName]], 3],
+            origami
+        ];
+        foldedTriangle = extractPointValues[
             Take[
-                origami[["polygons"]][[polygonName]],
+                origami[["crease_pattern"]][["polygons"]][[polygonName]],
                 3
-            ] /. getFolded[origami];
+            ],
+            origami
+        ];
         center = Mean[foldedTriangle];
         up = calculateUp[
             foldedTriangle,
@@ -343,16 +376,23 @@ calculateFoldedVectors[polygonName_, origami_] :=
     ]
 
 calculatePolygonVectorAngle[polygonName1_, polygonName2_, origami_] :=
-    Module[{creases1, creases2, axialCrease, axialMidpoint, binormal1,
-        binormal2, points, foldedPoints},
-        creases1 = origami[["polygons"]][[polygonName1]];
-        creases2 = origami[["polygons"]][[polygonName2]];
-        foldedPoints = getFolded[origami];
-        binormal1 = calculateBinormal[Take[creases1, 3]
-            /. foldedPoints];
-        binormal2 = calculateBinormal[Take[creases2, 3]
-            /. foldedPoints];
-        VectorAngle[binormal1, binormal2]
+    Module[{calculateVector, creases1, creases2, binormal1, binormal2},
+        calculateVector = Function[{polygonName},
+            Module[{creases, creasePattern},
+                creasePattern = origami[["crease_pattern"]];
+                creases = creasePattern[["polygons"]][[polygonName]];
+                calculateBinormal[
+                    extractPointValues[
+                        Take[creases, 3],
+                        origami
+                    ]
+                ]
+            ]
+        ];
+        VectorAngle[
+            calculateVector[polygonName1],
+            calculateVector[polygonName2]
+        ]
     ]
 
 calculateCreaseDirection[polygonName1_, polygonName2_, origami_] :=
