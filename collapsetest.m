@@ -90,6 +90,89 @@ collapseTestReport = TestReport[
             ],
             Pi,
             TestID -> "calculatePolygonVectorAngle"
+        ],
+        VerificationTest[
+            Module[{origami},
+                origami = makeOrigamiFromCreasePattern[
+                    generateTwoBase["valley"]
+                ];
+                calculateCreaseDirection[
+                    "p",
+                    "q",
+                    rotatePolygonsInCreasePattern[
+                        {"p"},
+                        #,
+                        extractPointValues[Sort[{"a", "b"}], origami],
+                        origami
+                    ]
+                ]& /@ {Pi/2, -Pi/2}
+            ],
+            {"mountain", "valley"},
+            TestID -> "calculateCreaseDirection"
+        ],
+        VerificationTest[
+            Module[{origami},
+                origami = makeOrigamiFromCreasePattern[
+                    generateTwoBase["valley"]
+                ];
+                rotatePolygonsInCreasePattern[
+                    {"p"},
+                    Pi/2,
+                    extractPointValues[Sort[{"a", "b"}], origami],
+                    origami
+                ]
+            ],
+            <|
+                "points" -> {
+                    {-1, 0, 0} -> {-1, 0, 0},
+                    {1, 0, 0} -> {1, 0, 0},
+                    {0, -1, 0} -> {0, 0, -1}
+                },
+                "crease_pattern" -> <|
+                    "points" -> {
+                        "a" -> {-1, 0, 0},
+                        "b" -> {1, 0, 0},
+                        "u" -> {0, -1, 0},
+                        "v" -> {0, 1, 0}
+                    },
+                    "polygons" -> <|
+                        "p" -> {"a", "b", "u"},
+                        "q" -> {"a", "b", "v"}
+                    |>,
+                    "creases" -> <|
+                        "mountain" -> {},
+                        "valley" -> {{"a", "b"}}
+                    |>,
+                    "fractals" -> {},
+                    "type" -> "crease_pattern"
+                |>,
+                "type" -> "origami"
+            |>,
+            "TestID" -> "rotatePolygonsInCreasePattern"
+        ],
+        VerificationTest[
+            Module[{origami, calculateAngles},
+                calculateAngles = Function[{creaseType},
+                    Module[{origami},
+                        origami = makeOrigamiFromCreasePattern[
+                            generateTwoBase[creaseType]
+                        ];
+                        origami = rotatePolygonsInCreasePattern[
+                            {"p"},
+                            #,
+                            extractPointValues[Sort[{"a", "b"}], origami],
+                            origami
+                        ]& /@ {Pi/2, -Pi/2};
+                        calculateCreaseDirectionalAngle["p", "q", Sort[{"a", "b"}], #]& /@ origami
+                    ]
+                ];
+                {
+                    calculateAngles["mountain"],
+                    calculateAngles["valley"]
+                }
+            ],
+            {{Pi/2, -Pi/2}, {-Pi/2, Pi/2}},
+            TestID -> "calculateCreaseDirectionalAngle"
         ]
     }
 ];

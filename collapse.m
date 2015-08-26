@@ -275,7 +275,7 @@ updateFoldedPoints[points_, origami_] :=
     Module[{newFolded, newOrigami},
         newFolded = <|origami[["points"]]|>;
         Do[
-            newFolded[Key[point[[1]] /. origami[["crease_pattern"]][["points"]]]] = point[[2]],
+            newFolded[Key[extractPointKey[point[[1]], origami]]] = point[[2]],
             {point, points}
         ];
         newOrigami = origami;
@@ -421,33 +421,31 @@ convertPolygonToCreases[polygon_] :=
 
 rotatePolygonsInCreasePattern[polygonNames_, angle_, {creaseStart_, creaseEnd_},
     origami_] :=
-    Module[{pointName, foldedPoints, points, point, rotation},
+    Module[{foldedPoints, points, point, rotation},
         points = <||>;
         rotation = RotationMatrix[
                 angle,
                 creaseEnd - creaseStart
             ];
-        foldedPoints = getFolded[origami];
         Do[
-            point = <|foldedPoints|>[[pointName]];
+            point = extractPointValue[pointName, origami];
             points[pointName] =
                 rotation.(point - creaseStart) + creaseStart,
             {polygonName, polygonNames},
-            {pointName, origami[["polygons"]][[polygonName]]}
+            {pointName, origami[["crease_pattern"]][["polygons"]][[polygonName]]}
         ];
-        updateFolded[Normal[points], origami]
+        updateFoldedPoints[Normal[points], origami]
     ]
 
-getCreaseType[crease_, origami_] :=
-    If[MemberQ[Sort /@ origami[["creases"]][["mountain"]], Sort[crease]] ||
-        MemberQ[
-            Sort /@ (origami[["creases"]][["mountain"]] /.
-                origami[["points"]]),
-            Sort[crease]
-        ],
+getCreaseType[crease_, creasePattern_] :=
+    If[MemberQ[Sort /@ creasePattern[["creases"]][["mountain"]], Sort[crease]],
         "mountain",
         "valley"
-    ]
+    ] /; creasePattern[["type"]] == "crease_pattern"
+
+getCreaseType[crease_, origami_] :=
+    getCreaseType[crease, origami[["crease_pattern"]]] /;
+        origami[["type"]] == "origami"
 
 calculateCreaseDirectionalAngle[polygonName1_, polygonName2_, axialCrease_,
     origami_] :=
