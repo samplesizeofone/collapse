@@ -1,5 +1,8 @@
 BeginPackage["collapsetest`", {"collapse`"}]
 
+approximate[n_] :=
+    n /. {x_/;NumericQ[x] :> IntegerPart[1000 N[x]]}
+
 collapseTestReport = TestReport[
     {
         VerificationTest[
@@ -76,9 +79,9 @@ collapseTestReport = TestReport[
                 origami = makeOrigamiFromCreasePattern[
                     generateTwoBase["valley"]
                 ];
-                calculateFoldedVectors["p", origami]
+                approximate[calculateFoldedVectors["p", origami]]
             ],
-            {{0, -(1/3), 1}, {0, -(1/3), -1}},
+            approximate[{{0., -0.333333, 0.001}, {0., -0.333333, -0.001}}],
             TestID -> "calculateFoldedVectors"
         ],
         VerificationTest[
@@ -94,7 +97,7 @@ collapseTestReport = TestReport[
         VerificationTest[
             Module[{origami},
                 origami = makeOrigamiFromCreasePattern[
-                    generateTwoBase["valley"]
+                    generateTwoBase[#]
                 ];
                 calculateCreaseDirection[
                     "p",
@@ -106,8 +109,8 @@ collapseTestReport = TestReport[
                         origami
                     ]
                 ]& /@ {Pi/2, -Pi/2}
-            ],
-            {"mountain", "valley"},
+            ]& /@ {"valley", "mountain"},
+            {{"mountain", "valley"}, {"mountain", "valley"}},
             TestID -> "calculateCreaseDirection"
         ],
         VerificationTest[
@@ -173,6 +176,27 @@ collapseTestReport = TestReport[
             ],
             {{Pi/2, -Pi/2}, {-Pi/2, Pi/2}},
             TestID -> "calculateCreaseDirectionalAngle"
+        ],
+        VerificationTest[
+            Module[{origami},
+                origami = makeOrigamiFromCreasePattern[
+                    generateTwoBase["valley"]
+                ];
+                origami = rotatePolygonsInCreasePattern[
+                    {"p"},
+                    Pi/2,
+                    extractPointValues[Sort[{"a", "b"}], origami],
+                    origami
+                ];
+                alignPolygon["q", "p", origami][["points"]]
+            ],
+            {
+                {-1, 0, 0} -> {-1, 0, 0},
+                {1, 0, 0} -> {1, 0, 0},
+                {0, -1, 0} -> {0, 0, -1},
+                {0, 1, 0} -> {0, 0, 1}
+                },
+            TestID -> "alignPolygon"
         ]
     }
 ];
