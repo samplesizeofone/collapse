@@ -512,11 +512,11 @@ rotatePolygonsInCreasePattern[polygonNames_, angle_, {creaseStart_, creaseEnd_},
 polygonsForCrease[crease_, creasePattern_] :=
     Cases[
         Normal[creasePattern[["polygons"]]],
-        (polygonName_ -> polygon_/;
+        (polygonName_ -> (polygon_/;
             MemberQ[
-                Sort /@ convertPolygonToCreases[polygon],
-                Sort[crease]
-            ]) :> polygonName
+                Sort[extractPointKeys[#, creasePattern]]& /@ convertPolygonToCreases[polygon],
+                Sort[extractPointKeys[crease, creasePattern]]
+            ])) :> polygonName
     ] /; creasePattern[["type"]] == "crease_pattern"
 
 polygonsForCrease[crease_, origami_] :=
@@ -670,7 +670,7 @@ findReferenceNeighbors[pointName_, origami_] :=
         referenceNeighborNames = Intersection[
             findPointNeighbors[
                 extractPointKey[pointName, origami],
-                Values[origami[["crease_pattern"]][["polygons"]]] /. origami[["crease_pattern"]][["points"]]
+                origami[["crease_pattern"]][["polygons"]] /. origami[["crease_pattern"]][["points"]]
             ],
             findKnownPoints[origami]
         ];
@@ -704,10 +704,10 @@ findUnknownPoints[origami_] :=
         findKnownPoints[origami]
     ]
 
-findCalculablePoint[origami_] :=
+findCalculablePoint[origami_, polygon_] :=
     Module[{calculable},
         calculable = Cases[
-            findUnknownPoints[origami],
+            Intersection[findUnknownPoints[origami], origami[["crease_pattern"]][["polygons"]][[polygon]] /. origami[["crease_pattern"]][["points"]]],
             pointName_ /; findReferenceNeighbors[
                     pointName,
                     origami
@@ -746,7 +746,6 @@ placePolygon[polygonName_, origami_] :=
             foundLabels = Intersection[pointLabels, Keys[<|origami[["points"]]|>]];
             If[Length[foundLabels] < 3,
                 origami,
-                Print[polygonName];
                 referenceLabels = Take[foundLabels, 3];
                 newPoints = reframe[
                     #,
@@ -761,7 +760,8 @@ placePolygon[polygonName_, origami_] :=
 
 calculateCreaseAngleAverage[origami_] :=
     Module[{creases, polygons, polygonName1, polygonName2,
-        creasePolygons, creasePattern, c},
+        creasePolygons, creasePattern, c, flex, flexed, samples},
+        flexed = False;
         creasePattern = origami[["crease_pattern"]];
         creases = Sort[
             Union[
@@ -770,36 +770,42 @@ calculateCreaseAngleAverage[origami_] :=
             ]
         ];
         polygons = creasePattern[["polygons"]] /. creasePattern[["points"]];
-        Re[
-            Mean[
-                Table[
-                    creasePolygons = Cases[
-                        Normal[polygons],
-                        (name_ ->
-                            polygon_ /; MemberQ[
-                                Sort /@
-                                    convertPolygonToCreases[polygon],
-                                crease
-                            ]) :>
-                        name
+        samples = Table[
+            creasePolygons = Cases[
+                Normal[polygons],
+                (name_ ->
+                    polygon_ /; MemberQ[
+                        Sort /@
+                            convertPolygonToCreases[polygon],
+                        crease
+                    ]) :>
+                name
+            ];
+            If[Length[creasePolygons] == 2,
+                {polygonName1, polygonName2} = creasePolygons;
+                If[polygonFoundQ[polygonName1, origami] && polygonFoundQ[polygonName2, origami],
+                    c = calculateCreaseDirectionalAngle[
+                        polygonName1,
+                        polygonName2,
+                        crease,
+                        origami
                     ];
-                    If[Length[creasePolygons] == 2,
-                        {polygonName1, polygonName2} = creasePolygons;
-                        If[polygonFoundQ[polygonName1, origami] && polygonFoundQ[polygonName2, origami],
-                            c = calculateCreaseDirectionalAngle[
-                                polygonName1,
-                                polygonName2,
-                                crease,
-                                origami
-                            ];
-                            c,
-                            Unevaluated[Sequence[]]
-                        ],
-                        Unevaluated[Sequence[]]
+                    flex = Normal[origami[["crease_pattern"]][["creases"]][["flexible"]]];
+                    flex = Cases[flex, (a_ /; (Sort[extractPointKeys[a, origami]] == Sort[crease]) -> b_) :> b];
+                    If[Length[flex] > 0,
+                        c = c - flex[[1]];
+                        {Pi - Abs[c]/2, True},
+                        {c, False}
                     ],
-                    {crease, creases}
-                ]
-            ]
+                    Unevaluated[Sequence[]]
+                ],
+                Unevaluated[Sequence[]]
+            ],
+            {crease, creases}
+        ];
+        If[Or@@Table[sample[[2]], {sample, samples}],
+            Re[Mean[Cases[samples, {value_, True} :> value]]],
+            Re[Mean[Cases[samples, {value_, False} :> value]]]
         ]
     ]
 
@@ -809,91 +815,87 @@ findCloserOrigami[origami_, origami1_, origami2_] :=
         points = extractPointValues[pointNames, origami];
         points1 = extractPointValues[pointNames, origami1];
         points2 = extractPointValues[pointNames, origami2];
-        If[Sum[EuclideanDistance[points[[i]], points1[[i]]], {i, Length[points]}] <
-            Sum[EuclideanDistance[points[[i]], points2[[i]]], {i, Length[points]}],
-            origami1,
-            origami2
-        ]
+        {Max[Table[EuclideanDistance[points[[i]], points1[[i]]], {i, Length[points]}]], 
+            Max[Table[EuclideanDistance[points[[i]], points2[[i]]], {i, Length[points]}]]}
     ]
 
-calculateAnyPoint[origami_] :=
+calculateAnyPoint[origami_, lastOrigami_, polygon_] :=
     Module[{reference, point, pointName, points, point1, point2,
         origami1, origami2, involvedPolygons, currentAverage, currentAverage1,
-        currentAverage2, creasePattern, pointKey},
+        currentAverage2, creasePattern, pointKey, a, b},
         creasePattern = origami[["crease_pattern"]];
-        point = findCalculablePoint[origami];
+        point = findCalculablePoint[origami, polygon];
         If[point =!= Null,
             {pointName, reference} = point;
+            (* Print[{"pointName", pointName}]; *)
             {point1, point2} = trilaterate@@reference;
             points = <||>;
             points[pointName] = point1;
             origami1 = updateFoldedPoints[Normal[points], origami];
-(*             involvedPolygons = Cases[
-                Normal[origami1[["polygons"]]],
-                (name_ -> polygon_) /; Length[Intersection[Keys[<|origami1[["points"]]|>], polygon /. origami1[["crease_pattern"]][["points"]]]] != Length[polygon] &&
-                    Length[Intersection[Keys[<|origami1[["points"]]|>], polygon /. origami1[["crease_pattern"]][["points"]]]] > 2 :>
-                    name
-            ];
-
- *)         
             Do[
                 origami1 = placePolygon[polygonName, origami1],
                 {polygonName, Keys[creasePattern[["polygons"]]]}
             ];
             points[pointName] = point2;
             origami2 = updateFoldedPoints[Normal[points], origami];
-(*             involvedPolygons = Cases[
-                Normal[origami2[["polygons"]]],
-                (name_ -> polygon_) /; Length[Intersection[Keys[<|origami2[["points"]]|>], polygon /. origami2[["crease_pattern"]][["points"]]]] != Length[polygon] &&
-                    Length[Intersection[Keys[<|origami2[["points"]]|>], polygon /. origami2[["crease_pattern"]][["points"]]]] > 2 :>
-                    name
-            ];
- *)            Do[
+            Do[
                 origami2 = placePolygon[polygonName, origami2],
                 {polygonName, Keys[creasePattern[["polygons"]]]}
             ];
 
-            currentAverage = calculateCreaseAngleAverage[origami];
+            (* Print[Graphics3D /@ renderOrigami /@ {origami1, origami2}];
+            Pause[.5]; *)
+
+(*             currentAverage = calculateCreaseAngleAverage[origami];
             currentAverage1 = calculateCreaseAngleAverage[origami1];
             currentAverage2 = calculateCreaseAngleAverage[origami2];
-
-            Print[{IntegerPart[10000 currentAverage], 8149, currentAverage1, currentAverage2}];
-            Print[Graphics3D[renderOrigami[#], ViewPoint -> 2*{-1, 1, 1}]& /@ {origami, origami1, origami2}];
-            Print[{numberOfFoundPolygons[origami1], numberOfFoundPolygons[origami2]}];
- (*             Pause[.1];
  *)
-            If[IntegerPart[10000 currentAverage] == (* 14210 *)1,
-                $ori1 = origami1;
-                $ori2 = origami2;
-                Throw["zz"]
-            ];
 
-            Print[{extractPointKeys[{"Lright_forward", "Rleft_forward"}, origami], extractPointKey[pointName, origami]}];
-            If[False && MemberQ[extractPointKeys[{"Lright_forward", "Rleft_forward"}, origami], extractPointKey[pointName, origami]],
-                Print["reversed"];
-                If[currentAverage1 < currentAverage2,
+
+            (* Print[{extractPointKeys[{"Lright_forward", "Rleft_forward"}, origami], extractPointKey[pointName, origami]}]; *)
+            (* If[currentAverage1 > currentAverage2,
+                origami1,
+                origami2
+            ] *)
+            {a, b} = findCloserOrigami[lastOrigami, origami1, origami2];
+            If[Abs[a - b] < .01,
+                currentAverage = calculateCreaseAngleAverage[origami];
+                currentAverage1 = calculateCreaseAngleAverage[origami1];
+                currentAverage2 = calculateCreaseAngleAverage[origami2];
+                If[currentAverage1 > currentAverage2,
                     origami1,
                     origami2
                 ],
-                If[currentAverage1 >= currentAverage2,
+                If[a < b,
                     origami1,
                     origami2
                 ]
             ]
+
         ]
     ]
 
-fold[origami_] :=
+fold[origami_, previousOrigami_, solveOrder_] :=
     Module[{lastOrigami, possibleOrigami, currentOrigami, foundPolygons, lastFoundPolygons,
-        angleAverage1, angleAverage2, angleAverage, found1, found2, suborigami1 ,suborigami2},
+        angleAverage1, angleAverage2, angleAverage, found1, found2, suborigami1 ,suborigami2,
+        order},
+        order = solveOrder;
         currentOrigami = origami;
-        While[currentOrigami =!= Null,
+        While[currentOrigami =!= Null && Length[order] > 0,
             lastOrigami = currentOrigami;
-            currentOrigami = calculateAnyPoint[
-                currentOrigami
+            If[!polygonFoundQ[order[[1]], currentOrigami],
+                currentOrigami = calculateAnyPoint[
+                    currentOrigami,
+                    previousOrigami,
+                    order[[1]]
+                ];
             ];
-            Print["^^^"];
-        ];
+            order = Rest[order];
+            (* Print[currentOrigami]; *)
+(*             Print[Graphics3D[renderOrigami[currentOrigami]]];
+            Pause[1]
+            ;
+ *)        ];
         lastOrigami
     ]
 
