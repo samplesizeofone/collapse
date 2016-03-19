@@ -176,7 +176,7 @@ trilaterate[{p1 : {x1_, y1_, z1_}, radius1_}, {p2 : {x2_, y2_, z2_}, radius2_},
         {
             p1 + x ehx + y ehy + z ehz,
             p1 + x ehx + y ehy - z ehz
-        }
+        }//N
     ]
 
 calculatePointPlaneDistance[point0_, plane:{point1_, point2_, point3_}] :=
@@ -278,7 +278,7 @@ updateFoldedPoints[points_, origami_] :=
     Module[{newFolded, newOrigami},
         newFolded = <|origami[["points"]]|>;
         Do[
-            newFolded[Key[extractPointKey[point[[1]], origami]]] = point[[2]],
+            newFolded[extractPointKey[point[[1]], origami]] = point[[2]],
             {point, points}
         ];
         newOrigami = origami;
@@ -619,7 +619,8 @@ manipulateCrease[polygonName1_, polygonName2_, polygons_, angle_, origami_] :=
             {creaseStart, creaseEnd},
             origami
         ];
-        origami2 = rotatePolygonsInCreasePattern[
+        origami1
+(*         origami2 = rotatePolygonsInCreasePattern[
             Append[polygons, polygonName1],
             -angle,
             {creaseStart, creaseEnd},
@@ -649,7 +650,7 @@ manipulateCrease[polygonName1_, polygonName2_, polygons_, angle_, origami_] :=
 
         creaseIndex = selectCrease[creaseType, creaseDirection1, angle1, creaseDirection2, angle2];
         If[angle < 0, Reverse, Identity][{origami1, origami2}][[creaseIndex]]
-    ]
+ *)    ]
 
 findPointNeighbors[pointName_, polygons_] :=
     Union[
@@ -707,7 +708,7 @@ findUnknownPoints[origami_] :=
 findCalculablePoint[origami_, polygon_] :=
     Module[{calculable},
         calculable = Cases[
-            Intersection[findUnknownPoints[origami], origami[["crease_pattern"]][["polygons"]][[polygon]] /. origami[["crease_pattern"]][["points"]]],
+            findUnknownPoints[origami],
             pointName_ /; findReferenceNeighbors[
                     pointName,
                     origami
@@ -819,12 +820,21 @@ findCloserOrigami[origami_, origami1_, origami2_] :=
             Max[Table[EuclideanDistance[points[[i]], points2[[i]]], {i, Length[points]}]]}
     ]
 
-calculateAnyPoint[origami_, lastOrigami_, polygon_] :=
+calculateAnyPoint[origami_, targetPoint_, choice_] :=
     Module[{reference, point, pointName, points, point1, point2,
         origami1, origami2, involvedPolygons, currentAverage, currentAverage1,
         currentAverage2, creasePattern, pointKey, a, b},
         creasePattern = origami[["crease_pattern"]];
-        point = findCalculablePoint[origami, polygon];
+        If[targetPoint =!= Null,
+            point = {
+                targetPoint,
+                findReferenceNeighbors[
+                    targetPoint,
+                    origami
+                ]
+            },
+            point = findCalculablePoint[origami, polygon]
+        ];
         If[point =!= Null,
             {pointName, reference} = point;
             (* Print[{"pointName", pointName}]; *)
@@ -857,6 +867,13 @@ calculateAnyPoint[origami_, lastOrigami_, polygon_] :=
                 origami1,
                 origami2
             ] *)
+
+            If[targetPoint =!= Null,
+                {origami1, origami2}[[choice]],
+                {pointName, {origami1, origami2}}
+            ]
+
+            (*)
             {a, b} = findCloserOrigami[lastOrigami, origami1, origami2];
             If[Abs[a - b] < .01,
                 currentAverage = calculateCreaseAngleAverage[origami];
@@ -871,7 +888,29 @@ calculateAnyPoint[origami_, lastOrigami_, polygon_] :=
                     origami2
                 ]
             ]
+            *)
 
+        ]
+    ]
+
+foldPath[origami_, path_] :=
+    Module[{currentOrigami},
+        currentOrigami = origami;
+        Last[
+            Table[
+                currentOrigami = foldGuided[currentOrigami, path[[i]]],
+                {i, Length[path]}
+            ]
+        ]
+    ]
+
+foldGuided[origami_, step_:{Null, Null}] :=
+    Module[{lastOrigami, possibleOrigami, currentOrigami, foundPolygons, lastFoundPolygons,
+        angleAverage1, angleAverage2, angleAverage, found1, found2, suborigami1 ,suborigami2,
+        order},
+        calculateAnyPoint[
+            origami,
+            Sequence@@step
         ]
     ]
 
