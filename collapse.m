@@ -52,7 +52,9 @@ creasePatternLibrary =
                 "center_front" -> {0, 3, 0},
                 "right_half_front" -> {1, 3, 0},
                 "right_front" -> {2, 3, 0}
-            },
+
+(*                 "center_forward" -> {0, 2, 0}
+ *)            },
             "polygons" -> <|
                 "left_back" -> {
                     "left_back", "center_back", "center_middle", "left_middle"
@@ -62,22 +64,49 @@ creasePatternLibrary =
                 },
 
                 "left_middle" -> {
-                    "left_middle", "center_middle", "left_half_forward",
-                    "left_forward"
+                    "left_middle", "center_middle", "left_half_forward"
                 },
                 "right_middle" -> {
-                    "right_middle", "center_middle", "right_half_forward",
-                    "right_forward"
+                    "right_middle", "center_middle", "right_half_forward"
                 },
+
+                "left_side_middle" -> {
+                    "left_middle", "left_forward", "left_half_forward"
+                },
+                "right_side_middle" -> {
+                    "right_middle", "right_forward", "right_half_forward"
+                },
+
                 "left_center" -> {
                     "center_middle", "center_front", "left_half_forward"
                 },
                 "right_center" -> {
                     "center_middle", "center_front", "right_half_forward"
                 },
+                "left_side_front" -> {
+                    "left_front", "left_half_forward", "left_forward"
+                },
+                "right_side_front" -> {
+                    "right_front", "right_half_forward", "right_forward"
+                },
+
+(*
+                "left_half_middle" -> {
+                    "center_middle", "center_forward", "left_half_forward"
+                },
+                "right_half_middle" -> {
+                    "center_middle", "center_forward", "right_half_forward"
+                },
+                 "left_half_forward" -> {
+                    "center_forward", "center_front", "left_half_forward"
+                },
+                "right_half_forward" -> {
+                    "center_forward", "center_front", "right_half_forward"
+                },
+*)
+                
                 "left_front" -> {
-                    "left_front", "left_half_front", "left_half_forward",
-                    "left_forward"
+                    "left_front", "left_half_front", "left_half_forward"
                 },
                 "left_half_front" -> {
                     "left_half_front", "center_front", "left_half_forward"
@@ -86,8 +115,7 @@ creasePatternLibrary =
                     "right_half_front", "center_front", "right_half_forward"
                 },
                 "right_front" -> {
-                    "right_front", "right_half_front", "right_half_forward",
-                    "right_forward"
+                    "right_front", "right_half_front", "right_half_forward"
                 }
             |>,
             "creases" -> <|
@@ -95,7 +123,10 @@ creasePatternLibrary =
                     {"center_back", "center_middle"},
                     {"left_middle", "center_middle"},
                     {"center_middle", "right_middle"},
-                    {"center_middle", "center_front"},
+
+                    (* {"center_middle", "center_forward"}, *)
+(*                     {"center_forward", "center_front"},
+ *)
                     {"right_half_front", "right_half_forward"},
                     {"left_half_front", "left_half_forward"},
                     {"right_middle", "right_forward"},
@@ -103,7 +134,10 @@ creasePatternLibrary =
                     {"right_front", "right_half_front"},
                     {"right_half_front", "center_front"},
                     {"center_front", "left_half_front"},
-                    {"left_half_front", "left_front"}
+                    {"left_half_front", "left_front"},
+
+                    {"left_middle", "left_half_forward"},
+                    {"right_middle", "right_half_forward"}
                 },
                 "valley" -> {
                     {"center_middle", "left_half_forward"},
@@ -113,7 +147,15 @@ creasePatternLibrary =
                     {"left_half_forward", "center_front"},
                     {"center_front", "right_half_forward"},
                     {"right_forward", "right_front"},
-                    {"left_forward", "left_front"}
+                    {"left_forward", "left_front"},
+
+(*                     {"center_forward", "left_half_forward"},
+                    {"center_forward", "right_half_forward"},
+ *)
+                    {"center_middle", "center_front"},
+
+                    {"left_front", "left_half_forward"},
+                    {"right_front", "right_half_forward"}
                 }
             |>,
             "fractals" -> <|
@@ -201,6 +243,7 @@ recast[{px_, py_, pz_}, {{x1_, y1_, z1_}, {x2_, y2_, z2_}, {x3_, y3_, z3_}}] :=
 reframe[point_, sourceFramePoints_, destinationFramePoints_] :=
     Module[{sourceFrameVectors, destinationFrameVectors, sourceFrame,
         destinationFrame, framelessPoint},
+        Print[{"s", sourceFramePoints, destinationFramePoints}];
         sourceFrameVectors = # - sourceFramePoints[[2]]& /@ sourceFramePoints;
         destinationFrameVectors = # - destinationFramePoints[[2]]& /@
             destinationFramePoints;
@@ -571,14 +614,17 @@ alignPolygon[polygonName1_, polygonName2_, origami_] :=
         creasePattern = origami[["crease_pattern"]];
         polygon1 = creasePattern[["polygons"]][[polygonName1]];
         polygon2 = creasePattern[["polygons"]][[polygonName2]];
-        points1 = (polygon1 /. creasePattern[["points"]]);
-        points2 = (polygon2 /. creasePattern[["points"]]);
+        points1 = extractPointKeys[polygon1, origami];
+        points2 = extractPointKeys[polygon2, origami];
+        Print[points1];
+        Print[points2];
         folded = extractPointValues[polygon2, origami];
         sourceFramePoints = Take[points2, 3];
         destinationFramePoints = Take[folded, 3];
         newPoints = reframe[#, sourceFramePoints, destinationFramePoints]& /@
-            points1;
+           points1;
         newFolded = (#[[1]] -> #[[2]])& /@ Thread[{points1, newPoints}];
+        Print[newFolded];
         updateFoldedPoints[newFolded, origami]
     ]
 
@@ -700,12 +746,13 @@ findKnownPoints[origami_] :=
     ]
 
 findUnknownPoints[origami_] :=
-    Complement[
-        Values[<|origami[["crease_pattern"]][["points"]]|>],
-        findKnownPoints[origami]
+    Cases[
+        origami[["crease_pattern"]][["points"]],
+        (name_ -> point_) /; Not[MemberQ[Keys[<|origami[["points"]]|>], point]] :>
+            point
     ]
 
-findCalculablePoint[origami_, polygon_] :=
+findCalculablePoints[origami_, polygon_] :=
     Module[{calculable},
         calculable = Cases[
             findUnknownPoints[origami],
@@ -720,9 +767,8 @@ findCalculablePoint[origami_, polygon_] :=
                     ]
                 }
             ];
-        If[Length[calculable] > 0,
-            RandomChoice[calculable]
-        ]
+        Print[{"calc", calculable}];
+        calculable
     ]
 
 canonicalizeCrease[crease_, creasePattern_] :=
@@ -821,75 +867,49 @@ findCloserOrigami[origami_, origami1_, origami2_] :=
     ]
 
 calculateAnyPoint[origami_, targetPoint_, choice_] :=
-    Module[{reference, point, pointName, points, point1, point2,
+    Module[{reference, points, pointName, unknownPoints, point, point1, point2,
         origami1, origami2, involvedPolygons, currentAverage, currentAverage1,
-        currentAverage2, creasePattern, pointKey, a, b},
+        currentAverage2, creasePattern, pointKey, a, b, calculablePoint},
         creasePattern = origami[["crease_pattern"]];
         If[targetPoint =!= Null,
-            point = {
-                targetPoint,
-                findReferenceNeighbors[
+            unknownPoints = {
+                {
                     targetPoint,
-                    origami
-                ]
+                    findReferenceNeighbors[
+                        targetPoint,
+                        origami
+                    ]
+                }
             },
-            point = findCalculablePoint[origami, polygon]
+            unknownPoints = findCalculablePoints[origami, polygon]
         ];
-        If[point =!= Null,
-            {pointName, reference} = point;
-            (* Print[{"pointName", pointName}]; *)
-            {point1, point2} = trilaterate@@reference;
-            points = <||>;
-            points[pointName] = point1;
-            origami1 = updateFoldedPoints[Normal[points], origami];
-            Do[
-                origami1 = placePolygon[polygonName, origami1],
-                {polygonName, Keys[creasePattern[["polygons"]]]}
-            ];
-            points[pointName] = point2;
-            origami2 = updateFoldedPoints[Normal[points], origami];
-            Do[
-                origami2 = placePolygon[polygonName, origami2],
-                {polygonName, Keys[creasePattern[["polygons"]]]}
-            ];
+        If[unknownPoints =!= Null,
+            calculablePoint = Null;
+(*             While[calculablePoint == Null && Length[unkownPoints] > 0, *) 
+                point = unknownPoints[[1]];
+                {pointName, reference} = point;
+                {point1, point2} = trilaterate@@reference;
+                points = <||>;
+                points[pointName] = point1;
+                origami1 = updateFoldedPoints[Normal[points], origami];
 
-            (* Print[Graphics3D /@ renderOrigami /@ {origami1, origami2}];
-            Pause[.5]; *)
+                Do[
+                    origami1 = placePolygon[polygonName, origami1],
+                    {polygonName, Keys[creasePattern[["polygons"]]]}
+                ];
+                points[pointName] = point2;
+                origami2 = updateFoldedPoints[Normal[points], origami];
+                Do[
+                    origami2 = placePolygon[polygonName, origami2],
+                    {polygonName, Keys[creasePattern[["polygons"]]]}
+                ];
 
-(*             currentAverage = calculateCreaseAngleAverage[origami];
-            currentAverage1 = calculateCreaseAngleAverage[origami1];
-            currentAverage2 = calculateCreaseAngleAverage[origami2];
- *)
-
-
-            (* Print[{extractPointKeys[{"Lright_forward", "Rleft_forward"}, origami], extractPointKey[pointName, origami]}]; *)
-            (* If[currentAverage1 > currentAverage2,
-                origami1,
-                origami2
-            ] *)
-
-            If[targetPoint =!= Null,
-                {origami1, origami2}[[choice]],
-                {pointName, {origami1, origami2}}
-            ]
-
-            (*)
-            {a, b} = findCloserOrigami[lastOrigami, origami1, origami2];
-            If[Abs[a - b] < .01,
-                currentAverage = calculateCreaseAngleAverage[origami];
-                currentAverage1 = calculateCreaseAngleAverage[origami1];
-                currentAverage2 = calculateCreaseAngleAverage[origami2];
-                If[currentAverage1 > currentAverage2,
-                    origami1,
-                    origami2
-                ],
-                If[a < b,
-                    origami1,
-                    origami2
+                If[targetPoint =!= Null,
+                    {origami1, origami2}[[choice]],
+                    (* points = Drop[points, 1] *)
+                    {pointName, {origami1, origami2}}
                 ]
-            ]
-            *)
-
+            (* ] *)
         ]
     ]
 
