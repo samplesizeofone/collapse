@@ -52,9 +52,7 @@ creasePatternLibrary =
                 "center_front" -> {0, 3, 0},
                 "right_half_front" -> {1, 3, 0},
                 "right_front" -> {2, 3, 0}
-
-(*                 "center_forward" -> {0, 2, 0}
- *)            },
+            },
             "polygons" -> <|
                 "left_back" -> {
                     "left_back", "center_back", "center_middle", "left_middle"
@@ -89,22 +87,7 @@ creasePatternLibrary =
                 "right_side_front" -> {
                     "right_front", "right_half_forward", "right_forward"
                 },
-
-(*
-                "left_half_middle" -> {
-                    "center_middle", "center_forward", "left_half_forward"
-                },
-                "right_half_middle" -> {
-                    "center_middle", "center_forward", "right_half_forward"
-                },
-                 "left_half_forward" -> {
-                    "center_forward", "center_front", "left_half_forward"
-                },
-                "right_half_forward" -> {
-                    "center_forward", "center_front", "right_half_forward"
-                },
-*)
-                
+        
                 "left_front" -> {
                     "left_front", "left_half_front", "left_half_forward"
                 },
@@ -123,10 +106,6 @@ creasePatternLibrary =
                     {"center_back", "center_middle"},
                     {"left_middle", "center_middle"},
                     {"center_middle", "right_middle"},
-
-                    (* {"center_middle", "center_forward"}, *)
-(*                     {"center_forward", "center_front"},
- *)
                     {"right_half_front", "right_half_forward"},
                     {"left_half_front", "left_half_forward"},
                     {"right_middle", "right_forward"},
@@ -135,7 +114,6 @@ creasePatternLibrary =
                     {"right_half_front", "center_front"},
                     {"center_front", "left_half_front"},
                     {"left_half_front", "left_front"},
-
                     {"left_middle", "left_half_forward"},
                     {"right_middle", "right_half_forward"}
                 },
@@ -148,12 +126,7 @@ creasePatternLibrary =
                     {"center_front", "right_half_forward"},
                     {"right_forward", "right_front"},
                     {"left_forward", "left_front"},
-
-(*                     {"center_forward", "left_half_forward"},
-                    {"center_forward", "right_half_forward"},
- *)
                     {"center_middle", "center_front"},
-
                     {"left_front", "left_half_forward"},
                     {"right_front", "right_half_forward"}
                 }
@@ -243,7 +216,6 @@ recast[{px_, py_, pz_}, {{x1_, y1_, z1_}, {x2_, y2_, z2_}, {x3_, y3_, z3_}}] :=
 reframe[point_, sourceFramePoints_, destinationFramePoints_] :=
     Module[{sourceFrameVectors, destinationFrameVectors, sourceFrame,
         destinationFrame, framelessPoint},
-        Print[{"s", sourceFramePoints, destinationFramePoints}];
         sourceFrameVectors = # - sourceFramePoints[[2]]& /@ sourceFramePoints;
         destinationFrameVectors = # - destinationFramePoints[[2]]& /@
             destinationFramePoints;
@@ -616,15 +588,12 @@ alignPolygon[polygonName1_, polygonName2_, origami_] :=
         polygon2 = creasePattern[["polygons"]][[polygonName2]];
         points1 = extractPointKeys[polygon1, origami];
         points2 = extractPointKeys[polygon2, origami];
-        Print[points1];
-        Print[points2];
         folded = extractPointValues[polygon2, origami];
         sourceFramePoints = Take[points2, 3];
         destinationFramePoints = Take[folded, 3];
         newPoints = reframe[#, sourceFramePoints, destinationFramePoints]& /@
            points1;
         newFolded = (#[[1]] -> #[[2]])& /@ Thread[{points1, newPoints}];
-        Print[newFolded];
         updateFoldedPoints[newFolded, origami]
     ]
 
@@ -767,7 +736,6 @@ findCalculablePoints[origami_, polygon_] :=
                     ]
                 }
             ];
-        Print[{"calc", calculable}];
         calculable
     ]
 
